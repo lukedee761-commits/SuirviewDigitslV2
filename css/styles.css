@@ -175,10 +175,11 @@ main, .foot { position: relative; z-index: 1; }
 .hero-kicker { color: var(--gold); text-transform: uppercase; margin-bottom: 28px; overflow: hidden; }
 .hero-kicker span { display: inline-block; }
 .hero-title {
-  font-size: clamp(2.5rem, 8.2vw, 7rem); font-weight: 800; text-transform: uppercase;
-  letter-spacing: -0.02em; max-width: 14ch;
+  font-size: clamp(2rem, 5vw, 5.6rem); font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
-.hero-title .line { display: block; overflow: hidden; }
+/* Each line is a fixed unit of the choreography — it must never wrap or clip */
+.hero-title .line { display: block; overflow: hidden; white-space: nowrap; }
 .line-inner { display: inline-block; }
 .hero-title .accent {
   background: linear-gradient(120deg, var(--gold-light), var(--gold));
@@ -407,7 +408,7 @@ main, .foot { position: relative; z-index: 1; }
 }
 @media (max-width: 560px) {
   /* Split-line hero can't wrap — size it so the longest line fits 320px */
-  .hero-title { font-size: clamp(1.2rem, 6.9vw, 2.2rem); }
+  .hero-title { font-size: clamp(1rem, 5.8vw, 2.1rem); }
   .bento { grid-template-columns: 1fr; }
   .tile-wide { grid-column: span 1; }
   .numbers { grid-template-columns: 1fr 1fr; }
