@@ -24,6 +24,8 @@
 </head>
 <body>
 
+  <a class="skip-link" href="#home">Skip to content</a>
+
   <!-- Preloader curtain (JS-only; hidden entirely without JS) -->
   <div class="preloader" aria-hidden="true">
     <svg class="preloader-mark" viewBox="0 0 84 84">
@@ -111,16 +113,17 @@
     <section class="hero" id="home" data-spy-target>
       <p class="hero-kicker mono reveal-line"><span>SuirViewDigital · Web studio · Co. Tipperary</span></p>
       <h1 class="hero-title">
-        <span class="line"><span class="line-inner">Most local websites</span></span>
-        <span class="line"><span class="line-inner">are forgettable.</span></span>
-        <span class="line"><span class="line-inner accent">Yours won't be.</span></span>
+        <span class="line"><span class="line-inner">Most local</span></span>
+        <span class="line"><span class="line-inner">websites are</span></span>
+        <span class="line"><span class="line-inner">forgettable.</span></span>
+        <span class="line"><span class="line-inner accent">Yours won’t be.</span></span>
       </h1>
       <div class="hero-foot">
         <p class="hero-sub">We design and build custom, fast, search-ready websites for ambitious businesses across Ireland — then look after them like our own.</p>
         <a href="#contact" class="spin-badge book-call" aria-label="Book a call">
           <svg viewBox="0 0 120 120" aria-hidden="true">
             <defs><path id="circlePath" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/></defs>
-            <text class="spin-text"><textPath href="#circlePath">BOOK A CALL — LET'S TALK — BOOK A CALL — LET'S TALK —</textPath></text>
+            <text class="spin-text"><textPath href="#circlePath">BOOK A CALL — LET’S TALK — BOOK A CALL — LET’S TALK —</textPath></text>
             <path d="M48 60 H72 M64 52 L72 60 L64 68" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
@@ -230,7 +233,7 @@
         <article class="deck-card">
           <p class="mono deck-step">Step 3 of 4</p>
           <h3>Refine</h3>
-          <p>We walk through it together and polish every detail — words, photos, colours — until it's exactly right.</p>
+          <p>We walk through it together and polish every detail — words, photos, colours — until it’s exactly right.</p>
         </article>
         <article class="deck-card">
           <p class="mono deck-step">Step 4 of 4</p>
@@ -243,8 +246,8 @@
     <!-- Numbers band -->
     <section class="numbers reveal" aria-label="Studio numbers">
       <div class="num"><strong data-count="100" data-suffix="%">0%</strong><span>Custom-built</span></div>
-      <div class="num"><strong data-count="7" data-prefix="~" data-suffix=" days">0</strong><span>Typical turnaround</span></div>
-      <div class="num"><strong data-count="24" data-suffix=" hr">0</strong><span>Repair guarantee</span></div>
+      <div class="num"><strong data-count="7" data-prefix="~" data-suffix="&nbsp;days">0</strong><span>Typical turnaround</span></div>
+      <div class="num"><strong data-count="24" data-suffix="&nbsp;hr">0</strong><span>Repair guarantee</span></div>
       <div class="num"><strong data-count="1" data-suffix=":1">0</strong><span>Direct with the designer</span></div>
     </section>
 
@@ -293,7 +296,7 @@
           <button class="acc-btn" aria-expanded="false" aria-controls="faq1">
             <span class="acc-title">How long does a website take?</span><span class="acc-ico" aria-hidden="true"></span>
           </button>
-          <div class="acc-panel" id="faq1"><div class="acc-body"><p>Typically about a week from our first call to going live — sometimes faster. You'll see a live preview early, so there are no surprises.</p></div></div>
+          <div class="acc-panel" id="faq1"><div class="acc-body"><p>Typically about a week from our first call to going live — sometimes faster. You’ll see a live preview early, so there are no surprises.</p></div></div>
         </div>
         <div class="acc-item reveal">
           <button class="acc-btn" aria-expanded="false" aria-controls="faq2">
@@ -305,7 +308,7 @@
           <button class="acc-btn" aria-expanded="false" aria-controls="faq3">
             <span class="acc-title">What happens after launch?</span><span class="acc-ico" aria-hidden="true"></span>
           </button>
-          <div class="acc-panel" id="faq3"><div class="acc-body"><p>We stay in your corner. Updates, changes and maintenance are part of both plans — and if anything ever stops working, it's repaired within 24 hours.</p></div></div>
+          <div class="acc-panel" id="faq3"><div class="acc-body"><p>We stay in your corner. Updates, changes and maintenance are part of both plans — and if anything ever stops working, it’s repaired within 24 hours.</p></div></div>
         </div>
         <div class="acc-item reveal">
           <button class="acc-btn" aria-expanded="false" aria-controls="faq4">
@@ -320,7 +323,7 @@
     <section class="block block-contact" id="contact" data-spy-target>
       <header class="block-head reveal">
         <p class="mono block-eyebrow">07 — Contact</p>
-        <h2 class="block-title contact-title">Let's build yours.</h2>
+        <h2 class="block-title contact-title">Let’s build yours.</h2>
       </header>
 
       <div class="contact-grid">
@@ -341,7 +344,7 @@
           </div>
           <div class="field">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" autocomplete="email" required />
+            <input type="email" id="email" name="email" autocomplete="email" spellcheck="false" required />
           </div>
           <div class="field">
             <label for="business">Business name</label>
@@ -355,7 +358,7 @@
           <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
           <label class="consent">
             <input type="checkbox" id="consent" name="consent" required />
-            <span>I'm happy for SuirViewDigital to use these details to contact me about my enquiry. Never shared, never used for anything else.</span>
+            <span>I’m happy for SuirViewDigital to use these details to contact me about my enquiry. Never shared, never used for anything else.</span>
           </label>
           <button type="submit" class="pill pill-gold pill-lg pill-block">Send enquiry</button>
           <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>

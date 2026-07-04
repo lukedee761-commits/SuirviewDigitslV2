@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /
+
+# v2 concept preview — remove this Disallow (and the noindex meta in index.html)
+# if this version is chosen as the live SuirViewDigital.ie site.
