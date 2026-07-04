@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuirViewDigital — The Site They Remember</title>
+  <meta name="description" content="SuirViewDigital builds custom, high-performing websites for ambitious businesses across Ireland. A different kind of web studio — book a call." />
+  <meta name="theme-color" content="#0A0B0F" />
+  <!-- v2 concept preview: keep out of Google until Luke picks a version -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="SuirViewDigital — The Site They Remember" />
+  <meta property="og:description" content="Custom, high-performing websites for ambitious businesses across Ireland." />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Preloader curtain (JS-only; hidden entirely without JS) -->
+  <div class="preloader" aria-hidden="true">
+    <svg class="preloader-mark" viewBox="0 0 84 84">
+      <defs>
+        <linearGradient id="plg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C888"/><stop offset="1" stop-color="#A9884E"/></linearGradient>
+      </defs>
+      <path d="M26 24 L42 55 L58 24" fill="none" stroke="url(#plg)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="20" y1="60" x2="64" y2="60" stroke="url(#plg)" stroke-width="1.6"/>
+    </svg>
+  </div>
+
+  <!-- Drifting river-contour field (the signature; decorative) -->
+  <div class="contours" aria-hidden="true">
+    <svg class="contour-layer contour-a" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#13233F" stroke-width="1.1">
+        <path d="M-50,620 C200,560 350,700 620,640 C880,585 1010,690 1450,610"/>
+        <path d="M-50,660 C210,600 360,745 640,682 C900,624 1030,735 1450,655"/>
+        <path d="M-50,700 C220,645 380,790 660,724 C920,665 1050,780 1450,700"/>
+        <path d="M-50,745 C230,690 400,835 680,768 C940,708 1070,825 1450,748"/>
+        <path d="M-50,180 C260,240 420,90 700,150 C960,205 1120,100 1450,170"/>
+        <path d="M-50,140 C250,200 410,50 690,110 C950,165 1110,60 1450,130"/>
+      </g>
+    </svg>
+    <svg class="contour-layer contour-b" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#1E3A8A" stroke-opacity="0.35" stroke-width="1">
+        <path d="M-50,420 C240,360 430,480 700,430 C960,382 1140,470 1450,415"/>
+        <path d="M-50,460 C250,405 445,525 720,472 C980,422 1160,515 1450,458"/>
+        <path d="M-50,505 C260,450 460,570 740,515 C1000,463 1180,560 1450,502"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Fixed index rail (desktop) -->
+  <nav class="rail" aria-label="Section index">
+    <a class="rail-mark" href="#home" aria-label="SuirViewDigital — back to top">
+      <svg viewBox="0 0 84 84" aria-hidden="true">
+        <defs><linearGradient id="rlg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C888"/><stop offset="1" stop-color="#A9884E"/></linearGradient></defs>
+        <rect x="3" y="3" width="78" height="78" rx="18" fill="none" stroke="url(#rlg)" stroke-width="2"/>
+        <path d="M26 24 L42 55 L58 24" fill="none" stroke="url(#rlg)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <line x1="22" y1="62" x2="62" y2="62" stroke="url(#rlg)" stroke-width="1.6"/>
+      </svg>
+    </a>
+    <div class="rail-index">
+      <a href="#home"     data-spy="home"><span class="rail-num">01</span><span class="rail-label">Home</span></a>
+      <a href="#who"      data-spy="who"><span class="rail-num">02</span><span class="rail-label">Who</span></a>
+      <a href="#services" data-spy="services"><span class="rail-num">03</span><span class="rail-label">Services</span></a>
+      <a href="#process"  data-spy="process"><span class="rail-num">04</span><span class="rail-label">Process</span></a>
+      <a href="#plans"    data-spy="plans"><span class="rail-num">05</span><span class="rail-label">Plans</span></a>
+      <a href="#faq"      data-spy="faq"><span class="rail-num">06</span><span class="rail-label">FAQ</span></a>
+      <a href="#contact"  data-spy="contact"><span class="rail-num">07</span><span class="rail-label">Contact</span></a>
+    </div>
+    <span class="rail-wordmark">SUIRVIEW — TIPPERARY, IRELAND</span>
+  </nav>
+
+  <!-- Scroll progress -->
+  <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- Corner controls -->
+  <header class="corner">
+    <a href="#contact" class="pill pill-gold book-call">Book a call</a>
+    <button class="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="overlayMenu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- Full-screen overlay menu -->
+  <div class="overlay" id="overlayMenu" hidden>
+    <nav class="overlay-nav" aria-label="Menu">
+      <a href="#home"><em class="mono">01</em> Home</a>
+      <a href="#who"><em class="mono">02</em> Who we design for</a>
+      <a href="#services"><em class="mono">03</em> Services</a>
+      <a href="#process"><em class="mono">04</em> Process</a>
+      <a href="#plans"><em class="mono">05</em> Plans</a>
+      <a href="#faq"><em class="mono">06</em> FAQ</a>
+      <a href="#contact"><em class="mono">07</em> Contact</a>
+    </nav>
+    <div class="overlay-foot">
+      <a href="tel:+353851538421">085 153 8421</a>
+      <a href="mailto:Lukedigital489@gmail.com">Lukedigital489@gmail.com</a>
+    </div>
+  </div>
+
+  <main>
+    <!-- ============ 01 HERO ============ -->
+    <section class="hero" id="home" data-spy-target>
+      <p class="hero-kicker mono reveal-line"><span>SuirViewDigital · Web studio · Co. Tipperary</span></p>
+      <h1 class="hero-title">
+        <span class="line"><span class="line-inner">Most local websites</span></span>
+        <span class="line"><span class="line-inner">are forgettable.</span></span>
+        <span class="line"><span class="line-inner accent">Yours won't be.</span></span>
+      </h1>
+      <div class="hero-foot">
+        <p class="hero-sub">We design and build custom, fast, search-ready websites for ambitious businesses across Ireland — then look after them like our own.</p>
+        <a href="#contact" class="spin-badge book-call" aria-label="Book a call">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <defs><path id="circlePath" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/></defs>
+            <text class="spin-text"><textPath href="#circlePath">BOOK A CALL — LET'S TALK — BOOK A CALL — LET'S TALK —</textPath></text>
+            <path d="M48 60 H72 M64 52 L72 60 L64 68" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Marquee ticker -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Custom design</span><i>·</i><span>SEO &amp; Google</span><i>·</i><span>Hosting &amp; security</span><i>·</i><span>Ongoing care</span><i>·</i><span>Copy &amp; content</span><i>·</i><span>Launch in ~a week</span><i>·</i>
+        <span>Custom design</span><i>·</i><span>SEO &amp; Google</span><i>·</i><span>Hosting &amp; security</span><i>·</i><span>Ongoing care</span><i>·</i><span>Copy &amp; content</span><i>·</i><span>Launch in ~a week</span><i>·</i>
+      </div>
+    </div>
+
+    <!-- ============ 02 WHO ============ -->
+    <section class="block" id="who" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">02 — Who we design for</p>
+        <h2 class="block-title">Owners who take pride in the work.</h2>
+      </header>
+
+      <div class="acc" data-acc-group>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="true" aria-controls="acc1">
+            <span class="acc-title">Clinics &amp; healthcare</span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="acc1">
+            <div class="acc-body"><p>Dentists, GPs, chiropodists and private practices. Your site has one job: look trustworthy and make booking effortless. We build calm, credible pages with one-tap calling and clear services.</p></div>
+          </div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc2">
+            <span class="acc-title">Salons, barbers &amp; trades</span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="acc2">
+            <div class="acc-body"><p>You live on reputation and word of mouth. We turn that into a site that shows your standards before a customer ever walks in — work, prices-on-call, opening hours, directions.</p></div>
+          </div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="acc3">
+            <span class="acc-title">Ambitious owners</span>
+            <span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="acc3">
+            <div class="acc-body"><p>Ready to move past a Facebook page or a dated site. We position you a level above the local competition — premium design, faster loading, better Google visibility.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 SERVICES (bento) ============ -->
+    <section class="block" id="services" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">03 — Services</p>
+        <h2 class="block-title">Everything handled. One person to call.</h2>
+      </header>
+
+      <div class="bento">
+        <article class="tile tile-wide reveal" data-glow>
+          <svg class="tico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M7 21h10"/></svg>
+          <h3>Custom website design</h3>
+          <p>Designed from a blank page around your business — never a template. Mobile-first, fast, and built to convert visitors into calls.</p>
+        </article>
+        <article class="tile reveal" data-glow>
+          <svg class="tico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <h3>SEO &amp; Google</h3>
+          <p>Technical SEO and local search so the right customers find you first.</p>
+        </article>
+        <article class="tile reveal" data-glow>
+          <svg class="tico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/></svg>
+          <h3>Hosting &amp; security</h3>
+          <p>Domain, SSL and enterprise-grade protection — set up and managed.</p>
+        </article>
+        <article class="tile reveal" data-glow>
+          <svg class="tico" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v5h5M5 3h9l5 5v13H5z"/><path d="M9 13h6M9 17h6"/></svg>
+          <h3>Copy &amp; content</h3>
+          <p>Human words that build trust and guide people to get in touch.</p>
+        </article>
+        <article class="tile tile-wide reveal" data-glow>
+          <svg class="tico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg>
+          <h3>Ongoing care &amp; updates</h3>
+          <p>Changes managed for you, whenever you need them — with a guaranteed repair inside 24 hours if anything ever breaks. A real person answers the phone.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 04 PROCESS (sticky deck) ============ -->
+    <section class="block block-process" id="process" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">04 — Process</p>
+        <h2 class="block-title">First call to live site, without the stress.</h2>
+      </header>
+
+      <div class="deck">
+        <article class="deck-card">
+          <p class="mono deck-step">Step 1 of 4</p>
+          <h3>Discover</h3>
+          <p>A quick, no-pressure call. Your business, your customers, what you want the site to do. Plain English, no jargon.</p>
+        </article>
+        <article class="deck-card">
+          <p class="mono deck-step">Step 2 of 4</p>
+          <h3>Design &amp; build</h3>
+          <p>We craft the site around your brand and share a live preview link you can open on any phone or laptop.</p>
+        </article>
+        <article class="deck-card">
+          <p class="mono deck-step">Step 3 of 4</p>
+          <h3>Refine</h3>
+          <p>We walk through it together and polish every detail — words, photos, colours — until it's exactly right.</p>
+        </article>
+        <article class="deck-card">
+          <p class="mono deck-step">Step 4 of 4</p>
+          <h3>Launch &amp; care</h3>
+          <p>Live on your own domain, secured, and looked after — updates and changes handled for you, ongoing.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Numbers band -->
+    <section class="numbers reveal" aria-label="Studio numbers">
+      <div class="num"><strong data-count="100" data-suffix="%">0%</strong><span>Custom-built</span></div>
+      <div class="num"><strong data-count="7" data-prefix="~" data-suffix=" days">0</strong><span>Typical turnaround</span></div>
+      <div class="num"><strong data-count="24" data-suffix=" hr">0</strong><span>Repair guarantee</span></div>
+      <div class="num"><strong data-count="1" data-suffix=":1">0</strong><span>Direct with the designer</span></div>
+    </section>
+
+    <!-- ============ 05 PLANS (diptych) ============ -->
+    <section class="block" id="plans" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">05 — Plans</p>
+        <h2 class="block-title">Two ways to work together.</h2>
+      </header>
+
+      <div class="diptych reveal">
+        <article class="panel">
+          <p class="mono panel-tag">Option one</p>
+          <h3>Pay as you go</h3>
+          <p class="panel-sub">Low upfront, everything managed month to month.</p>
+          <ul>
+            <li>Small activation fee, then a simple monthly plan</li>
+            <li>Maintenance, updates &amp; security included</li>
+            <li>Changes handled for you, whenever</li>
+          </ul>
+        </article>
+        <div class="diptych-divider" aria-hidden="true"><span>or</span></div>
+        <article class="panel panel-gold">
+          <p class="mono panel-tag">Option two</p>
+          <h3>One-time payment</h3>
+          <p class="panel-sub">A single investment with two full years of care built in.</p>
+          <ul>
+            <li>One payment — no monthly cost</li>
+            <li>24 months of maintenance, upgrades &amp; security</li>
+            <li>Direct access to Luke · repairs inside 24 hours</li>
+          </ul>
+        </article>
+      </div>
+      <p class="plans-note reveal">No prices online — every project is quoted honestly on a quick call. <a href="#contact" class="gold-link book-call">Get your price</a>.</p>
+    </section>
+
+    <!-- ============ 06 FAQ ============ -->
+    <section class="block" id="faq" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">06 — FAQ</p>
+        <h2 class="block-title">Asked before you ask.</h2>
+      </header>
+
+      <div class="acc" data-acc-group>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="faq1">
+            <span class="acc-title">How long does a website take?</span><span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="faq1"><div class="acc-body"><p>Typically about a week from our first call to going live — sometimes faster. You'll see a live preview early, so there are no surprises.</p></div></div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="faq2">
+            <span class="acc-title">Do I need to sort hosting or a domain?</span><span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="faq2"><div class="acc-body"><p>No — we handle the domain, hosting, SSL and security end to end. You own the domain; we manage the technical side.</p></div></div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="faq3">
+            <span class="acc-title">What happens after launch?</span><span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="faq3"><div class="acc-body"><p>We stay in your corner. Updates, changes and maintenance are part of both plans — and if anything ever stops working, it's repaired within 24 hours.</p></div></div>
+        </div>
+        <div class="acc-item reveal">
+          <button class="acc-btn" aria-expanded="false" aria-controls="faq4">
+            <span class="acc-title">How much does it cost?</span><span class="acc-ico" aria-hidden="true"></span>
+          </button>
+          <div class="acc-panel" id="faq4"><div class="acc-body"><p>It depends on what your business needs, so we quote honestly on a quick call — no pressure, no hidden costs. Two simple plans: pay as you go, or one-time.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 CONTACT ============ -->
+    <section class="block block-contact" id="contact" data-spy-target>
+      <header class="block-head reveal">
+        <p class="mono block-eyebrow">07 — Contact</p>
+        <h2 class="block-title contact-title">Let's build yours.</h2>
+      </header>
+
+      <div class="contact-grid">
+        <div class="contact-side reveal">
+          <p class="contact-lead">Tell us a little about your business, or skip the typing and book a call straight into the calendar.</p>
+          <a href="#contact" class="pill pill-gold pill-lg book-call">Book a call</a>
+          <ul class="contact-list mono">
+            <li><a href="tel:+353851538421">085 153 8421</a></li>
+            <li><a href="mailto:Lukedigital489@gmail.com">Lukedigital489@gmail.com</a></li>
+            <li><span>County Tipperary — serving all of Ireland</span></li>
+          </ul>
+        </div>
+
+        <form class="form reveal" id="contactForm" action="https://formspree.io/f/mykqlzrr" method="POST" novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" required />
+          </div>
+          <div class="field">
+            <label for="business">Business name</label>
+            <input type="text" id="business" name="business" autocomplete="organization" />
+          </div>
+          <div class="field">
+            <label for="message">What do you need?</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          <input type="hidden" name="_subject" value="New enquiry from SuirViewDigital.ie (v2 concept)" />
+          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" />
+          <label class="consent">
+            <input type="checkbox" id="consent" name="consent" required />
+            <span>I'm happy for SuirViewDigital to use these details to contact me about my enquiry. Never shared, never used for anything else.</span>
+          </label>
+          <button type="submit" class="pill pill-gold pill-lg pill-block">Send enquiry</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span class="mono">© <span id="year"></span> SuirViewDigital</span>
+    <span class="mono">Designed &amp; built on the Suir</span>
+    <a class="mono" href="#home">Back to top ↑</a>
+  </footer>
+
+  <!-- Trailing cursor glow (decorative, fine-pointer only) -->
+  <div class="glow-ring" aria-hidden="true"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
