@@ -169,8 +169,8 @@ main, .foot { position: relative; z-index: 1; }
 
 /* ---------- Hero ---------- */
 .hero {
-  min-height: 100svh; display: flex; flex-direction: column; justify-content: center;
-  padding: 120px var(--gutter) 80px calc(var(--rail-w) + var(--gutter));
+  min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-start;
+  padding: clamp(84px, 12vh, 132px) var(--gutter) 80px calc(var(--rail-w) + var(--gutter));
 }
 .hero-kicker { color: var(--gold); text-transform: uppercase; margin-bottom: 28px; overflow: hidden; }
 .hero-kicker span { display: inline-block; }
