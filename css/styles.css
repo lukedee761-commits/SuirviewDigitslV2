@@ -205,12 +205,12 @@ main, .foot { position: relative; z-index: 1; }
 
 /* Hero load choreography (JS-gated) */
 .js .hero-kicker span, .js .line-inner { transform: translateY(115%); transition: transform 0.9s var(--ease); }
-.js .loaded .hero-kicker span, .js .loaded .line-inner { transform: translateY(0); }
-.js .loaded .line:nth-child(1) .line-inner { transition-delay: 0.05s; }
-.js .loaded .line:nth-child(2) .line-inner { transition-delay: 0.16s; }
-.js .loaded .line:nth-child(3) .line-inner { transition-delay: 0.27s; }
+.js.loaded .hero-kicker span, .js.loaded .line-inner { transform: translateY(0); }
+.js.loaded .line:nth-child(1) .line-inner { transition-delay: 0.05s; }
+.js.loaded .line:nth-child(2) .line-inner { transition-delay: 0.16s; }
+.js.loaded .line:nth-child(3) .line-inner { transition-delay: 0.27s; }
 .js .hero-foot { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease) 0.5s, transform 0.8s var(--ease) 0.5s; }
-.js .loaded .hero-foot { opacity: 1; transform: none; }
+.js.loaded .hero-foot { opacity: 1; transform: none; }
 
 /* ---------- Marquee ---------- */
 .marquee {
