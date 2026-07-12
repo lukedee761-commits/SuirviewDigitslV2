@@ -1,0 +1,76 @@
+/* =========================================================
+   SuirViewDigital — Journal / blog
+   Reuses styles.css tokens (:root vars, fonts, contour field).
+   Link order per page: styles.css THEN blog.css.
+   ========================================================= */
+
+/* Top bar (blog pages have no scroll-spy rail) */
+.blog-top {
+  position: sticky; top: 0; z-index: 90;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 14px clamp(20px, 5vw, 48px);
+  background: rgba(10, 11, 15, 0.72); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.blog-top .brand { display: inline-flex; align-items: center; gap: 12px; }
+.blog-top .brand svg { width: 34px; height: 34px; }
+.blog-top .brand b { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; font-size: 1.02rem; }
+.blog-nav { display: flex; align-items: center; gap: 22px; }
+.blog-nav a { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; color: var(--slate); transition: color 0.25s var(--ease); }
+.blog-nav a:hover { color: var(--gold-light); }
+@media (max-width: 620px) { .blog-nav a.hide-sm { display: none; } }
+
+/* Article shell */
+.post { max-width: 760px; margin: 0 auto; padding: clamp(40px, 7vh, 84px) clamp(20px, 5vw, 32px) 40px; }
+.post .crumb { font-family: var(--mono); font-size: 0.74rem; color: var(--slate-dim); margin-bottom: 22px; }
+.post .crumb a:hover { color: var(--gold-light); }
+.post .eyebrow { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.post h1 { font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 700; margin: 14px 0 14px; }
+.post .post-meta { font-family: var(--mono); font-size: 0.76rem; color: var(--slate-dim); margin-bottom: 30px; }
+.post h2 { font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 700; margin: 42px 0 14px; }
+.post h3 { font-size: clamp(1.12rem, 2.4vw, 1.35rem); font-weight: 600; margin: 28px 0 10px; color: var(--cream); }
+.post p { color: #D9DCE6; margin: 0 0 18px; font-size: 1.05rem; }
+.post a.inline { color: var(--gold-light); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+.post a.inline:hover { text-decoration-color: var(--gold); }
+.post ul, .post ol { margin: 0 0 18px 1.1rem; color: #D9DCE6; }
+.post li { margin: 8px 0; }
+.post strong { color: var(--cream); }
+
+/* TL;DR + callouts */
+.tldr { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--gold); border-radius: 12px; padding: 18px 22px; margin: 0 0 30px; }
+.tldr strong { color: var(--gold-light); }
+blockquote.expert { margin: 26px 0; padding: 4px 0 4px 22px; border-left: 3px solid var(--gold); font-family: var(--display); font-size: 1.2rem; line-height: 1.4; color: var(--cream); }
+blockquote.expert cite { display: block; margin-top: 10px; font-family: var(--mono); font-size: 0.74rem; font-style: normal; color: var(--slate); letter-spacing: 0.04em; }
+.stat { color: var(--gold-light); font-weight: 600; }
+
+/* Key takeaways table */
+.takeaways { width: 100%; border-collapse: collapse; margin: 8px 0 30px; font-size: 0.98rem; }
+.takeaways th, .takeaways td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+.takeaways thead th { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.takeaways td:first-child { color: var(--cream); font-weight: 600; white-space: nowrap; }
+.takeaways td { color: var(--slate); }
+
+/* FAQ */
+.post-faq { margin-top: 44px; border-top: 1px solid var(--line-soft); padding-top: 8px; }
+.post-faq h2 { margin-top: 26px; }
+.post-faq h3 { color: var(--gold-light); }
+
+/* CTA */
+.cta-box { margin: 46px 0 10px; padding: 30px; border-radius: 16px; background: linear-gradient(150deg, var(--midnight-2), var(--panel)); border: 1px solid var(--line); text-align: center; }
+.cta-box h2 { margin: 0 0 10px; font-size: 1.5rem; }
+.cta-box p { margin: 0 auto 20px; max-width: 46ch; }
+.cta-box .pill { margin: 6px; }
+
+/* Journal index */
+.blog-hero { max-width: 900px; margin: 0 auto; padding: clamp(48px, 9vh, 110px) clamp(20px, 5vw, 32px) 20px; }
+.blog-hero .eyebrow { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+.blog-hero h1 { font-family: var(--display); font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 800; margin: 14px 0 12px; }
+.blog-hero p { color: var(--slate); max-width: 56ch; font-size: 1.08rem; }
+.blog-grid { max-width: 900px; margin: 0 auto; padding: 26px clamp(20px, 5vw, 32px) 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 680px) { .blog-grid { grid-template-columns: 1fr; } }
+.card-post { display: block; padding: 24px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line-soft); transition: transform 0.3s var(--ease), border-color 0.3s var(--ease); }
+.card-post:hover { transform: translateY(-3px); border-color: var(--gold); }
+.card-post .tag { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+.card-post h2 { font-family: var(--display); font-size: 1.3rem; font-weight: 700; margin: 12px 0 8px; line-height: 1.12; }
+.card-post p { color: var(--slate); font-size: 0.96rem; margin: 0; }
+.card-post .read { display: inline-block; margin-top: 14px; font-family: var(--mono); font-size: 0.74rem; color: var(--gold-light); }
