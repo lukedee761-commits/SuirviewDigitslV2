@@ -1,0 +1,37 @@
+{
+  "slug": "suirviewdigital",
+  "business": "SuirViewDigital",
+  "siteUrl": "https://www.suirviewdigital.ie",
+  "blogPath": "blog",
+  "phoneDisplay": "085 153 8421",
+  "phoneTel": "+353851538421",
+  "bookingHref": "../index.html#contact",
+  "location": "County Tipperary, serving all of Ireland",
+  "audience": "Owner-operators of small Irish businesses — clinics, dentists, salons, barbers, trades — who want a premium website and to be found on Google and AI search without learning the jargon.",
+  "tone": "Warm, confident, plain-English, a little premium. Irish English (en-IE). No hype, no jargon, no 'unlock/supercharge'. Reassure, don't sell hard.",
+  "brand": "Dark navy (#0A0B0F) with soft gold accent; Syne display headings. Never generic AI aesthetics.",
+  "services": [
+    { "name": "Custom website design", "anchor": "../index.html#services" },
+    { "name": "SEO, Google & AI search visibility", "anchor": "../index.html#services" },
+    { "name": "Hosting, security & ongoing care", "anchor": "../index.html#services" },
+    { "name": "Two plans: pay-as-you-go or one-time", "anchor": "../index.html#plans" }
+  ],
+  "internalLinks": {
+    "services": "../index.html#services",
+    "plans": "../index.html#plans",
+    "process": "../index.html#process",
+    "contact": "../index.html#contact",
+    "journal": "index.html"
+  },
+  "authorities": [
+    "Central Statistics Office (CSO) Ireland — cso.ie",
+    "Local Enterprise Office / Trading Online Voucher — localenterprise.ie",
+    "Google Search Central — developers.google.com/search",
+    "Enterprise Ireland — enterprise-ireland.com"
+  ],
+  "doNotSay": [
+    "No fabricated statistics or invented case-study numbers",
+    "No specific prices on-site — every project is quoted on a call",
+    "No guarantees of #1 rankings or specific traffic numbers"
+  ]
+}

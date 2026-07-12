@@ -1,0 +1,14 @@
+{
+  "name": "suirviewdigital-seo-bot",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Auto-drafts GEO-optimised blog articles for SuirViewDigital-managed sites and opens a PR for human approval.",
+  "scripts": {
+    "generate": "node generate.mjs",
+    "check": "node quality-gate.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "latest"
+  }
+}
