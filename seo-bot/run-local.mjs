@@ -12,7 +12,8 @@ const REPO_ROOT = join(BOT_DIR, "..");
 const CLIENT = process.env.CLIENT || "suirviewdigital";
 
 function git(args, opts = {}) {
-  const r = spawnSync("git", args, { cwd: REPO_ROOT, encoding: "utf8", shell: process.platform === "win32", ...opts });
+  // no shell: args pass literally, so multi-word commit messages stay one argument
+  const r = spawnSync("git", args, { cwd: REPO_ROOT, encoding: "utf8", ...opts });
   if (r.status !== 0 && !opts.allowFail) throw new Error(`git ${args.join(" ")} failed: ${(r.stderr || r.stdout || "").trim()}`);
   return (r.stdout || "").trim();
 }
