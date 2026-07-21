@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="SuirViewDigital otter mark">
+  <defs>
+    <linearGradient id="swimmerDi-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#13233F"/><stop offset="1" stop-color="#0A0B0F"/>
+    </linearGradient>
+    <linearGradient id="swimmerDi-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4C888"/><stop offset="0.5" stop-color="#C9A96A"/><stop offset="1" stop-color="#A9884E"/>
+    </linearGradient>
+    <linearGradient id="swimmerDi-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <!-- body: an S-curve (the otter IS the S) -->
+    <path d="M30 72 C30 60 44 58 52 51 C60 44 58 34 50 31"
+          fill="none" stroke="url(#swimmerDi-gold)" stroke-width="9.5" stroke-linecap="round"/>
+    <!-- tail taper -->
+    <path d="M30 72 C26 76 22 78 17 78" fill="none" stroke="url(#swimmerDi-gold)" stroke-width="4.2" stroke-linecap="round"/>
+    <!-- head -->
+    <circle cx="46" cy="27" r="8.4" fill="url(#swimmerDi-gold)"/>
+    <circle cx="39.5" cy="20.5" r="3.1" fill="url(#swimmerDi-gold)"/>
+    <circle cx="52.5" cy="20.5" r="3.1" fill="url(#swimmerDi-gold)"/>
+    <!-- muzzle + eye punched out -->
+    <circle cx="49.5" cy="30.5" r="3.4" fill="#0A0B0F" opacity="0.92"/>
+    <circle cx="43.5" cy="25" r="1.5" fill="#0A0B0F"/>
+    <!-- river -->
+    <path d="M14 84 C30 78 46 90 64 80 C72 75.5 78 71 84 66"
+          fill="none" stroke="url(#swimmerDi-blue)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+    <path d="M22 90 C34 86 46 93 58 86" fill="none" stroke="url(#swimmerDi-blue)" stroke-width="2"
+          stroke-linecap="round" opacity="0.38"/>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 120" role="img" aria-label="SuirViewDigital">
+  <defs>
+    <linearGradient id="sealDl-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#13233F"/><stop offset="1" stop-color="#0A0B0F"/>
+    </linearGradient>
+    <linearGradient id="sealDl-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4C888"/><stop offset="0.5" stop-color="#C9A96A"/><stop offset="1" stop-color="#A9884E"/>
+    </linearGradient>
+    <linearGradient id="sealDl-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="sealDl-river" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9A96A"/><stop offset="0.55" stop-color="#E4C888"/><stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(8,12)">
+    <circle cx="48" cy="48" r="45" fill="url(#sealDl-panel)" stroke="url(#sealDl-gold)" stroke-width="2"/>
+    <circle cx="48" cy="48" r="39.5" fill="none" stroke="url(#sealDl-gold)" stroke-width="0.9" opacity="0.55"/>
+    <!-- S -->
+    <path d="M50 33 C50 26.5 39.5 24.5 33.5 28 C26.5 32 27.5 39.5 35.5 42.8 C43.5 46 48.5 49 47.2 55.5 C46 62 36 65 29.5 61.5"
+          fill="none" stroke="url(#sealDl-gold)" stroke-width="4.6" stroke-linecap="round"/>
+    <!-- V (interlocks to the right of the S) -->
+    <path d="M48 35 L58.5 62.5 L69 35" fill="none" stroke="url(#sealDl-gold)" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- S upper bowl redrawn over the V arm = woven ligature -->
+    <path d="M50 33 C50 26.5 39.5 24.5 33.5 28" fill="none" stroke="url(#sealDl-gold)" stroke-width="4.6" stroke-linecap="round"/>
+    <!-- river horizon -->
+    <line x1="34" y1="73" x2="62" y2="73" stroke="url(#sealDl-gold)" stroke-width="1.4" opacity="0.9"/>
+    <line x1="39" y1="78" x2="57" y2="78" stroke="url(#sealDl-blue)" stroke-width="1.8" stroke-linecap="round" opacity="0.5"/>
+  </g>
+  <g transform="translate(126,0)">
+    <text x="0" y="62" font-family="Fraunces, 'Cormorant Garamond', Georgia, serif" font-size="46" font-weight="600" letter-spacing="-0.5" fill="#F7F5F1">Suir<tspan fill="url(#sealDl-gold)">View</tspan></text>
+    <text x="2" y="90" font-family="Inter, 'Segoe UI', system-ui, sans-serif" font-size="18" font-weight="500" letter-spacing="7" fill="#8B93A7">DIGITAL</text>
+  </g>
+</svg>

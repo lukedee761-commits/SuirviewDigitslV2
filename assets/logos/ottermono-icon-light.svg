@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="SuirViewDigital otter mark">
+  <defs>
+    <linearGradient id="ottermonoLi-panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#13233F"/><stop offset="1" stop-color="#0A0B0F"/>
+    </linearGradient>
+    <linearGradient id="ottermonoLi-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4C888"/><stop offset="0.5" stop-color="#C9A96A"/><stop offset="1" stop-color="#A9884E"/>
+    </linearGradient>
+    <linearGradient id="ottermonoLi-blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <g>
+    <rect x="1" y="1" width="94" height="94" rx="8" fill="url(#ottermonoLi-gold)"/>
+    <!-- ears -->
+    <circle cx="36.69" cy="31.86" r="4.836" fill="none" stroke="#FFFFFF" stroke-width="2.465"/>
+    <circle cx="59.31" cy="31.86" r="4.836" fill="none" stroke="#FFFFFF" stroke-width="2.465"/>
+    <!-- crown / head -->
+    <path d="M33.18 44.34 C33.18 32.64 39.42 27.96 48.0 27.96 C56.58 27.96 62.82 32.64 62.82 44.34
+             C62.82 52.14 56.58 56.82 48.0 56.82 C39.42 56.82 33.18 52.14 33.18 44.34 Z"
+          fill="none" stroke="#FFFFFF" stroke-width="2.9"/>
+    <!-- broad muzzle (the otter tell) -->
+    <path d="M39.42 49.02 C39.42 55.26 44.1 57.6 48.0 57.6 C51.9 57.6 56.58 55.26 56.58 49.02"
+          fill="none" stroke="#FFFFFF" stroke-width="2.088"/>
+    <!-- nose -->
+    <path d="M44.88 46.68 C44.88 44.73 51.12 44.73 51.12 46.68 C51.12 49.02 48.0 50.58 48.0 50.58
+             C48.0 50.58 44.88 49.02 44.88 46.68 Z" fill="#FFFFFF"/>
+    <!-- eyes -->
+    <circle cx="41.37" cy="40.44" r="1.9500000000000002" fill="#FFFFFF"/>
+    <circle cx="54.63" cy="40.44" r="1.9500000000000002" fill="#FFFFFF"/>
+    <!-- whiskers -->
+    <path d="M38.64 50.58 L29.28 48.24 M38.64 52.92 L30.06 53.7
+             M57.36 50.58 L66.72 48.24 M57.36 52.92 L65.94 53.7"
+          stroke="#FFFFFF" stroke-width="1.45" stroke-linecap="round" opacity="0.85"/>
+    <rect x="27" y="72" width="42" height="3.2" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="27" y="79" width="26" height="3.2" fill="#3B82F6" opacity="0.85"/>
+  </g>
+</svg>

@@ -12,7 +12,9 @@ $mime = @{
   ".xml"="application/xml; charset=utf-8"; ".txt"="text/plain; charset=utf-8";
   ".png"="image/png"; ".jpg"="image/jpeg"; ".jpeg"="image/jpeg";
   ".webp"="image/webp"; ".gif"="image/gif"; ".ico"="image/x-icon";
-  ".woff2"="font/woff2"; ".woff"="font/woff"
+  ".woff2"="font/woff2"; ".woff"="font/woff";
+  ".mp3"="audio/mpeg"; ".m4a"="audio/mp4"; ".wav"="audio/wav"; ".ogg"="audio/ogg";
+  ".mp4"="video/mp4"; ".webm"="video/webm"
 }
 
 $listener = New-Object System.Net.HttpListener
