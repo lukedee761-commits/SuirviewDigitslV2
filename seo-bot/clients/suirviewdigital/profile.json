@@ -14,7 +14,7 @@
     { "name": "Custom website design", "anchor": "../index.html#services" },
     { "name": "SEO, Google & AI search visibility", "anchor": "../index.html#services" },
     { "name": "Hosting, security & ongoing care", "anchor": "../index.html#services" },
-    { "name": "Two plans: pay-as-you-go or one-time", "anchor": "../index.html#plans" }
+    { "name": "Website packages from €349 + monthly care & content plans (from €50/mo)", "anchor": "../index.html#plans" }
   ],
   "internalLinks": {
     "services": "../index.html#services",
@@ -31,7 +31,7 @@
   ],
   "doNotSay": [
     "No fabricated statistics or invented case-study numbers",
-    "No specific prices on-site — every project is quoted on a call",
+    "Public 'from' prices are fine to mention (Starter from €349, Care from €50/mo) — but never present an exact custom project price as final; exact quotes are confirmed on a quick call",
     "No guarantees of #1 rankings or specific traffic numbers"
   ]
 }

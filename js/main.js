@@ -249,3 +249,221 @@
     }
   }
 })();
+
+/* ===== Website configurator (build & price) ===== */
+(function () {
+  var root = document.querySelector('.configurator');
+  if (!root) return;
+  var BASE = 349;
+  var totalEl = document.getElementById('configTotal');
+  var listEl = document.getElementById('configList');
+  var quoteBtn = document.getElementById('configQuote');
+  var addons = [].slice.call(root.querySelectorAll('.addon[data-price]'));
+
+  function fmt(n) { return '€' + n.toLocaleString('en-IE'); }
+
+  function render() {
+    var total = BASE;
+    var items = [{ name: 'Starter website', price: BASE, base: true }];
+    addons.forEach(function (a) {
+      if (a.getAttribute('aria-pressed') === 'true') {
+        var price = parseInt(a.getAttribute('data-price'), 10) || 0;
+        total += price;
+        items.push({ name: a.getAttribute('data-name') || 'Add-on', price: price, base: false });
+      }
+    });
+    if (totalEl) totalEl.textContent = fmt(total);
+    if (listEl) {
+      listEl.innerHTML = '';
+      items.forEach(function (it) {
+        var li = document.createElement('li');
+        if (it.base) li.className = 'is-base';
+        var nm = document.createElement('span'); nm.textContent = it.name;
+        var pr = document.createElement('span'); pr.textContent = (it.base ? '' : '+') + fmt(it.price);
+        li.appendChild(nm); li.appendChild(pr);
+        listEl.appendChild(li);
+      });
+    }
+    return { total: total, items: items };
+  }
+
+  addons.forEach(function (a) {
+    a.addEventListener('click', function () {
+      a.setAttribute('aria-pressed', a.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+      render();
+    });
+  });
+
+  if (quoteBtn) {
+    quoteBtn.addEventListener('click', function () {
+      var state = render();
+      var form = document.getElementById('contactForm');
+      if (form && form.message) {
+        var lines = state.items.map(function (it) {
+          return '• ' + it.name + ' (' + (it.base ? '' : '+') + fmt(it.price) + ')';
+        });
+        form.message.value = 'I’d like a quote for this build (from ' + fmt(state.total) + '):\n' + lines.join('\n') + '\n\nA bit about my business: ';
+      }
+      setTimeout(function () {
+        var nameField = document.getElementById('name');
+        if (nameField) nameField.focus({ preventScroll: true });
+      }, 550);
+    });
+  }
+
+  var moreBtn = document.getElementById('configMore');
+  if (moreBtn) {
+    moreBtn.addEventListener('click', function () {
+      var box = root.querySelector('.config-addons');
+      var open = box.classList.toggle('show-all');
+      moreBtn.setAttribute('aria-expanded', String(open));
+      moreBtn.textContent = open ? 'Show fewer add-ons' : 'Show 6 more add-ons';
+    });
+  }
+
+  render();
+})();
+
+/* ===== Sales chat assistant (guided — never quotes a price) ===== */
+(function () {
+  var chat = document.getElementById('chat');
+  if (!chat) return;
+  var launch = document.getElementById('chatLaunch');
+  var panel = document.getElementById('chatPanel');
+  var closeBtn = document.getElementById('chatClose');
+  var log = document.getElementById('chatLog');
+  var chipBar = document.getElementById('chatChips');
+  var form = document.getElementById('chatInput');
+  var field = document.getElementById('chatField');
+  var started = false;
+
+  function goTo(hash) { window.location.hash = hash; }
+  function bookCall() { var b = document.querySelector('.book-call'); if (b) b.click(); }
+
+  var TOPICS = {
+    build: {
+      chip: 'What do you build?',
+      keys: ['build', 'make', 'websites', 'what do you', 'offer', 'services', 'design'],
+      answer: 'We design custom websites for local businesses — from a 5-page Starter site to full e-commerce and bigger builds, all made around your brand (never a template).',
+      actions: [{ label: 'Design & price one', act: function () { goTo('#build'); } }, { label: 'See packages', act: function () { goTo('#plans'); } }]
+    },
+    price: {
+      chip: 'How much does it cost?',
+      keys: ['cost', 'price', 'how much', 'expensive', 'budget', 'pricing', 'quote', 'cheap'],
+      answer: 'It depends on exactly what you need — the quickest way is to build your own package and see a starting price, then we confirm an exact quote. No obligation.',
+      actions: [{ label: 'Build & price it', act: function () { goTo('#build'); } }, { label: 'Get a quote', act: function () { goTo('#contact'); } }]
+    },
+    time: {
+      chip: 'How long does it take?',
+      keys: ['long', 'time', 'quick', 'fast', 'when', 'turnaround', 'ready'],
+      answer: 'Usually about a week from our first call to going live — sometimes faster. You’ll see a live preview early, so there are no surprises.',
+      actions: [{ label: 'Book a quick call', act: bookCall }]
+    },
+    seo: {
+      chip: 'SEO & AI search?',
+      keys: ['seo', 'google', 'rank', 'ai search', 'chatgpt', 'geo', 'found', 'search', 'perplexity'],
+      answer: 'Every site is built to be found — on Google and on AI search like ChatGPT, Perplexity and Gemini (we call that GEO). Our monthly plans add fresh content to keep you climbing.',
+      actions: [{ label: 'See the plans', act: function () { goTo('#plans'); } }]
+    },
+    offer: {
+      chip: 'The founding offer',
+      keys: ['offer', 'founding', 'deal', 'discount', 'spaces', 'special'],
+      answer: 'Right now we’re taking on four founding clients: your website for €400 with a full year of care and content included — or €200 to start, then €50/month.',
+      actions: [{ label: 'Claim a space', act: function () { goTo('#contact'); } }]
+    },
+    ava: {
+      chip: '',
+      keys: ['ava', 'receptionist', 'phone', 'answer call', 'answer the phone', 'missed call'],
+      answer: 'That’s Ava — our 24/7 AI phone receptionist. She answers every call and books straight into your calendar. Website + Ava is €279/month together (Care + Ava), on top of your one-off build.',
+      actions: [{ label: 'Meet Ava', act: function () { window.location.href = 'receptionist.html'; } }]
+    },
+    quote: {
+      chip: 'Get a quote',
+      keys: ['contact', 'talk', 'human', 'enquire', 'email', 'get in touch', 'speak'],
+      answer: 'Perfect — tell us a little about your business and we’ll come back fast with an exact price. You can also book a quick call.',
+      actions: [{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Book a call', act: bookCall }]
+    }
+  };
+  var DEFAULT_CHIPS = ['build', 'price', 'time', 'seo', 'offer', 'quote'];
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function openChat(open) {
+    if (open) { panel.removeAttribute('hidden'); start(); setTimeout(function () { field.focus(); }, 60); }
+    else { panel.setAttribute('hidden', ''); }
+    launch.setAttribute('aria-expanded', String(open));
+    chat.classList.toggle('is-open', open);
+  }
+
+  function addMsg(text, who) {
+    var m = el('div', 'chat-msg chat-msg--' + who, text);
+    log.appendChild(m);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function addActions(actions) {
+    if (!actions || !actions.length) return;
+    var wrap = el('div', 'chat-actions');
+    actions.forEach(function (a) {
+      var b = el('button', 'chat-action', a.label);
+      b.type = 'button';
+      b.addEventListener('click', function () { a.act(); openChat(false); });
+      wrap.appendChild(b);
+    });
+    log.appendChild(wrap);
+    log.scrollTop = log.scrollHeight;
+  }
+
+  function renderChips() {
+    chipBar.innerHTML = '';
+    DEFAULT_CHIPS.forEach(function (key) {
+      var t = TOPICS[key];
+      if (!t || !t.chip) return;
+      var c = el('button', 'chat-chip', t.chip);
+      c.type = 'button';
+      c.addEventListener('click', function () { answer(key, t.chip); });
+      chipBar.appendChild(c);
+    });
+  }
+
+  function answer(key, echo) {
+    var t = TOPICS[key];
+    if (echo) addMsg(echo, 'user');
+    setTimeout(function () { addMsg(t.answer, 'bot'); addActions(t.actions); }, 240);
+  }
+
+  function match(text) {
+    var q = text.toLowerCase();
+    var found = null;
+    Object.keys(TOPICS).forEach(function (key) {
+      TOPICS[key].keys.forEach(function (kw) { if (!found && q.indexOf(kw) !== -1) found = key; });
+    });
+    return found;
+  }
+
+  function start() {
+    if (started) return;
+    started = true;
+    addMsg('Hi! 👋 I can help you get a website sorted. What would you like to know?', 'bot');
+    renderChips();
+  }
+
+  launch.addEventListener('click', function () { openChat(panel.hasAttribute('hidden')); });
+  if (closeBtn) closeBtn.addEventListener('click', function () { openChat(false); });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var text = field.value.trim();
+    if (!text) return;
+    addMsg(text, 'user');
+    field.value = '';
+    var key = match(text);
+    setTimeout(function () {
+      if (key) { addMsg(TOPICS[key].answer, 'bot'); addActions(TOPICS[key].actions); }
+      else {
+        addMsg('Good question! The quickest way is a proper answer from us — want to get a quote or book a quick call?', 'bot');
+        addActions([{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Book a call', act: bookCall }]);
+      }
+    }, 240);
+  });
+})();
