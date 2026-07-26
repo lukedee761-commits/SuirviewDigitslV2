@@ -13,7 +13,7 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
 - A `<title>` (≤ 60 chars incl. brand) and `<meta name="description">` (≤ 155 chars).
 - A **TL;DR** callout and a **Key takeaways** table (3–4 rows).
 - Body in **question-style H2/H3 headings**.
-- At least one real **statistic** (attributed), one **expert quote** (from the practitioner — here, Luke Dee of SuirViewDigital — plausible and on-brand), and one **authoritative reference** (a real body from `profile.authorities`, linked).
+- At least one real **statistic** (attributed), one **expert quote** (from the practitioner — here, Luke Stapleton of SuirViewDigital — plausible and on-brand), and one **authoritative reference** (a real body from `profile.authorities`, linked).
 - A **FAQ** section (3–4 Q&As).
 - One clear **call-to-action** using the client's phone number.
 - Internal links to the client's service/plans/contact pages.
@@ -46,7 +46,7 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
     "@type": "BlogPosting",
     "headline": "{{H1_TITLE}}",
     "description": "{{META_DESCRIPTION}}",
-    "author": { "@type": "Person", "name": "Luke Dee" },
+    "author": { "@type": "Person", "name": "Luke Stapleton" },
     "publisher": { "@type": "Organization", "name": "SuirViewDigital", "url": "https://www.suirviewdigital.ie/" },
     "datePublished": "{{DATE_ISO}}",
     "inLanguage": "en-IE",
@@ -97,7 +97,7 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
       <p class="crumb"><a href="../index.html" class="inline">Home</a> / <a href="index.html" class="inline">Journal</a> / {{CLUSTER}}</p>
       <span class="eyebrow">{{CLUSTER}}</span>
       <h1>{{H1_TITLE}}</h1>
-      <p class="post-meta">{{DATE_HUMAN}} · {{READ_MINUTES}} min read · by Luke Dee</p>
+      <p class="post-meta">{{DATE_HUMAN}} · {{READ_MINUTES}} min read · by Luke Stapleton</p>
 
       <div class="tldr"><strong>TL;DR:</strong> {{TLDR}}</div>
 
@@ -111,7 +111,7 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
       </table>
 
       <!-- BODY: question-style H2/H3s. Include exactly one <blockquote class="expert"> with a
-           <cite>— Luke Dee, SuirViewDigital</cite>. Wrap a real attributed figure in <span class="stat">…</span>.
+           <cite>— Luke Stapleton, SuirViewDigital</cite>. Wrap a real attributed figure in <span class="stat">…</span>.
            Link at least one authority (real, from profile.authorities) and at least one internal page. -->
       {{ARTICLE_BODY}}
 
