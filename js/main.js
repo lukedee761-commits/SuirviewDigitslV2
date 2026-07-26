@@ -368,7 +368,7 @@
     offer: {
       chip: 'The founding offer',
       keys: ['offer', 'founding', 'deal', 'discount', 'spaces', 'special'],
-      answer: 'We’re taking on four founding clients before it closes on 31 July: a full build, 12 months of Care and a year of blog content — 52 articles, one a week. It’s €200 to start, then €50/month for the year — or €400 up front and you save 50%. After the year, both carry on at €50/month.',
+      answer: 'The founding offer runs until 31 July: a full build, 12 months of Care and a year of blog content — 52 articles, one a week. It’s €200 to start, then €50/month for the year — or €400 up front and you save 50%. After the year, both carry on at €50/month.',
       actions: [{ label: 'Claim a space', act: function () { goTo('#contact'); } }]
     },
     ava: {
