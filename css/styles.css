@@ -535,12 +535,23 @@ main, .foot { position: relative; z-index: 1; }
 .sw-abbr { display: none; }
 /* the bar is fixed, so the page needs to start below it */
 main { padding-top: 68px; }
-@media (max-width: 640px) {
-  .switch { height: 56px; }
-  .switch-item { font-size: .66rem; letter-spacing: 1.2px; padding: 0 14px; }
+/* The .corner controls are fixed at z-index 110 and overlap this bar from the
+   right, so the tabs must always end left of the "Book a call" pill. With three
+   tabs the full labels don't fit until ~900px — below that they ran under the
+   pill and stole its taps, so switch to the short labels earlier. */
+@media (max-width: 900px) {
   .sw-full { display: none; }
   .sw-abbr { display: inline; }
+}
+@media (max-width: 640px) {
+  .switch { height: 56px; }
+  .switch-item { font-size: .62rem; letter-spacing: 1px; padding: 0 9px; }
   main { padding-top: 56px; }
+}
+/* Extra margin on the narrowest phones so the third tab still clears the pill
+   if JetBrains Mono fails and a wider fallback (Consolas) is substituted. */
+@media (max-width: 420px) {
+  .switch-item { padding: 0 7px; letter-spacing: .8px; }
 }
 
 /* ============================================================
@@ -792,3 +803,20 @@ main { padding-top: 68px; }
 .subhead h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--cream); margin-top: 6px; }
 .subhead p { color: var(--slate); margin-top: 8px; max-width: 620px; }
 @media (max-width: 860px) { .ladder-grid { grid-template-columns: 1fr; } }
+
+/* Build tiers — 2-up on tablet, stacked and compact on phones (no sideways swipe) */
+@media (max-width: 980px) {
+  .tier-grid { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow-x: visible; scroll-snap-type: none; padding-bottom: 0; }
+}
+@media (max-width: 700px) {
+  .tier-grid { grid-template-columns: minmax(0, 1fr); }
+  /* Badge + price share the top row so each card stays short enough to read at a glance */
+  .tier-grid .plan { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 16px; padding: 22px 20px; }
+  .tier-grid .plan-badge { grid-area: 1 / 1; margin-bottom: 0; align-self: start; }
+  .tier-grid .plan-badge .tier-flag { margin-left: 0; }
+  .tier-grid .plan-from { grid-area: 1 / 2; text-align: right; margin-bottom: 0; align-self: start; }
+  .tier-grid .plan-price { grid-area: 2 / 2; text-align: right; }
+  .tier-grid .plan-desc { grid-area: 2 / 1; margin: 0; }
+  .tier-grid .plan ul { grid-column: 1 / -1; margin-top: 18px; gap: 10px; }
+  .tier-grid .plan .pill { grid-column: 1 / -1; margin-top: 18px; }
+}
