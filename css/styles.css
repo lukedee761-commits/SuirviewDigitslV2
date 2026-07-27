@@ -231,8 +231,15 @@ main, .foot { position: relative; z-index: 1; }
 .overlay[hidden] { display: flex; }
 .overlay-nav { display: flex; flex-direction: column; gap: 4px; }
 .overlay-nav a {
-  font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 4.6vw, 2.6rem);
-  padding: 8px 0; color: var(--cream); display: flex; align-items: baseline; gap: 18px;
+  font-family: var(--display); font-weight: 700;
+  /* Height matters as much as width: the longest menu is 10 items and the
+     overlay is only ever as tall as the window, so a wide-but-short desktop
+     window overflowed while a width-only clamp still sized the text at its
+     2.6rem maximum. min() lets whichever axis is tighter do the limiting. */
+  font-size: clamp(1.35rem, min(4.6vw, 3.9vh), 2.6rem);
+  line-height: 1.15;
+  padding: clamp(5px, 0.7vh, 8px) 0;
+  color: var(--cream); display: flex; align-items: baseline; gap: 18px;
   transition: color 0.3s var(--ease), transform 0.35s var(--ease);
 }
 .overlay-nav a:hover { color: var(--gold-light); transform: translateX(12px); }
@@ -240,6 +247,14 @@ main, .foot { position: relative; z-index: 1; }
 .overlay-foot { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 48px; }
 .overlay-foot a { font-family: var(--mono); font-size: 0.85rem; color: var(--slate); }
 .overlay-foot a:hover { color: var(--gold-light); }
+/* Short windows: below ~620px the padding and the clamp floor are most of the
+   height budget, so trimming them buys more than shrinking the text again.
+   Top padding still has to clear the fixed close button (18px + ~48px). */
+@media (max-height: 620px) {
+  .overlay { padding-top: clamp(70px, 10vh, 84px); padding-bottom: 24px; }
+  .overlay-nav a { font-size: clamp(1.05rem, min(4.6vw, 3.9vh), 2.6rem); padding: 4px 0; }
+  .overlay-foot { margin-top: 24px; }
+}
 
 /* ---------- Hero ---------- */
 .hero {
@@ -551,9 +566,16 @@ main, .foot { position: relative; z-index: 1; }
 /* the bar is fixed, so the page needs to start below it */
 main { padding-top: 68px; }
 /* The .corner controls are fixed at z-index 110 and overlap this bar from the
-   right, so the tabs must always end left of the "Book a call" pill. With three
-   tabs the full labels don't fit until ~900px — below that they ran under the
-   pill and stole its taps, so switch to the short labels earlier. */
+   right, so the tabs must always end left of whatever sits there. With four
+   tabs the full labels only clear the "Book a call" pill from ~1040px up
+   (57px to spare at 1041) — so below that the pill goes rather than the
+   labels, and the tabs run against the narrow menu button instead. That buys
+   full labels all the way down to 900px (87px to spare at 901); the chat
+   launcher carries the booking action wherever the pill is gone. Scoped to
+   .corner so the chat's own .chat-book (same class) is untouched. */
+@media (max-width: 1040px) {
+  .corner .book-call { display: none; }
+}
 @media (max-width: 900px) {
   .sw-full { display: none; }
   .sw-abbr { display: inline; }
@@ -563,8 +585,8 @@ main { padding-top: 68px; }
   .switch-item { font-size: .62rem; letter-spacing: 1px; padding: 0 9px; }
   main { padding-top: 56px; }
 }
-/* Extra margin on the narrowest phones so the third tab still clears the pill
-   if JetBrains Mono fails and a wider fallback (Consolas) is substituted. */
+/* Extra margin on the narrowest phones so the fourth tab still clears the menu
+   button if JetBrains Mono fails and a wider fallback (Consolas) is used. */
 @media (max-width: 420px) {
   .switch-item { padding: 0 7px; letter-spacing: .8px; }
 }
@@ -777,7 +799,11 @@ main { padding-top: 68px; }
 /* ============================================================
    SALES CHAT — guided assistant (bottom-right)
    ============================================================ */
-.chat { position: fixed; right: clamp(16px, 3vw, 28px); bottom: clamp(16px, 3vw, 28px); z-index: 95; }
+.chat { position: fixed; right: clamp(16px, 3vw, 28px); bottom: clamp(16px, 3vw, 28px); z-index: 95; display: flex; align-items: center; gap: 10px; }
+/* Booking CTA rides alongside the launcher, revealed only once the chat is open */
+.chat-book { display: none; padding: 11px 20px; font-size: .88rem; }
+.chat.is-open .chat-book { display: inline-flex; animation: chatBookIn .35s var(--ease) both; }
+@keyframes chatBookIn { from { opacity: 0; transform: translateX(12px); } to { opacity: 1; transform: none; } }
 .chat-launch { display: inline-flex; align-items: center; gap: 9px; padding: 13px 20px 13px 16px; border: none; border-radius: 999px; cursor: pointer; font-family: var(--sans); font-weight: 600; font-size: .95rem; color: #1a1408; background: linear-gradient(135deg, var(--gold-light), var(--gold)); box-shadow: 0 10px 30px rgba(201, 169, 106, 0.32); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
 .chat-launch:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(201, 169, 106, 0.45); }
 .chat-launch svg { width: 22px; height: 22px; fill: none; stroke: #1a1408; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }

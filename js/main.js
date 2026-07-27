@@ -337,7 +337,12 @@
   var field = document.getElementById('chatField');
   var started = false;
 
-  function goTo(hash) { window.location.hash = hash; }
+  // #plans and #build only exist on the homepage — the chat now runs on every
+  // page, so fall back to sending them there instead of setting a dead hash.
+  function goTo(hash) {
+    if (document.querySelector(hash)) window.location.hash = hash;
+    else window.location.href = 'index.html' + hash;
+  }
   function bookCall() { var b = document.querySelector('.book-call'); if (b) b.click(); }
 
   var TOPICS = {
@@ -450,6 +455,10 @@
 
   launch.addEventListener('click', function () { openChat(panel.hasAttribute('hidden')); });
   if (closeBtn) closeBtn.addEventListener('click', function () { openChat(false); });
+
+  // The panel covers the page on mobile — get it out of the way before jumping to the form
+  var bookPill = chat.querySelector('.chat-book');
+  if (bookPill) bookPill.addEventListener('click', function () { openChat(false); });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();

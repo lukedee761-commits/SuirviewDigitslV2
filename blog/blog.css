@@ -4,9 +4,17 @@
    Link order per page: styles.css THEN blog.css.
    ========================================================= */
 
+/* Primary tab bar (.switch, from styles.css). On the main site it is inset by
+   the scroll-spy rail; blog pages have no rail, so it spans the full width.
+   It is fixed, so the page has to reserve its height, and .blog-top sticks
+   directly beneath it rather than at the very top. */
+.switch { left: 0; }
+body { padding-top: 68px; }
+@media (max-width: 640px) { body { padding-top: 56px; } }
+
 /* Top bar (blog pages have no scroll-spy rail) */
 .blog-top {
-  position: sticky; top: 0; z-index: 90;
+  position: sticky; top: 68px; z-index: 90;
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding: 14px clamp(20px, 5vw, 48px);
   background: rgba(10, 11, 15, 0.72); backdrop-filter: blur(10px);
@@ -16,8 +24,11 @@
 .blog-top .brand svg { width: 34px; height: 34px; }
 .blog-top .brand b { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; font-size: 1.02rem; }
 .blog-nav { display: flex; align-items: center; gap: 22px; }
-.blog-nav a { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; color: var(--slate); transition: color 0.25s var(--ease); }
-.blog-nav a:hover { color: var(--gold-light); }
+/* :not(.pill) matters — this selector outranks .pill-gold, so without it the
+   "Book a call" pill lost its near-black label to grey-on-gold. */
+.blog-nav a:not(.pill) { font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.06em; color: var(--slate); transition: color 0.25s var(--ease); }
+.blog-nav a:not(.pill):hover { color: var(--gold-light); }
+@media (max-width: 640px) { .blog-top { top: 56px; } }
 @media (max-width: 620px) { .blog-nav a.hide-sm { display: none; } }
 
 /* Article shell */
