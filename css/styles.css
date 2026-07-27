@@ -522,11 +522,13 @@ main, .foot { position: relative; z-index: 1; }
   padding: 0 clamp(14px, 2.2vw, 30px);
   font-family: var(--mono); font-size: .72rem; letter-spacing: 1.8px;
   text-transform: uppercase; white-space: nowrap;
-  color: var(--slate-dim); text-decoration: none;
+  /* Full cream at all times — never dimmed. Hover and the current page are
+     signalled by the background tint and the gold underline instead. */
+  color: var(--cream); text-decoration: none;
   border-right: 1px solid var(--line-soft);
   transition: color .3s var(--ease), background-color .3s var(--ease);
 }
-.switch-item:hover { color: var(--cream); background: rgba(255, 255, 255, 0.035); }
+.switch-item:hover { background: rgba(255, 255, 255, 0.035); }
 .switch-item.is-active { color: var(--cream); }
 .switch-item.is-active::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
