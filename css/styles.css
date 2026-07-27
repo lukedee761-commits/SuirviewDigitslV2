@@ -208,12 +208,25 @@ main, .foot { position: relative; z-index: 1; }
 
 /* ---------- Overlay menu ---------- */
 .overlay {
-  position: fixed; inset: 0; z-index: 100;
+  /* Above .switch (also z-index 100, and later in the DOM, so it used to paint
+     over the menu and hide the first item) but below .corner (110), which holds
+     the close button and must stay clickable. */
+  position: fixed; inset: 0; z-index: 105;
   background: linear-gradient(160deg, var(--midnight), var(--black) 70%);
-  display: flex; flex-direction: column; justify-content: center; padding: 0 var(--gutter);
+  display: flex; flex-direction: column;
+  /* This is a scroll container: plain `center` pushes overflow above scrollTop 0
+     where it can never be reached. `safe` falls back to start-alignment once the
+     list is taller than the screen, so item 01 is always in view. */
+  justify-content: center;
+  justify-content: safe center;
+  /* Top padding clears the fixed corner controls. */
+  padding: clamp(84px, 12vh, 104px) var(--gutter) clamp(40px, 6vh, 56px);
   opacity: 0; pointer-events: none; transition: opacity 0.45s var(--ease);
   overscroll-behavior: contain; overflow-y: auto;
 }
+/* The menu carries its own phone and email, so the header CTA would only sit on
+   top of the list while it's open. */
+.menu-open .corner .pill { display: none; }
 .overlay:not([hidden]) { opacity: 1; pointer-events: auto; }
 .overlay[hidden] { display: flex; }
 .overlay-nav { display: flex; flex-direction: column; gap: 4px; }
