@@ -15,13 +15,29 @@
   --blue-bright: #3B82F6;
   --cyan: #38BDF8;
 
+  /* Structural gold — gradients, focus rings, borders, CTA fills, logo marks.
+     Deliberately NOT lifted: these carry the brand's warmth and depth. */
   --gold: #C9A96A;
   --gold-light: #E4C888;
   --gold-deep: #A9884E;
 
   --cream: #F7F5F1;
-  --slate: #8B93A7;
-  --slate-dim: #828A9E;
+
+  /* ---- Heading furniture (text only) -------------------------------------
+     The headings themselves (h1/h2/h3, .block-title, .subhead h3, .acc-title,
+     .offer-banner h3) are --cream #F7F5F1 = 245/255. They are already at the
+     ceiling and are NOT touched.
+     What actually read as dark is the gold/grey furniture around them. These
+     four tokens carry that furniture and are lifted toward white using
+        new = old + p x (255 - old)
+     DEFAULT BELOW = +15%. Compare other levels by setting data-lift on <html>:
+        document.documentElement.dataset.lift = '25'   // 0 | 10 | 15 | 25
+     --------------------------------------------------------------------- */
+  --gold-label: #D1B680;  /* from --gold      #C9A96A  +15% — .block-eyebrow, .hero-kicker, .deck-step, .panel-tag */
+  --gold-badge: #B69A69;  /* from --gold-deep #A9884E  +15% — .plan-badge, .step-n */
+  --slate: #9CA3B4;       /* from            #8B93A7  +15% — .block-lede, .plan-desc, body copy */
+  --slate-dim: #959CAD;   /* from            #828A9E  +15% — small .mono labels, .offer-lbl */
+
   --line: rgba(201, 169, 106, 0.16);
   --line-soft: rgba(255, 255, 255, 0.07);
 
@@ -32,6 +48,29 @@
   --rail-w: 76px;
   --gutter: clamp(24px, 5vw, 72px);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* =========================================================
+   HEADING-FURNITURE LIFT — A/B/C comparison
+   Flip live, no reload, in the browser console:
+       document.documentElement.dataset.lift = '0'    // original, before
+       document.documentElement.dataset.lift = '10'
+       document.documentElement.dataset.lift = '15'   // default (also in :root)
+       document.documentElement.dataset.lift = '25'
+   Or hard-set it in the markup:  <html lang="en" data-lift="25">
+   Remove the attribute entirely and :root's +15% default applies.
+   ========================================================= */
+:root[data-lift="0"] {          /* BEFORE — original values */
+  --gold-label: #C9A96A; --gold-badge: #A9884E; --slate: #8B93A7; --slate-dim: #828A9E;
+}
+:root[data-lift="10"] {         /* +10% — most conservative lift */
+  --gold-label: #CEB279; --gold-badge: #B29460; --slate: #979EB0; --slate-dim: #8E96A8;
+}
+:root[data-lift="15"] {         /* +15% — DEFAULT, warm gold retained */
+  --gold-label: #D1B680; --gold-badge: #B69A69; --slate: #9CA3B4; --slate-dim: #959CAD;
+}
+:root[data-lift="25"] {         /* +25% — gold reads noticeably paler / sandier */
+  --gold-label: #D6BE8F; --gold-badge: #BEA67A; --slate: #A8AEBD; --slate-dim: #A1A7B6;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -194,7 +233,7 @@ main, .foot { position: relative; z-index: 1; }
   min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-start;
   padding: clamp(84px, 12vh, 132px) var(--gutter) 80px calc(var(--rail-w) + var(--gutter));
 }
-.hero-kicker { color: var(--gold); text-transform: uppercase; margin-bottom: 28px; overflow: hidden; }
+.hero-kicker { color: var(--gold-label); text-transform: uppercase; margin-bottom: 28px; overflow: hidden; }
 .hero-kicker span { display: inline-block; }
 .hero-title {
   /* Longest line measures 14.74em (Syne 800 uppercase). Width-derived size with
@@ -223,7 +262,7 @@ main, .foot { position: relative; z-index: 1; }
 .spin-badge:hover { transform: scale(1.06); }
 .spin-badge svg { width: 100%; height: 100%; }
 .spin-text {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.22em; fill: var(--gold);
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.22em; fill: var(--gold-label);
   transform-origin: 60px 60px; animation: spin 22s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -251,13 +290,13 @@ main, .foot { position: relative; z-index: 1; }
   color: var(--slate);
 }
 .marquee:hover .marquee-track { animation-play-state: paused; }
-.marquee-track i { color: var(--gold); font-style: normal; }
+.marquee-track i { color: var(--gold-label); font-style: normal; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ---------- Blocks ---------- */
 .block { padding: clamp(90px, 13vh, 150px) var(--gutter) 0 calc(var(--rail-w) + var(--gutter)); }
 .block-head { margin-bottom: clamp(36px, 6vh, 60px); max-width: 900px; }
-.block-eyebrow { color: var(--gold); text-transform: uppercase; margin-bottom: 18px; }
+.block-eyebrow { color: var(--gold-label); text-transform: uppercase; margin-bottom: 18px; }
 .block-title { font-size: clamp(1.9rem, 4.6vw, 3.6rem); font-weight: 700; }
 .block-lede { color: var(--slate); margin-top: 18px; max-width: 620px; }
 .block-lede strong { color: var(--cream); }
@@ -318,7 +357,7 @@ main, .foot { position: relative; z-index: 1; }
 .deck-card:nth-child(2) { top: 126px; }
 .deck-card:nth-child(3) { top: 142px; }
 .deck-card:nth-child(4) { top: 158px; }
-.deck-step { color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+.deck-step { color: var(--gold-label); text-transform: uppercase; margin-bottom: 14px; }
 .deck-card h3 { font-size: clamp(1.5rem, 3.4vw, 2.3rem); font-weight: 700; margin-bottom: 12px; }
 .deck-card p { color: var(--slate); max-width: 560px; font-size: 1.02rem; }
 
@@ -342,7 +381,7 @@ main, .foot { position: relative; z-index: 1; }
   border: 1px solid var(--line-soft); border-radius: 20px; padding: clamp(30px, 4vw, 46px);
 }
 .panel-gold { border-color: var(--line); background: linear-gradient(160deg, var(--midnight-2), var(--panel)); }
-.panel-tag { color: var(--gold); text-transform: uppercase; margin-bottom: 14px; }
+.panel-tag { color: var(--gold-label); text-transform: uppercase; margin-bottom: 14px; }
 .panel h3 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 8px; }
 .panel-sub { color: var(--slate); margin-bottom: 22px; }
 .panel ul { list-style: none; display: grid; gap: 12px; }
@@ -353,7 +392,7 @@ main, .foot { position: relative; z-index: 1; }
 }
 .diptych-divider { display: flex; align-items: center; padding: 0 18px; }
 .diptych-divider span {
-  font-family: var(--display); font-weight: 700; color: var(--gold);
+  font-family: var(--display); font-weight: 700; color: var(--gold-label);
   width: 52px; height: 52px; border: 1px solid var(--line); border-radius: 50%;
   display: flex; align-items: center; justify-content: center; background: var(--black);
 }
@@ -545,7 +584,7 @@ main { padding-top: 68px; }
 /* steps */
 .steps { display: grid; gap: 14px; }
 .step { display: grid; grid-template-columns: auto 1fr; gap: 18px; align-items: start; padding: 22px; border: 1px solid var(--line-soft); border-radius: 14px; background: var(--panel); }
-.step-n { font-family: var(--mono); font-size: .78rem; color: var(--gold-deep); padding-top: 3px; }
+.step-n { font-family: var(--mono); font-size: .78rem; color: var(--gold-badge); padding-top: 3px; }
 .step h3 { font-family: var(--sans); font-size: 1.05rem; margin-bottom: 5px; color: var(--cream); }
 .step p { color: var(--slate); font-size: .94rem; line-height: 1.6; }
 
@@ -567,7 +606,7 @@ main { padding-top: 68px; }
 .plan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 @media (max-width: 860px) { .plan-grid { grid-template-columns: 1fr; } }
 .plan { border: 1px solid var(--line); border-radius: 18px; padding: clamp(24px, 3vw, 36px); background: var(--panel); }
-.plan-badge { display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-deep); margin-bottom: 14px; }
+.plan-badge { display: inline-block; font-family: var(--mono); font-size: .68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-badge); margin-bottom: 14px; }
 .plan-price { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 4.4vw, 3rem); color: var(--cream); line-height: 1; }
 .plan-price small { font-family: var(--sans); font-size: .95rem; font-weight: 500; color: var(--slate); }
 .plan-setup { color: var(--slate-dim); font-size: .9rem; margin-top: 8px; }
@@ -651,7 +690,7 @@ main { padding-top: 68px; }
 
 /* Universal "every build includes" guarantee strip */
 .build-includes { margin-top: 22px; padding: 20px 24px; border: 1px solid var(--line-soft); border-radius: 16px; background: rgba(15, 27, 61, 0.28); }
-.build-includes > .mono { color: var(--gold); text-transform: uppercase; margin-bottom: 12px; }
+.build-includes > .mono { color: var(--gold-label); text-transform: uppercase; margin-bottom: 12px; }
 
 /* Founding limited-time offer banner */
 .offer-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(20px, 3vw, 44px); margin-bottom: 26px; padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(201, 169, 106, 0.45); border-radius: 20px; background: linear-gradient(135deg, rgba(201, 169, 106, 0.12), rgba(19, 35, 63, 0.6)); }
@@ -670,7 +709,7 @@ main { padding-top: 68px; }
    ============================================================ */
 .configurator { margin-top: clamp(52px, 7vh, 84px); }
 .config-head { max-width: 760px; margin-bottom: 26px; }
-.config-head > .mono { color: var(--gold); text-transform: uppercase; margin-bottom: 12px; display: block; }
+.config-head > .mono { color: var(--gold-label); text-transform: uppercase; margin-bottom: 12px; display: block; }
 .config-head h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--cream); margin-bottom: 8px; letter-spacing: -0.01em; }
 .config-head p { color: var(--slate); max-width: 620px; }
 .config-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: clamp(18px, 2.5vw, 30px); align-items: start; }
@@ -690,7 +729,7 @@ main { padding-top: 68px; }
 .addon.is-base .addon-tick { background: linear-gradient(135deg, var(--gold-light), var(--gold)); border-color: transparent; }
 .addon.is-base .addon-tick::after { transform: rotate(45deg) scale(1); }
 .config-summary { position: sticky; top: 90px; border: 1px solid var(--line); border-radius: 18px; padding: clamp(22px, 3vw, 30px); background: linear-gradient(160deg, var(--midnight-2), var(--panel)); }
-.config-summary-label { color: var(--gold); text-transform: uppercase; margin-bottom: 10px; }
+.config-summary-label { color: var(--gold-label); text-transform: uppercase; margin-bottom: 10px; }
 .config-total { display: flex; align-items: baseline; gap: 10px; padding-bottom: 18px; border-bottom: 1px solid var(--line-soft); margin-bottom: 16px; }
 .config-total .mono { color: var(--slate-dim); text-transform: uppercase; }
 .config-total strong { font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--gold-light); line-height: 1; letter-spacing: -0.015em; }
