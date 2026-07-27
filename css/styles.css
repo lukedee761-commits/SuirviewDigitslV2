@@ -357,7 +357,9 @@ main, .foot { position: relative; z-index: 1; }
 .deck-card:nth-child(2) { top: 126px; }
 .deck-card:nth-child(3) { top: 142px; }
 .deck-card:nth-child(4) { top: 158px; }
-.deck-step { color: var(--gold-label); text-transform: uppercase; margin-bottom: 14px; }
+/* Scoped to beat `.deck-card p` (0,1,1) below — as a bare `.deck-step` (0,1,0)
+   this colour never applied and the step labels rendered as body grey. */
+.deck-card .deck-step { color: var(--gold-label); text-transform: uppercase; margin-bottom: 14px; }
 .deck-card h3 { font-size: clamp(1.5rem, 3.4vw, 2.3rem); font-weight: 700; margin-bottom: 12px; }
 .deck-card p { color: var(--slate); max-width: 560px; font-size: 1.02rem; }
 
@@ -571,7 +573,9 @@ main { padding-top: 68px; }
 /* sample call player */
 .player { background: var(--panel); border: 1px solid var(--line); border-top: 2px solid var(--gold); border-radius: 18px; padding: 26px; }
 .player h3 { font-family: var(--sans); font-size: 1.05rem; margin-bottom: 4px; color: var(--cream); }
-.player p { color: var(--slate-dim); font-size: .88rem; }
+/* :not() exempts the eyebrow — as a bare `.block-eyebrow` (0,1,0) it lost to
+   `.player p` (0,1,1) and the "Sample call" label rendered dim grey, not gold. */
+.player p:not(.block-eyebrow) { color: var(--slate-dim); font-size: .88rem; }
 .player-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
 .play-btn { width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0; border: 1px solid var(--line); background: rgba(201,169,106,.1); display: grid; place-items: center; cursor: pointer; }
 .play-btn svg { width: 15px; height: 15px; fill: var(--gold-light); stroke: none; }
