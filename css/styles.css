@@ -585,10 +585,17 @@ main { padding-top: 68px; }
   .switch-item { font-size: .62rem; letter-spacing: 1px; padding: 0 9px; }
   main { padding-top: 56px; }
 }
-/* Extra margin on the narrowest phones so the fourth tab still clears the menu
-   button if JetBrains Mono fails and a wider fallback (Consolas) is used. */
-@media (max-width: 420px) {
-  .switch-item { padding: 0 7px; letter-spacing: .8px; }
+/* "24/7 Receptionist" is ~130px on its own, so the four tabs have to claw back
+   width from tracking and padding to clear the menu button (which sits at
+   viewport - 64px). This tier needs >=335px; JetBrains Mono is the worst case
+   here, a Consolas fallback measures narrower, not wider. */
+@media (max-width: 460px) {
+  .switch-item { font-size: .60rem; letter-spacing: .4px; padding: 0 5px; }
+}
+/* Below 335px even that runs under the button, so 320px-class phones give up
+   the tracking entirely. */
+@media (max-width: 359px) {
+  .switch-item { font-size: .56rem; letter-spacing: 0; padding: 0 3px; }
 }
 
 /* ============================================================
