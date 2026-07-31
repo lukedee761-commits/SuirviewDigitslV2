@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>document.documentElement.classList.add('js');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Check Your Own Website in 60 Seconds | SuirViewDigital</title>
+  <meta name="description" content="Three checks you can run on your own phone in about a minute — speed, AI search and Google Maps. Nothing is sent anywhere. Nobody sees the result but you." />
+  <meta name="theme-color" content="#0A0B0F" />
+  <link rel="canonical" href="https://www.suirviewdigital.ie/check.html" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.suirviewdigital.ie/check.html" />
+  <meta property="og:title" content="Check your own website in 60 seconds" />
+  <meta property="og:description" content="Three checks, on your own phone, right now. Nothing is sent anywhere." />
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=20260728b" />
+
+  <style>
+    /* =========================================================
+       /check — self-audit landing page
+       Scoped components only (chk-*). Tokens come from styles.css.
+       Mobile-first: this page exists to be used ON a phone.
+       ========================================================= */
+
+    .chk-wrap { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); }
+
+    /* Not defined in styles.css — needed for the fieldset legends. */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+    }
+
+    /* --- minimal header: a landing page should have few exits --- */
+    .chk-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 22px 0 8px;
+    }
+    .chk-brand { display: inline-flex; align-items: center; gap: 10px; }
+    .chk-brand svg { width: 34px; height: 34px; }
+    .chk-brand span {
+      font-family: var(--display); font-weight: 700; font-size: 1rem;
+      letter-spacing: -0.01em; color: var(--cream);
+    }
+
+    /* --- hero --- */
+    .chk-hero { padding: 34px 0 8px; }
+    .chk-kicker {
+      font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold-label); margin-bottom: 16px;
+    }
+    .chk-hero h1 {
+      font-family: var(--display); font-weight: 800;
+      font-size: clamp(2.1rem, 8vw, 3.4rem); line-height: 1.04;
+      letter-spacing: -0.03em; color: var(--cream); margin-bottom: 18px;
+    }
+    .chk-hero h1 em { font-style: normal; color: var(--gold); }
+    .chk-lede { font-size: 1.06rem; color: var(--slate); max-width: 54ch; }
+
+    .chk-privacy {
+      display: flex; align-items: flex-start; gap: 10px;
+      margin-top: 22px; padding: 14px 16px;
+      border: 1px solid var(--line); border-radius: 12px;
+      background: rgba(201, 169, 106, 0.045);
+      font-size: 0.9rem; color: var(--slate);
+    }
+    .chk-privacy svg { width: 17px; height: 17px; flex: 0 0 auto; margin-top: 3px; stroke: var(--gold); fill: none; stroke-width: 1.7; }
+    .chk-privacy strong { color: var(--cream); font-weight: 600; }
+
+    /* --- check cards --- */
+    .chk-list { margin: 40px 0 0; display: grid; gap: 18px; }
+
+    .chk-card {
+      border: 1px solid var(--line-soft); border-radius: 16px;
+      background: var(--panel); padding: 22px 20px 20px;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+    .chk-card[data-state="pass"] { border-color: rgba(56, 189, 248, 0.4); }
+    .chk-card[data-state="fail"] { border-color: rgba(201, 169, 106, 0.45); background: var(--panel-2); }
+
+    .chk-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+    .chk-n {
+      font-family: var(--mono); font-size: 0.78rem; color: var(--gold-badge);
+      border: 1px solid var(--line); border-radius: 7px;
+      padding: 3px 8px; flex: 0 0 auto;
+    }
+    .chk-card h2 {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.2rem, 4.6vw, 1.5rem); line-height: 1.15;
+      letter-spacing: -0.02em; color: var(--cream);
+    }
+
+    .chk-do {
+      border-left: 2px solid var(--gold-deep); padding-left: 14px;
+      margin-bottom: 14px; font-size: 0.99rem; color: var(--cream);
+    }
+    .chk-do code {
+      font-family: var(--mono); font-size: 0.88em;
+      background: rgba(255,255,255,0.06); border-radius: 5px;
+      padding: 2px 6px; color: var(--gold-light);
+      /* long queries must wrap, not overflow, on a narrow phone */
+      overflow-wrap: anywhere;
+    }
+
+    .chk-good { font-size: 0.94rem; color: var(--slate); margin-bottom: 6px; }
+    .chk-good strong { color: var(--cream); font-weight: 600; }
+    .chk-good ul { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+    .chk-good li { padding-left: 20px; position: relative; }
+    .chk-good li::before {
+      content: ""; position: absolute; left: 2px; top: 0.62em;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--gold-deep);
+    }
+
+    .chk-stat {
+      font-family: var(--mono); font-size: 0.78rem; line-height: 1.55;
+      color: var(--slate-dim); margin-top: 14px;
+      padding-top: 12px; border-top: 1px solid var(--line-soft);
+    }
+
+    /* --- answer buttons (radios, so they work without JS) --- */
+    .chk-answers { border: 0; padding: 0; margin: 18px 0 0; display: flex; gap: 10px; }
+    .chk-answers label {
+      flex: 1 1 0; position: relative; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 46px; padding: 10px 12px;
+      border: 1px solid var(--line-soft); border-radius: 10px;
+      font-size: 0.92rem; font-weight: 500; color: var(--slate);
+      background: rgba(255,255,255,0.02);
+      transition: all 0.2s var(--ease);
+    }
+    .chk-answers input {
+      position: absolute; opacity: 0; width: 1px; height: 1px;
+      margin: 0; pointer-events: none;
+    }
+    .chk-answers label:hover { border-color: var(--line); color: var(--cream); }
+    .chk-answers input:focus-visible + span { outline: 2px solid var(--gold); outline-offset: 6px; border-radius: 4px; }
+    .chk-answers input:checked ~ * { color: var(--cream); }
+    .chk-answers label:has(input[value="pass"]:checked) {
+      border-color: var(--cyan); background: rgba(56, 189, 248, 0.1); color: var(--cream);
+    }
+    .chk-answers label:has(input[value="fail"]:checked) {
+      border-color: var(--gold); background: rgba(201, 169, 106, 0.12); color: var(--cream);
+    }
+
+    /* --- verdict --- */
+    .chk-verdict {
+      margin: 40px 0 0; padding: 26px 22px;
+      border: 1px solid var(--line); border-radius: 18px;
+      background: linear-gradient(160deg, var(--midnight) 0%, var(--panel) 70%);
+    }
+    .chk-score {
+      font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--gold-label); margin-bottom: 12px;
+    }
+    .chk-verdict h2 {
+      font-family: var(--display); font-weight: 700;
+      font-size: clamp(1.5rem, 6vw, 2.1rem); line-height: 1.1;
+      letter-spacing: -0.02em; color: var(--cream); margin-bottom: 12px;
+    }
+    .chk-verdict p { color: var(--slate); font-size: 1rem; }
+    .chk-verdict p + p { margin-top: 10px; }
+    #chkFixes { margin: 16px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+    #chkFixes li {
+      padding-left: 20px; position: relative;
+      font-size: 0.95rem; color: var(--cream);
+    }
+    #chkFixes li::before {
+      content: "→"; position: absolute; left: 0; top: 0;
+      color: var(--gold); font-family: var(--mono); font-size: 0.9em;
+    }
+
+    .chk-cta { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+    .chk-cta a {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 50px; padding: 12px 22px; border-radius: 999px;
+      font-weight: 600; font-size: 0.97rem; flex: 1 1 auto;
+      transition: transform 0.2s var(--ease), filter 0.2s var(--ease);
+    }
+    .chk-cta a:hover { transform: translateY(-1px); filter: brightness(1.07); }
+    .chk-primary {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold-deep));
+      color: #16120A;
+    }
+    .chk-secondary { border: 1px solid var(--line); color: var(--cream); }
+    .chk-cta svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+    .chk-sign {
+      margin: 30px 0 0; padding-top: 20px; border-top: 1px solid var(--line-soft);
+      font-family: var(--mono); font-size: 0.78rem; color: var(--slate-dim);
+      line-height: 1.7;
+    }
+    .chk-sign strong { color: var(--cream); font-weight: 500; }
+
+    .chk-foot-space { height: 64px; }
+
+    /* No-JS: the verdict can't score, so lead with the standing offer. */
+    html:not(.js) .chk-nojs-hide { display: none; }
+    .js .chk-nojs-only { display: none; }
+
+    @media (min-width: 700px) {
+      .chk-hero { padding-top: 56px; }
+      .chk-card { padding: 26px 26px 24px; }
+      .chk-cta a { flex: 0 1 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#chkMain">Skip to content</a>
+
+  <div class="chk-wrap">
+
+    <header class="chk-top">
+      <a class="chk-brand" href="index.html" aria-label="SuirViewDigital — home">
+        <svg viewBox="0 0 96 96" aria-hidden="true">
+          <defs>
+            <linearGradient id="cg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C888"/><stop offset="1" stop-color="#A9884E"/></linearGradient>
+            <linearGradient id="cb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
+          </defs>
+          <g transform="translate(2.92,0.62) scale(0.94)">
+            <path d="M46 28 C46 21.5 35 19.5 28.5 23.5 C21 28 22.5 36 31 39.5 C39.5 43 44.5 46.5 43 53.5 C41.5 60.5 30 63.5 23.5 59.5" fill="none" stroke="url(#cg)" stroke-width="5.2" stroke-linecap="round"/>
+            <path d="M50 26 L61 60 L72 26" fill="none" stroke="url(#cg)" stroke-width="5.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M14 71 C30 63 46 79 61 60 C69 50 76 44 84 40" fill="none" stroke="url(#cb)" stroke-width="3.4" stroke-linecap="round" opacity="0.95"/>
+          </g>
+        </svg>
+        <span>SuirViewDigital</span>
+      </a>
+    </header>
+
+    <main id="chkMain">
+
+      <section class="chk-hero">
+        <p class="chk-kicker">The 60-second check</p>
+        <h1>Check your own website. <em>On your own phone.</em></h1>
+        <p class="chk-lede">
+          Three things worth knowing about how your business actually looks
+          to a customer in 2026. Takes about a minute. You'll need your phone
+          and your business name.
+        </p>
+
+        <div class="chk-privacy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+          <div>
+            <strong>Nothing is sent anywhere.</strong> No email, no sign-up, no
+            tracking of your answers. This page does its counting in your browser
+            and forgets it the moment you close the tab. Nobody sees the result but you.
+          </div>
+        </div>
+      </section>
+
+      <div class="chk-list">
+
+        <!-- ============ CHECK 1 ============ -->
+        <article class="chk-card" id="card1">
+          <div class="chk-head">
+            <span class="chk-n">01</span>
+            <h2>The phone test</h2>
+          </div>
+
+          <p class="chk-do">
+            Turn wifi <strong>off</strong>. On mobile data, open your own website
+            and count the seconds until you can actually read it.
+          </p>
+
+          <div class="chk-good">
+            <strong>What good looks like</strong>
+            <ul>
+              <li>Readable in under 3 seconds</li>
+              <li>Your phone number is tappable — it starts a call</li>
+              <li>No pinching, no sideways scrolling</li>
+              <li>You can find your opening hours in one go</li>
+            </ul>
+          </div>
+
+          <p class="chk-stat">
+            53% of people leave a site that takes more than three seconds.
+            On a phone, sites bounce about 12 points harder than on a laptop —
+            which is where most owners look at their own site.
+          </p>
+
+          <fieldset class="chk-answers">
+            <legend class="sr-only">Your result for the phone test</legend>
+            <label><input type="radio" name="c1" value="pass" data-check="1"><span>Passed</span></label>
+            <label><input type="radio" name="c1" value="fail" data-check="1"><span>Needs work</span></label>
+          </fieldset>
+        </article>
+
+        <!-- ============ CHECK 2 ============ -->
+        <article class="chk-card" id="card2">
+          <div class="chk-head">
+            <span class="chk-n">02</span>
+            <h2>The AI test</h2>
+          </div>
+
+          <p class="chk-do">
+            Open ChatGPT and type your business name. Then ask it
+            <code>best [what you do] in [your town]</code> — and see who it names.
+          </p>
+
+          <div class="chk-good">
+            <strong>What good looks like</strong>
+            <ul>
+              <li>It knows your business exists</li>
+              <li>It describes what you do accurately</li>
+              <li>It has your town right</li>
+              <li>You appear when it's asked for a local recommendation</li>
+            </ul>
+          </div>
+
+          <p class="chk-stat">
+            45% of people now use AI tools to find a local business — a year ago
+            it was 6%. In one 2026 study, 83% of restaurants were invisible to
+            ChatGPT, against 14% missing from Google.
+          </p>
+
+          <fieldset class="chk-answers">
+            <legend class="sr-only">Your result for the AI test</legend>
+            <label><input type="radio" name="c2" value="pass" data-check="2"><span>Passed</span></label>
+            <label><input type="radio" name="c2" value="fail" data-check="2"><span>Needs work</span></label>
+          </fieldset>
+        </article>
+
+        <!-- ============ CHECK 3 ============ -->
+        <article class="chk-card" id="card3">
+          <div class="chk-head">
+            <span class="chk-n">03</span>
+            <h2>The Maps test</h2>
+          </div>
+
+          <p class="chk-do">
+            Google your own business name. Look at the panel that appears —
+            that's your Google Business Profile, and it's free.
+          </p>
+
+          <div class="chk-good">
+            <strong>What good looks like</strong>
+            <ul>
+              <li>The main category is the right one</li>
+              <li>Opening hours are correct, including bank holidays</li>
+              <li>Photos added in the last 90 days</li>
+              <li>Your most recent review has a reply</li>
+            </ul>
+          </div>
+
+          <p class="chk-stat">
+            Google Business Profile signals carry roughly a third of local search
+            ranking. Since March 2026, review <em>recency</em> and owner reply rate
+            count for more than how many reviews you have.
+          </p>
+
+          <fieldset class="chk-answers">
+            <legend class="sr-only">Your result for the Maps test</legend>
+            <label><input type="radio" name="c3" value="pass" data-check="3"><span>Passed</span></label>
+            <label><input type="radio" name="c3" value="fail" data-check="3"><span>Needs work</span></label>
+          </fieldset>
+        </article>
+
+      </div>
+
+      <!-- ============ VERDICT ============ -->
+      <section class="chk-verdict" aria-live="polite">
+        <p class="chk-score" id="chkScore">Your result</p>
+        <h2 id="chkTitle">Answer the three above</h2>
+        <p id="chkBody">
+          Nothing here gets sent anywhere — tap your honest answer on each one
+          and this updates as you go.
+        </p>
+        <ul id="chkFixes"></ul>
+
+        <div class="chk-cta">
+          <a class="chk-primary" href="https://www.instagram.com/suirviewdigital.ie" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg>
+            DM me "CHECK"
+          </a>
+          <a class="chk-secondary" href="index.html#contact">
+            Book a free call
+          </a>
+        </div>
+
+        <p class="chk-sign">
+          <strong>Luke Stapleton</strong> · SuirViewDigital · Thurles, Co. Tipperary<br>
+          Send me your result and I'll tell you which one to fix first — free,
+          and I'll say so if the answer is "nothing".
+        </p>
+      </section>
+
+      <div class="chk-foot-space"></div>
+
+    </main>
+  </div>
+
+  <footer class="foot">
+    <span class="mono">© <span id="year"></span> SuirViewDigital</span>
+    <div class="foot-social">
+      <a href="https://www.instagram.com/suirviewdigital.ie" target="_blank" rel="noopener" aria-label="SuirViewDigital on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.facebook.com/share/1EKuWQsGKA/" target="_blank" rel="noopener" aria-label="SuirViewDigital on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8.5h-2a1.5 1.5 0 0 0-1.5 1.5v2H15l-.5 3h-3V21H8.5v-5h-2v-3h2v-2.4A3.6 3.6 0 0 1 12 7h3z"/></svg>
+      </a>
+    </div>
+    <a class="mono" href="index.html">Home</a>
+    <a class="mono" href="about.html">About</a>
+    <a class="mono" href="privacy.html">Privacy</a>
+    <span class="mono">Designed &amp; built on the Suir</span>
+  </footer>
+
+  <script>
+    (function () {
+      var yr = document.getElementById('year');
+      if (yr) yr.textContent = new Date().getFullYear();
+
+      var state = { 1: null, 2: null, 3: null };
+
+      var FIX = {
+        1: 'Speed and mobile — the fix that pays back fastest.',
+        2: 'AI search — the one almost nobody has done yet.',
+        3: 'Your Google Business Profile — free, and the biggest local lever.'
+      };
+
+      var scoreEl = document.getElementById('chkScore');
+      var titleEl = document.getElementById('chkTitle');
+      var bodyEl  = document.getElementById('chkBody');
+      var fixesEl = document.getElementById('chkFixes');
+
+      function render() {
+        var answered = 0, failed = [];
+        for (var k in state) {
+          if (state[k] === null) continue;
+          answered++;
+          if (state[k] === 'fail') failed.push(k);
+        }
+
+        if (answered === 0) {
+          scoreEl.textContent = 'Your result';
+          titleEl.textContent = 'Answer the three above';
+          bodyEl.textContent = 'Nothing here gets sent anywhere — tap your honest answer on each one and this updates as you go.';
+          fixesEl.innerHTML = '';
+          return;
+        }
+
+        var passed = answered - failed.length;
+
+        if (answered < 3) {
+          // Mid-flow, a pass ratio out of 1 or 2 reads like a bad score. Show progress.
+          scoreEl.textContent = answered + ' of 3 answered';
+          titleEl.textContent = 'Keep going';
+          bodyEl.textContent = 'Finish the other ' + (3 - answered) + ' and you’ll have the full picture.';
+          fixesEl.innerHTML = '';
+          return;
+        }
+
+        scoreEl.textContent = passed + ' of 3 passed';
+
+        // All three answered.
+        if (failed.length === 0) {
+          titleEl.textContent = 'All three. That’s rare.';
+          bodyEl.textContent = 'Genuinely — most businesses fail at least one of these. ' +
+            'You don’t need me. If you ever want a second pair of eyes on it, I’m around.';
+        } else if (failed.length === 1) {
+          titleEl.textContent = 'Two out of three, and one thing to fix.';
+          bodyEl.textContent = 'That puts you ahead of most. One gap left — and it’s a fixable one.';
+        } else {
+          titleEl.textContent = 'None of this is your fault.';
+          bodyEl.textContent = 'The rules changed and nobody sends a letter about it. ' +
+            'Every one of these is fixable, and the order below is the order I’d do them in.';
+        }
+
+        fixesEl.innerHTML = '';
+        failed.forEach(function (k) {
+          var li = document.createElement('li');
+          li.textContent = FIX[k];
+          fixesEl.appendChild(li);
+        });
+      }
+
+      document.querySelectorAll('.chk-answers input').forEach(function (input) {
+        input.addEventListener('change', function () {
+          var n = this.getAttribute('data-check');
+          state[n] = this.value;
+          var card = document.getElementById('card' + n);
+          if (card) card.setAttribute('data-state', this.value);
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+
+</body>
+</html>
