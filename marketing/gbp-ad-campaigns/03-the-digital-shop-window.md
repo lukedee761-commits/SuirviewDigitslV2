@@ -1,5 +1,7 @@
 # Campaign 3 — "The Digital Shop Window"
 
+**Format:** 8-slide still-image carousel (Midjourney only, no animation).
+
 ## 1. Research Summary
 
 **Why this topic matters**
@@ -20,7 +22,7 @@ transfers directly onto perceived food quality and service, before a single
 review is read in detail. Side-by-side comparison (this campaign's format)
 is one of the most persuasive structures in advertising because it removes
 all ambiguity: the viewer doesn't have to imagine the difference, they see
-it in one frame.
+it directly.
 
 **Common business mistakes**
 - Photos taken once at opening and never refreshed — outdated interior,
@@ -44,8 +46,8 @@ comparison format is under-used in this category and creates strong
 stopping power in a feed full of food photos.
 
 **Why this concept will generate enquiries**
-A split-screen comparison lets a restaurant owner instantly self-diagnose:
-"which side does my profile actually look like?" That moment of honest
+A split comparison lets a restaurant owner instantly self-diagnose: "which
+side does my profile actually look like?" That moment of honest
 self-recognition — often landing closer to the neglected side than they'd
 like to admit — is what drives the enquiry, because the ad has already done
 the work of proving the problem before asking for anything.
@@ -59,7 +61,7 @@ the work of proving the problem before asking for anything.
 - **Target customer:** Independent restaurant and café owners who invest in
   food quality and ambiance but have a thin or outdated Google presence.
 - **Emotional trigger:** Comparative shame/aspiration — "I don't want to be
-  the sad side of this split screen."
+  the sad side of this comparison."
 - **Pain point:** A great restaurant losing bookings to a lesser one purely
   because its online profile looks more trustworthy and appetising.
 - **Solution:** Suirview Digital's full GBP optimisation — photos, reviews,
@@ -68,91 +70,137 @@ the work of proving the problem before asking for anything.
 
 ## 3. Visual Direction
 
-- **Environment:** Two matched restaurant interiors shot in identical
-  compositional framing — same table angle, same time of day — one styled
-  as "neglected" (dim, empty, generic), one as "optimised" (warm, inviting,
-  full of life), joined in a single split-screen frame.
+- **Environment:** The same restaurant interior shot twice in identical
+  compositional framing — same table angle, same time of day — once styled
+  as "neglected" (dim, empty, generic), once as "optimised" (warm, inviting,
+  full of life). The carousel presents these as a paired sequence rather
+  than a single split frame.
 - **Camera angle:** Static, symmetrical, eye-level shot straight down the
-  centre aisle/table line of each restaurant half — the symmetry itself
-  sells the "before/after" idea without needing arrows or labels.
-- **Lighting:** Left/neglected side: flat, slightly cool, underlit
-  fluorescent-style lighting. Right/optimised side: warm tungsten and candle
+  centre aisle/table line in both states — the matched framing itself sells
+  the "before/after" idea without needing arrows or labels.
+- **Lighting:** Neglected slides: flat, slightly cool, underlit
+  fluorescent-style lighting. Optimised slides: warm tungsten and candle
   light, golden tones, inviting glow.
-- **Composition:** True 50/50 vertical split down the centre of frame, GBP
-  UI card overlays floating above each half showing the actual profile
-  contrast (star ratings, photo count, review recency).
+- **Composition:** Identical camera position and framing across the paired
+  "before" and "after" slides, with a GBP UI card overlay (added in post)
+  floating above each showing the actual profile contrast (star ratings,
+  photo count, review recency).
 - **Realism:** Photoreal restaurant interiors — believable furniture,
   believable food styling, no stock-photo sheen.
 - **Premium advertising style:** Restrained typography for the overlay UI
-  cards, consistent with Google's real Business Profile card design but
-  colour-graded to sit inside a premium ad frame.
+  cards (added in post), consistent with Google's real Business Profile
+  card design but colour-graded to sit inside a premium ad frame.
 - **Branding placement:** Suirview Digital watermark bottom-right of the
-  final combined frame only.
+  final slide only.
+- **Consistency:** generate the "neglected" hero slide first, then use
+  `--cref`/`--sref` pointed at it (with lighting/mood prompt adjustments) to
+  generate the matching "optimised" version so the room reads as the exact
+  same restaurant, just cared for differently.
 
-## 4. Still Image Prompt (Midjourney)
+## 4. Cover Still Image Prompt (Midjourney)
 
 ```
-Photoreal commercial split-screen photograph of a restaurant interior shown
-in two contrasting halves divided by a sharp vertical seam, left half dimly
-lit with flat cool fluorescent lighting, empty tables, generic bare walls,
-slightly neglected atmosphere, right half warmly lit with golden tungsten
-and candlelight, tables set beautifully, a few guests softly blurred in
-background enjoying dinner, lush plants and warm decor, both halves shot
-from an identical centered eye-level camera angle down the restaurant aisle
-for symmetry, shallow depth of field on both sides, shot on 24mm wide
-architectural lens, f/4, balanced exposure, commercial hospitality
-photography style similar to premium restaurant brand campaigns, ultra
-realistic, high detail, no text, no logos --ar 16:9 --style raw --v 6
+Photoreal commercial photograph of a restaurant interior, dimly lit with
+flat cool fluorescent lighting, empty tables, generic bare walls, slightly
+neglected atmosphere, shot from a centered eye-level camera angle down the
+restaurant aisle, shallow depth of field, shot on 24mm wide architectural
+lens, f/4, balanced exposure, commercial hospitality photography style
+similar to premium restaurant brand campaigns, ultra realistic, high
+detail, no text, no logos --ar 4:5 --style raw --v 6
 ```
 
-## 5. Higgsfield Animation Prompt
+## 5. Still-Image Carousel — 8 Slides
 
-- **Starting frame:** The static split-screen restaurant image, seam sharp
-  and centred, both halves visible at once.
-- **Camera movement:** Very slow synchronized dolly-in on both halves
-  simultaneously (they move as one shot), drawing the eye deeper into the
-  contrast rather than cutting between them.
-- **Transition effect:** Two floating UI cards animate in above each half —
-  left card shows "3 photos · No recent reviews · Hours not updated," right
-  card shows "84 photos · 4.9★ · Responds to every review." Cards fade in
-  with a soft upward drift, not a hard pop.
-- **Text animation:** Centre-seam text animates in vertically along the
-  dividing line: *"Same food. Same effort. Different Google Business
-  Profile."* Typography: thin premium serif for the emotional line, clean
-  sans-serif for the data cards, high contrast white on scrim.
-- **Motion style:** Slow, held, comparative — the split should linger long
-  enough for the viewer to actually read both cards before any further cut.
-- **Duration:** 9 seconds (extend the final CTA card 2 seconds for
-  Facebook/Instagram feed placements).
+**Slide 1 — Hook**
+On-image text: *"Same restaurant. Two different Google profiles."*
+```
+Photoreal still of a restaurant interior, dimly lit with flat cool
+fluorescent lighting, empty tables, generic bare walls, centered eye-level
+camera angle down the restaurant aisle, shallow depth of field, 24mm lens,
+f/4, muted cool colour grading, commercial hospitality photography, no
+text, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
 
-## 6. Full Storyboard (8 slides)
+**Slide 2 — Identify the problem**
+On-image text: *"This is what hungry customers see first."*
+```
+Photoreal close-up still of a smartphone screen showing a sparse Google
+Business Profile with only three blurry, outdated restaurant photos and a
+"hours may be inaccurate" style notice, softly blurred restaurant
+background, natural light, shallow depth of field, 50mm macro lens, f/2.2,
+muted colour grading, commercial product photography, no readable brand
+text, ultra realistic --ar 4:5 --style raw --v 6
+```
 
-1. **Hook** — The full split-screen reveal in one shot. Text: *"Same
-   restaurant. Two different Google profiles."*
-2. **Identify the problem** — Left half zoom: 3 old blurry photos, "Hours
-   may be inaccurate" warning badge. Text: *"This is what hungry customers
-   see first."*
-3. **Show consequences** — A diner's phone: they scroll past this listing
-   without a second look, tapping a competitor's instead. Text: *"They
-   scrolled past. Straight to a competitor."*
-4. **Explain why it happens** — Simple truth card: *"Most restaurants focus
-   all their energy on Instagram — and forget Google is where bookings
-   actually start."*
-5. **Introduce GBP optimisation** — Suirview Digital team uploading fresh
-   food photography, updating menu links and hours directly into the
-   profile. Text: *"We manage your Google shop window, every week."*
-6. **Show transformation** — Right half of the split-screen fully reveals:
-   84 photos, glowing reviews, live "Book a table" button. Text: *"Now this
-   is what they see instead."*
-7. **Show business benefits** — Warm montage: phone notification "New
-   booking via Google," host greeting arriving guests. Text: *"More covers.
-   Every night of the week."*
-8. **Strong CTA** — Full restored split-screen, but now both halves show the
-   optimised, warm version — implying every table could look like this.
-   Suirview Digital watermark bottom-right. Text: *"Which side is your
-   restaurant on? Free profile audit."*
+**Slide 3 — Show consequences**
+On-image text: *"They scrolled past. Straight to a competitor."*
+```
+Photoreal still of a diner's hand holding a smartphone at a table, thumb
+mid-scroll past a sparse restaurant listing toward a competitor's fuller,
+more appealing listing, warm cafe background softly blurred, natural light,
+shallow depth of field, 50mm macro lens, f/2.2, clean colour grading,
+commercial product photography, no readable brand text, ultra realistic
+--ar 4:5 --style raw --v 6
+```
 
-## 7. Self-Critique
+**Slide 4 — Explain why it happens**
+On-image text: *"Most restaurants focus on Instagram — and forget Google
+is where bookings actually start."*
+```
+Photoreal still of a restaurant owner's hands on a laptop keyboard, one
+browser tab open to an Instagram feed full of food photos, another tab
+faintly visible showing a neglected, empty Google Business Profile
+dashboard, warm cafe counter setting, natural window light, shallow depth
+of field, 35mm lens, f/2.2, warm neutral colour grading, commercial
+lifestyle photography, no readable text on screens, ultra realistic --ar
+4:5 --style raw --v 6
+```
+
+**Slide 5 — Introduce GBP optimisation**
+On-image text: *"We manage your Google shop window, every week."*
+```
+Photoreal still of a professional at a bright desk uploading fresh food
+photography into a Google Business Profile dashboard, menu and hours
+fields visible in soft focus, warm natural light, shallow depth of field,
+35mm lens, f/2.0, premium commercial office photography style, no readable
+text on screen, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 6 — Show transformation**
+On-image text: *"Now this is what they see instead."*
+```
+Photoreal still of the same restaurant interior, now warmly lit with golden
+tungsten and candlelight, tables set beautifully, a few guests softly
+blurred in the background enjoying dinner, lush plants and warm decor,
+identical centered eye-level camera angle down the restaurant aisle,
+shallow depth of field, 24mm lens, f/4, warm inviting colour grading,
+commercial hospitality photography, no text, no logos, ultra realistic --ar
+4:5 --style raw --v 6
+```
+
+**Slide 7 — Show business benefits**
+On-image text: *"More covers. Every night of the week."*
+```
+Photoreal still of a restaurant host smiling while greeting arriving guests
+at a warmly lit entrance, a tablet nearby showing a "New booking" style
+notification, warm ambient lighting, shallow depth of field, 35mm lens,
+f/1.8, warm inviting commercial hospitality photography style, no readable
+text on screen, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 8 — Strong CTA**
+On-image text: *"Which side is your restaurant on? Free profile audit."*
+(Suirview Digital watermark added bottom-right in post — this is the only
+slide carrying the logo.)
+```
+Photoreal still of the same restaurant interior fully warm and inviting,
+tables set, soft candlelight, a couple being seated by a host, golden warm
+colour grading, shallow depth of field, 24mm lens, f/3.2, commercial
+hospitality photography style similar to premium restaurant brand
+campaigns, no text, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+## 6. Self-Critique
 
 | Metric | Score |
 |---|---|
@@ -165,39 +213,41 @@ realistic, high detail, no text, no logos --ar 16:9 --style raw --v 6
 **Improvements applied:** Trust was initially 7/10 because a pure
 before/after comparison can feel exaggerated or "too perfect," which
 sophisticated restaurant owners (who know their own reviews and photo count
-already) might distrust. Fixed by grounding slide 2's problem callout in
+already) might distrust. Fixed by grounding Slide 2's problem callout in
 specific, verifiable GBP fields (photo count, review recency, hours
 accuracy) rather than vague "bad vibes," so the comparison reads as an
 honest audit finding rather than an exaggerated marketing dramatisation.
 
-## 8. Caption
+## 7. Caption
 
 > Same food. Same passion. But one Google Business Profile brings in
 > bookings every night — and the other quietly loses them to a competitor
 > with better photos and reviews. Which side is your restaurant on?
 
-## 9. CTA
+## 8. CTA
 
 **"Which side is your restaurant on? Free profile audit."** → link to
 Suirview Digital GBP Management page.
 
-## 10. Hashtags
+## 9. Hashtags
 
 `#RestaurantMarketing #GoogleBusinessProfile #LocalSEO #IrishRestaurants
 #HospitalityMarketing #GoogleMaps #SmallBusinessIreland #MoreBookings
 #SuirviewDigital #DigitalShopWindow`
 
-## 11. Recommended Platform
+## 10. Recommended Platform
 
-Instagram feed and Reels (restaurant owners and diners both live here),
-with a paid Facebook campaign geo-targeted to restaurant owners in Irish
-towns and cities.
+Instagram carousel post (restaurant owners and diners both live here) and
+Facebook carousel ads geo-targeted to restaurant owners in Irish towns and
+cities. The paired before/after slides (1+6, or 2+7) also work well
+repurposed as standalone side-by-side static comparisons for Facebook feed.
 
-## 12. Why This Should Generate Leads
+## 11. Why This Should Generate Leads
 
-The split-screen format removes the need to explain anything — the viewer
-sees the exact commercial outcome of neglect versus optimisation
-side by side, in a category (dining) where visual trust signals directly
-drive booking decisions. Framing the CTA as a self-diagnostic question
-("which side is your restaurant on?") invites the owner to check rather
-than feel sold to, which measurably lowers resistance to clicking through.
+The paired comparison format removes the need to explain anything — the
+viewer sees the exact commercial outcome of neglect versus optimisation
+across the swipe, in a category (dining) where visual trust signals
+directly drive booking decisions. Framing the CTA as a self-diagnostic
+question ("which side is your restaurant on?") invites the owner to check
+rather than feel sold to, which measurably lowers resistance to clicking
+through.

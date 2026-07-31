@@ -1,5 +1,7 @@
 # Campaign 4 — "The Lost Customer Journey"
 
+**Format:** 8-slide still-image carousel (Midjourney only, no animation).
+
 ## 1. Research Summary
 
 **Why this topic matters**
@@ -36,25 +38,25 @@ moved to the next name.
 Trade marketing usually leans on van wraps, local sponsorship and word of
 mouth — genuinely effective, but entirely offline. Very few tradespeople
 advertise the *digital* moment where a job is won or lost, which means this
-concept — dramatising the full search-to-booking journey end to end — is
-largely unclaimed territory in trade marketing and will stand out sharply
-against typical "call now, 24/7 emergency" ad copy.
+concept — dramatising the full search-to-booking journey through a matched
+before/after sequence of stills — is largely unclaimed territory in trade
+marketing and will stand out sharply against typical "call now, 24/7
+emergency" ad copy.
 
 **Why this concept will generate enquiries**
 Tradespeople feel the cost of a missed call more acutely than almost any
 other business type, because it's tangible: a specific job, a specific
 value, lost in real time. Showing the full journey — the exact moment a
-customer gives up and calls someone else, followed immediately by the
-same journey ending in a confirmed booking — makes the value of an
-optimised, responsive profile completely self-evident without needing to
-explain SEO at all.
+customer gives up and calls someone else, followed by the same journey
+ending in a confirmed booking — makes the value of an optimised, responsive
+profile completely self-evident without needing to explain SEO at all.
 
 ## 2. Creative Brief
 
 - **Advertisement title:** The Lost Customer Journey
 - **Main objective:** Generate GBP Management (and AI Automated
-  Receptionist) enquiries from tradespeople by dramatising a missed job
-  versus a booked job, back to back.
+  Receptionist) enquiries from tradespeople by contrasting a missed job
+  against a booked job.
 - **Target customer:** Plumbers, electricians, carpenters and other local
   trades who rely on urgent, high-intent local search.
 - **Emotional trigger:** Loss aversion — the specific, felt cost of a job
@@ -69,29 +71,33 @@ explain SEO at all.
 
 ## 3. Visual Direction
 
-- **Environment:** Two contrasting home settings — a stressed customer's
-  kitchen with a visible leak/dripping pipe (urgency, realistic domestic
-  detail), and a warm, resolved living room later with the same customer
-  relieved, tradesperson's van visible through the window.
-- **Camera angle:** Handheld-feeling but stabilised documentary style for
-  the "problem" beat (mirrors real urgency), transitioning to a calmer,
-  locked-off, wider composition for the "resolved" beat.
-- **Lighting:** Problem beat: cooler, slightly harsh overhead kitchen
-  light, water reflections adding tension. Resolution beat: warm lamp
+- **Environment:** Two contrasting home settings across the carousel — a
+  stressed customer's kitchen with a visible leak/dripping pipe (urgency,
+  realistic domestic detail), and later, the same kitchen calm and resolved,
+  with a tradesperson's van visible through the window.
+- **Camera angle:** Tighter, slightly candid-feeling framing for the
+  "problem" slides (mirrors real urgency), opening up to a calmer, wider
+  composition for the "resolved" slides.
+- **Lighting:** Problem slides: cooler, slightly harsh overhead kitchen
+  light, water reflections adding tension. Resolution slides: warm lamp
   light, golden evening tones, everything visually "settled."
-- **Composition:** Tight over-the-shoulder framing on the phone during the
-  search-and-call moment; wider, breathing-room composition once the job is
-  booked and resolved.
+- **Composition:** Tight framing on the phone during the search-and-call
+  moments; wider, breathing-room composition once the job is booked and
+  resolved.
 - **Realism:** Grounded, lived-in domestic realism — a real kitchen, not a
   showroom; a real work van, not a stock photo fleet.
 - **Premium advertising style:** Despite the domestic setting, colour
-  grading and pacing stay premium and controlled — this is closer to an
-  insurance-brand emotional film than a raw trade ad.
+  grading and staging stay premium and controlled — this is closer to an
+  insurance-brand emotional campaign than a raw trade ad.
 - **Branding placement:** Suirview Digital watermark appears only in the
-  final resolved frame, small, bottom-right, next to the "Booking
-  Confirmed" notification graphic.
+  final resolved slide, small, bottom-right, next to the "Booking
+  Confirmed" notification graphic (added in post).
+- **Consistency:** generate Slide 1 (the stressed kitchen) first, then use
+  `--cref` on the homeowner and `--sref` on the kitchen environment across
+  the remaining slides so the same person and room recur believably through
+  the "problem" and "resolution" halves.
 
-## 4. Still Image Prompt (Midjourney)
+## 4. Cover Still Image Prompt (Midjourney)
 
 ```
 Photoreal candid commercial photograph of a stressed homeowner in a modern
@@ -101,64 +107,104 @@ light mixing with cool blue exterior night light through the window, water
 droplets glistening on the floor tiles, shallow depth of field, shot on
 35mm lens, f/2.0, natural skin tones, slightly desaturated cool colour
 grading to convey stress and urgency, commercial documentary-style
-photography, ultra realistic, high detail, no text, no logos --ar 16:9
+photography, ultra realistic, high detail, no text, no logos --ar 4:5
 --style raw --v 6
 ```
 
-## 5. Higgsfield Animation Prompt
+## 5. Still-Image Carousel — 8 Slides
 
-- **Starting frame:** The stressed homeowner beside the leaking pipe,
-  phone to ear, ringing tone visualised subtly as a soft pulsing ring icon
-  near the phone.
-- **Camera movement:** Slow handheld-style drift toward the homeowner's
-  face as the ringing continues unanswered; then a hard, fast cut (the one
-  deliberate fast cut in the whole sequence) to a phone screen showing
-  "Call Ended — No Answer," followed immediately by the homeowner opening
-  Google and tapping the next listed plumber.
-- **Transition effect:** Time-jump wipe (soft light flash) forward to
-  early evening — same kitchen, but now dry, warm-lit, and calm; camera
-  pulls back to a wider, settled composition revealing a van through the
-  window and a tradesperson's toolbox by the door.
-- **Text animation:** During the missed call: *"Every ring un-answered is a
-  job walking to your competitor."* After the time-jump: *"With Suirview,
-  every call gets answered — day or night."* Typography: bold but restrained
-  sans-serif, urgency conveyed through pacing rather than aggressive type
-  treatment.
-- **Motion style:** Tense, slightly unstable handheld energy in the first
-  half; calm, locked-off stability in the second half — the *camera itself*
-  tells the story of stress resolving into control.
-- **Duration:** 11 seconds (the missed-call beat needs a touch longer to
-  land the tension before the resolution pays it off).
+**Slide 1 — Hook**
+On-image text: *"11pm. A pipe bursts. They're searching for you right
+now."*
+```
+Photoreal still of a stressed homeowner kneeling beside a dripping pipe
+under a kitchen sink at night, phone held to their ear, worried
+expression, warm pendant light mixing with cool blue exterior night light,
+water droplets on floor tiles, shallow depth of field, 35mm lens, f/2.0,
+desaturated cool colour grading, commercial documentary-style photography,
+no text, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
 
-## 6. Full Storyboard (8 slides)
+**Slide 2 — Identify the problem**
+On-image text: *"But they can't tell if you'll even answer."*
+```
+Photoreal close-up still of a smartphone screen showing a plumber's Google
+Business Profile with unclear hours and no visible response-time
+information, held in a worried homeowner's hand, warm kitchen light softly
+blurred behind, shallow depth of field, 50mm macro lens, f/2.2, cool muted
+colour grading, commercial product photography, no readable brand text,
+ultra realistic --ar 4:5 --style raw --v 6
+```
 
-1. **Hook** — Homeowner kneeling by the leak, phone ringing, tension in the
-   framing. Text: *"11pm. A pipe bursts. They're searching for you right
-   now."*
-2. **Identify the problem** — Phone screen shows the search result: your
-   listing, hours unclear, no response time shown. Text: *"But they can't
-   tell if you'll even answer."*
-3. **Show consequences** — Call rings out. Homeowner sighs, taps the next
-   name on the list instead. Text: *"So they called someone else."*
-4. **Explain why it happens** — Simple truth card: *"Most trade profiles
-   have no way to reassure a panicked customer they'll be answered — so
-   customers default to whoever looks safest."*
-5. **Introduce GBP optimisation** — Suirview Digital team updating the
-   profile: service areas, response-time messaging, completed-job photos,
-   and connecting the AI Automated Receptionist for after-hours calls. Text:
-   *"We make sure every call gets answered — and every profile proves
-   you're ready."*
-6. **Show transformation** — Replay the same opening scene, but this time
-   the call connects immediately; homeowner visibly relaxes. Text: *"This
-   time, the call connects."*
-7. **Show business benefits** — Warm resolution: van pulling up, job
-   booked, "Booking Confirmed" notification. Text: *"That's a job won,
-   not lost."*
-8. **Strong CTA** — Calm, resolved kitchen; Suirview Digital watermark
-   bottom-right beside the booking notification. Text: *"Stop losing jobs
-   to a missed call. Free profile and call-handling review."*
+**Slide 3 — Show consequences**
+On-image text: *"So they called someone else."*
+```
+Photoreal still of a homeowner's phone screen showing a call that has just
+ended unanswered, thumb now tapping the next plumber listing on a Google
+search results page, kitchen softly blurred in the background at night,
+shallow depth of field, 50mm macro lens, f/2.2, cool colour grading,
+commercial product photography, no readable brand text, ultra realistic
+--ar 4:5 --style raw --v 6
+```
 
-## 7. Self-Critique
+**Slide 4 — Explain why it happens**
+On-image text: *"Most trade profiles give panicked customers no reason to
+trust they'll be answered."*
+```
+Photoreal still of a laptop screen on a cluttered workshop desk showing a
+sparse tradesperson's Google Business Profile with no completed-job photos
+and no service area listed, warm desk lamp light, shallow depth of field,
+35mm lens, f/2.2, muted warm colour grading, commercial office photography,
+no readable text on screen, no logos, ultra realistic --ar 4:5 --style raw
+--v 6
+```
+
+**Slide 5 — Introduce GBP optimisation**
+On-image text: *"We make sure every call gets answered — and every profile
+proves you're ready."*
+```
+Photoreal still of a professional at a bright desk updating a
+tradesperson's Google Business Profile, completed-job photos and service
+area map visible in soft focus on the laptop screen, warm natural light,
+shallow depth of field, 35mm lens, f/2.0, premium commercial office
+photography style, no readable text on screen, no logos, ultra realistic
+--ar 4:5 --style raw --v 6
+```
+
+**Slide 6 — Show transformation**
+On-image text: *"This time, the call connects."*
+```
+Photoreal still of the same kitchen, now calm and dry, warm lamp light,
+the homeowner relaxed on the phone mid-conversation with a relieved
+expression, evening golden tones through the window, shallow depth of
+field, 35mm lens, f/1.8, warm colour grading, commercial documentary-style
+photography, no text, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 7 — Show business benefits**
+On-image text: *"That's a job won, not lost."*
+```
+Photoreal still of a tradesperson's van parked outside a home in the warm
+evening light, toolbox by the front door, a phone on the dashboard showing
+a "Booking Confirmed" style notification, shallow depth of field, 35mm
+lens, f/2.0, warm inviting colour grading, commercial lifestyle photography
+style, no readable text on screen, no logos, ultra realistic --ar 4:5
+--style raw --v 6
+```
+
+**Slide 8 — Strong CTA**
+On-image text: *"Stop losing jobs to a missed call. Free profile and
+call-handling review."* (Suirview Digital watermark added bottom-right in
+post — this is the only slide carrying the logo.)
+```
+Photoreal still of the same calm, resolved kitchen at night, warm lamp
+light, a phone resting on the counter showing a soft glowing notification,
+tidy and settled atmosphere, shallow depth of field, 35mm lens, f/2.0, warm
+premium colour grading, commercial documentary-style photography, no text,
+no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+## 6. Self-Critique
 
 | Metric | Score |
 |---|---|
@@ -173,38 +219,39 @@ the first draft focused solely on GBP optimisation, which doesn't fully
 solve the "missed call at 11pm" problem on its own — a sharp trade-business
 owner would spot that gap immediately and lose some trust in the pitch.
 Fixed by folding in Suirview Digital's AI Automated Receptionist as the
-after-hours call-answering layer alongside the GBP fix in slide 5, so the
+after-hours call-answering layer alongside the GBP fix in Slide 5, so the
 solution matches the specific problem dramatised (an unanswered late-night
 call) rather than only addressing profile visibility. This also raised
 trust to 9/10, since the ad no longer overpromises what a listing update
 alone can fix.
 
-## 8. Caption
+## 7. Caption
 
 > It's 11pm, a pipe just burst, and someone nearby is searching for a
 > plumber right now. If your profile doesn't answer them — literally or
 > figuratively — they're already calling the next name on the list. We fix
 > both.
 
-## 9. CTA
+## 8. CTA
 
 **"Stop losing jobs to a missed call. Book your free profile and
 call-handling review."** → link to Suirview Digital GBP Management + AI
 Receptionist page.
 
-## 10. Hashtags
+## 9. Hashtags
 
 `#TradesIreland #PlumberIreland #ElectricianIreland #GoogleBusinessProfile
 #LocalSEO #EmergencyCallOut #SmallBusinessIreland #MissedCallsCostMoney
 #SuirviewDigital #AIReceptionist`
 
-## 11. Recommended Platform
+## 10. Recommended Platform
 
-Facebook and Instagram Reels targeted geographically to trade-heavy local
-groups and pages, plus YouTube Shorts — trades audiences respond well to
-short, high-tension narrative video in that format.
+Facebook and Instagram carousel ads targeted geographically to trade-heavy
+local groups and pages. The Slide 1 / Slide 6 pairing (leak-panic vs.
+resolved-calm) also performs well repurposed as a standalone two-image
+comparison post.
 
-## 12. Why This Should Generate Leads
+## 11. Why This Should Generate Leads
 
 It dramatises the exact, specific moment of financial loss a tradesperson
 already fears — a missed emergency call — rather than talking abstractly

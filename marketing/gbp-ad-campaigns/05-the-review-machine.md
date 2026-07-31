@@ -1,5 +1,7 @@
 # Campaign 5 — "The Review Machine"
 
+**Format:** 8-slide still-image carousel (Midjourney only, no animation).
+
 ## 1. Research Summary
 
 **Why this topic matters**
@@ -39,15 +41,15 @@ imagery (the perfect room, the perfect cut, the perfect physique) without
 showing the underlying trust mechanics that actually drive the booking
 decision. Review-management services are usually sold as a dry back-office
 tool ("automate your review requests") rather than shown as a living,
-almost magical flywheel — happy customer in, trusted and visible business
-out. Visualising that flywheel as a single continuous motion is a stronger,
-more premium way to sell the same mechanism.
+almost magical growth engine — happy customer in, trusted and visible
+business out. Visualising that engine as a clean, premium still-image
+sequence is a stronger, more aspirational way to sell the same mechanism.
 
 **Why this concept will generate enquiries**
 Owners in these categories already intuitively value reviews — they don't
 need convincing that reviews matter. What they lack is a system for
 generating them consistently. Showing the review flywheel as an elegant,
-almost self-sustaining machine reframes "review management" from an admin
+almost self-sustaining engine reframes "review management" from an admin
 chore into a growth engine, which is both more accurate and more exciting
 to a business owner deciding where to invest next.
 
@@ -74,24 +76,28 @@ to a business owner deciding where to invest next.
 - **Environment:** A boutique hotel lobby or premium salon interior — warm,
   tactile materials (brass, marble, soft textiles), guests/clients visibly
   content in soft-focus background action.
-- **Camera angle:** Fluid, circular camera movement that mirrors the "loop"
-  concept — the camera itself moves in a gentle orbit around the central
-  subject (a phone showing a five-star review notification) rather than a
-  static shot.
+- **Camera angle:** Consistent, centred framing on a phone/notification as
+  the recurring visual anchor across the set, with the physical environment
+  filling the background of each slide — reinforcing the "engine" concept
+  through repetition rather than literal gears or icons.
 - **Lighting:** Warm ambient interior lighting, soft golden highlights on
   brass/wood fixtures, a single soft key light on the phone screen for
   legibility.
 - **Composition:** Central subject (phone/notification) with the physical
-  environment softly circling in the background — visually reinforcing the
-  "flywheel" idea without needing literal gears or icons.
+  environment softly filling the background — visually reinforcing
+  continuity slide to slide.
 - **Realism:** Photoreal boutique hospitality/salon interior — genuinely
   premium, believable materials and staging.
-- **Premium advertising style:** Feels like a five-star hotel brand film —
-  slow, confident, materially rich, zero clutter.
+- **Premium advertising style:** Feels like a five-star hotel brand
+  campaign — slow, confident, materially rich, zero clutter.
 - **Branding placement:** Suirview Digital watermark bottom-right of the
-  final CTA frame only, beside the profile's star-rating summary card.
+  final CTA slide only, beside the profile's star-rating summary card
+  (added in post).
+- **Consistency:** generate Slide 1 first, then reuse its `--seed` and
+  `--sref` across the remaining 7 prompts so the lobby's materials, light
+  and colour palette stay matched throughout the carousel.
 
-## 4. Still Image Prompt (Midjourney)
+## 4. Cover Still Image Prompt (Midjourney)
 
 ```
 Photoreal commercial photograph inside a warm boutique hotel lobby, brass
@@ -102,65 +108,102 @@ ambient lighting with gentle highlights on brass fixtures, shallow depth of
 field, shot on 50mm lens, f/1.8, cinematic warm colour grading, luxury
 hospitality advertising photography style similar to a five-star hotel
 brand campaign, ultra realistic, high detail, no visible text on screen, no
-logos --ar 16:9 --style raw --v 6
+logos --ar 4:5 --style raw --v 6
 ```
 
-## 5. Higgsfield Animation Prompt
+## 5. Still-Image Carousel — 8 Slides
 
-- **Starting frame:** The phone at the centre of the lobby, review
-  notification softly glowing, held steady in a guest's hand.
-- **Camera movement:** Slow 180-degree orbit around the phone and hand,
-  revealing the warm lobby environment circling behind it — the literal
-  camera motion becomes the "flywheel" visual metaphor.
-- **Transition effect:** As the orbit completes, the single review
-  notification multiplies into a soft cascade of additional review
-  notifications drifting upward and outward, then coalescing into a clean
-  Google Business Profile summary card showing a rising star rating and
-  review count ticking upward.
-- **Text animation:** Text appears as the cascade begins: *"One happy
-  guest becomes the next ten."* Final line as the profile card settles:
-  *"That's the review machine — and we build it for you."* Typography:
-  elegant thin-weight serif for emotional lines, clean sans-serif for the
-  data card, warm cream-on-dark colour treatment matching hospitality
-  branding.
-- **Motion style:** Smooth, continuous, orbital — no hard cuts anywhere in
-  this sequence; everything flows in one unbroken camera move to reinforce
-  the "machine" concept as elegant and self-sustaining rather than
-  effortful.
-- **Duration:** 10 seconds (this concept works exceptionally well looped
-  seamlessly for Instagram feed placements — the orbit can tie back to its
-  start frame for an infinite loop).
+**Slide 1 — Hook**
+On-image text: *"One five-star review. One moment."*
+```
+Photoreal still inside a warm boutique hotel lobby, brass and marble
+details, a hand holding a smartphone at center frame displaying a glowing
+five-star review notification, guests softly blurred in the background,
+warm golden ambient lighting, shallow depth of field, 50mm lens, f/1.8,
+cinematic warm colour grading, luxury hospitality photography, no visible
+text on screen, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
 
-## 6. Full Storyboard (8 slides)
+**Slide 2 — Identify the problem**
+On-image text: *"But most great moments like this never get captured."*
+```
+Photoreal still of a hotel staff member at the front desk glancing at a
+laptop showing a near-empty reviews tab, weeks since the last entry, warm
+but slightly subdued lobby lighting, shallow depth of field, 35mm lens,
+f/2.0, warm muted colour grading, luxury hospitality photography, no
+readable text on screen, no logos, ultra realistic --ar 4:5 --style raw
+--v 6
+```
 
-1. **Hook** — The glowing five-star review notification in the guest's
-   hand, lobby softly alive behind it. Text: *"One five-star review. One
-   moment."*
-2. **Identify the problem** — Cut to a quieter, less warm frame: staff
-   member glancing at a near-empty reviews tab, weeks since the last entry.
-   Text: *"But most great moments like this never get captured."*
-3. **Show consequences** — A prospective guest scrolling competitor
-   listings with fresher, more numerous reviews, choosing to book there
-   instead. Text: *"So the next guest books somewhere that looks more
-   loved."*
-4. **Explain why it happens** — Simple truth card: *"Asking for reviews
-   feels awkward — so most businesses just... don't."*
-5. **Introduce GBP optimisation** — Suirview Digital's system shown simply:
-   a QR/link review request sent at checkout, a team member responding
-   warmly to a review on a tablet. Text: *"We make it effortless to ask —
-   and to respond."*
-6. **Show transformation** — The orbit-and-cascade animation: one review
-   becomes a stream of reviews, star rating visibly climbing. Text: *"One
-   review becomes momentum."*
-7. **Show business benefits** — Warm montage: profile now shows 4.9★ with
-   200+ reviews, booking notifications increasing, front desk busier. Text:
-   *"More trust. More visibility. More bookings."*
-8. **Strong CTA** — Final settled shot of the lobby, profile summary card
-   glowing softly, Suirview Digital watermark bottom-right. Text: *"Turn
-   happy customers into your best marketing. Free review strategy
-   session."*
+**Slide 3 — Show consequences**
+On-image text: *"So the next guest books somewhere that looks more
+loved."*
+```
+Photoreal still of a prospective guest's hand holding a smartphone,
+scrolling through competing hotel listings with fresher, more numerous
+reviews, softly blurred cozy background, natural light, shallow depth of
+field, 50mm macro lens, f/2.2, clean warm colour grading, commercial
+product photography, no readable brand text, ultra realistic --ar 4:5
+--style raw --v 6
+```
 
-## 7. Self-Critique
+**Slide 4 — Explain why it happens**
+On-image text: *"Asking for reviews feels awkward — so most businesses just
+don't."*
+```
+Photoreal still of a hotel front-desk staff member at checkout, hesitating
+with a hand near a small "leave a review" card on the counter, warm ambient
+lobby lighting, shallow depth of field, 35mm lens, f/2.0, warm muted colour
+grading, luxury hospitality photography, no readable text, no logos, ultra
+realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 5 — Introduce GBP optimisation**
+On-image text: *"We make it effortless to ask — and to respond."*
+```
+Photoreal still of a hotel staff member at the front desk warmly handing a
+guest a small card with a QR code at checkout, guest smiling, warm golden
+lobby lighting, shallow depth of field, 35mm lens, f/1.8, warm inviting
+colour grading, luxury hospitality photography, no readable text on card,
+no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 6 — Show transformation**
+On-image text: *"One review becomes momentum."*
+```
+Photoreal still of a smartphone screen showing a Google Business Profile
+summary card with a high star rating and a large, steadily growing review
+count, held in a hand inside the same warm boutique hotel lobby softly
+blurred behind it, shallow depth of field, 50mm macro lens, f/2.0, warm
+cinematic colour grading, commercial product photography, no readable text
+beyond generic UI elements, no logos, ultra realistic --ar 4:5 --style raw
+--v 6
+```
+
+**Slide 7 — Show business benefits**
+On-image text: *"More trust. More visibility. More bookings."*
+```
+Photoreal still of a busy, lively hotel lobby front desk, staff checking in
+several smiling guests, warm golden ambient lighting, a sense of energy and
+activity, shallow depth of field, 35mm lens, f/2.2, warm inviting colour
+grading, luxury hospitality photography, no readable text, no logos, ultra
+realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 8 — Strong CTA**
+On-image text: *"Turn happy customers into your best marketing. Free
+review strategy session."* (Suirview Digital watermark added bottom-right
+in post — this is the only slide carrying the logo.)
+```
+Photoreal still of the same boutique hotel lobby, calm and settled, warm
+golden light, a smartphone resting on the marble counter showing a glowing
+review-summary notification, brass details catching soft highlights,
+shallow depth of field, 50mm lens, f/1.8, cinematic warm colour grading,
+luxury hospitality advertising photography, no readable text on screen, no
+logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+## 6. Self-Critique
 
 | Metric | Score |
 |---|---|
@@ -175,41 +218,41 @@ because "free review strategy session" is a slightly heavier, more
 consultative ask than the free "check" or "audit" CTAs used in the other
 four campaigns — hospitality and salon owners are busy operators and may
 hesitate at anything that sounds like a scheduled meeting. Raised to 8/10 by
-keeping the CTA copy but ensuring the linked landing page (referenced,
-not built here) leads with a fast, no-call audit option first, with the
+keeping the CTA copy but ensuring the linked landing page (referenced, not
+built here) leads with a fast, no-call audit option first, with the
 strategy session offered as a natural next step rather than the only entry
 point — preserving the low-friction pattern established across the whole
 campaign pack.
 
-## 8. Caption
+## 7. Caption
 
 > That five-star review your guest just left? It's worth more than any ad
 > you could run — if the right system is in place to turn it into the next
 > ten bookings. We build that system.
 
-## 9. CTA
+## 8. CTA
 
 **"Turn happy customers into your best marketing. Free review strategy
 session."** → link to Suirview Digital GBP Management page.
 
-## 10. Hashtags
+## 9. Hashtags
 
 `#HospitalityMarketing #GoogleReviews #GoogleBusinessProfile #SalonMarketing
 #HotelMarketingIreland #GymMarketing #LocalSEO #ReputationManagement
 #SuirviewDigital #IrishBusiness`
 
-## 11. Recommended Platform
+## 10. Recommended Platform
 
-Instagram feed (looped orbit animation performs strongly here) and
-Facebook Ads targeted to hotel, salon and gym owner audiences; a static cut
-of the lobby image works well on LinkedIn for hospitality group managers.
+Instagram carousel post and Facebook carousel ads targeted to hotel, salon
+and gym owner audiences; a static cut of the Slide 1 lobby image works well
+on LinkedIn for hospitality group managers.
 
-## 12. Why This Should Generate Leads
+## 11. Why This Should Generate Leads
 
 It reframes reviews from a passive, awkward ask into a visible, elegant
 growth mechanism the owner can picture working *for* them continuously,
 which is both emotionally appealing and directly tied to bookings — the
-metric owners in this category care about most. Because the ad shows
+metric owners in this category care about most. Because the carousel shows
 the exact moment of loss (a prospective guest choosing a more-reviewed
 competitor) before showing the resolution, it builds urgency without
 needing performance statistics, and the CTA gives a clear, valuable next

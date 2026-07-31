@@ -1,5 +1,7 @@
 # Campaign 1 — "The Empty Shopfront"
 
+**Format:** 8-slide still-image carousel (Midjourney only, no animation).
+
 ## 1. Research Summary
 
 **Why this topic matters**
@@ -37,14 +39,14 @@ Most local marketing agencies sell GBP management as a line item inside a
 generic "digital marketing" bundle, advertised with dashboards, graphs and
 stock-photo laptops. It reads as software, not as something a shop owner
 should urgently care about. Nobody is making the physical-to-digital
-metaphor visceral and premium — which leaves an open lane for a campaign
-that looks and feels like a luxury brand film rather than a marketing agency
-ad.
+metaphor visceral and premium — which leaves an open lane for a still-image
+campaign that looks and feels like a luxury brand shoot rather than a
+marketing agency ad.
 
 **Why this concept will generate enquiries**
 It doesn't ask the owner to understand SEO. It asks them to look at their
 own shopfront and imagine it with no sign — an emotional gut-punch any owner
-instantly understands — then resolves that fear in the same frame by
+instantly understands — then resolves that fear across the carousel by
 showing their business winning the exact same visibility online. The ad does
 the persuading before the caption is even read.
 
@@ -72,23 +74,27 @@ the persuading before the caption is even read.
 - **Environment:** A real Irish market-town high street — sandstone or
   painted shopfronts, wet pavement catching soft light, the kind of street
   found in Kilkenny, Waterford or Cork. Golden hour, low sun, long shadows.
-- **Camera angle:** Eye-level, straight-on approach shot — as if a customer
-  is walking toward the shop. Slight push-in over the sequence.
+- **Camera angle:** Eye-level, straight-on approach framing throughout the
+  set — as if a customer is walking toward the shop in each still.
 - **Lighting:** Warm natural light, soft shadow falloff, practical shop
   lighting glowing from inside the window. No artificial studio look.
 - **Composition:** Centred shopfront filling the middle third of frame,
-  generous negative space above for a single line of type, rule-of-thirds
-  placement of the door.
+  generous negative space above for a single line of type added in post,
+  rule-of-thirds placement of the door.
 - **Realism:** Photoreal, shot-on-a-real-camera quality — no illustration,
   no 3D render look.
 - **Premium advertising style:** Muted, cinematic colour grade (think Aesop
-  or an Apple Store film) — desaturated street tones against one warm accent
-  (the shop's own signage colour or a Suirview blue glow in the second half).
+  or an Apple Store campaign) — desaturated street tones against one warm
+  accent (the shop's own signage colour, or a Suirview blue glow once the
+  digital listing appears in later slides).
 - **Branding placement:** Suirview Digital logo appears only as a small
-  quiet mark bottom-right in the final frame, beside the Google Business
+  quiet mark bottom-right in the final slide, beside the Google Business
   Profile card overlay — never earlier, never large.
+- **Consistency:** generate Slide 1 first, then reuse its `--seed` and pass
+  it as `--sref` on Slides 2–8 so the street, light and shopfront read as
+  the same continuous location throughout the carousel.
 
-## 4. Still Image Prompt (Midjourney)
+## 4. Cover Still Image Prompt (Midjourney)
 
 ```
 Photoreal cinematic still of a charming independent boutique shopfront on a
@@ -100,59 +106,108 @@ past without glancing at the shop, shallow depth of field, shot on 35mm
 photographic lens, f/1.8, soft bokeh background, natural warm colour
 grading, subtle film grain, commercial advertising photography style
 similar to Apple or Aesop brand campaigns, no text, no logos, high detail,
-realistic architecture, ultra-realistic --ar 16:9 --style raw --v 6
+realistic architecture, ultra-realistic --ar 4:5 --style raw --v 6
 ```
 
-## 5. Higgsfield Animation Prompt
+## 5. Still-Image Carousel — 8 Slides
 
-- **Starting frame:** The empty, unsigned shopfront from the Midjourney
-  still, static for 1.5 seconds so the absence of a sign registers.
-- **Camera movement:** Slow, steady push-in toward the shop door (dolly-in,
-  2.5 seconds), simulating a customer approaching and then giving up,
-  turning away — camera subtly pans to follow them walking off-frame.
-- **Transition effect:** Match-cut / morph transition — the shopfront
-  window pane dissolves into a smartphone screen showing a Google search
-  results page with the same shop now appearing top of the Local Pack,
-  photos, reviews and "Open Now" badge visible. Use a soft light-wipe
-  transition, not a hard cut.
-- **Text animation:** Line 1 fades up softly over the empty shopfront: "A
-  beautiful business… invisible online." Line 2 animates in with a gentle
-  upward slide once the phone screen resolves: "Your Google Business
-  Profile is your shop window. Let's stop hiding it." Typography: clean
-  premium sans-serif, letter-spacing wide, white or cream on dark scrim.
-- **Motion style:** Slow, deliberate, cinematic — no fast cuts, no shake,
-  mirrors luxury brand film pacing throughout.
-- **Duration:** 8 seconds total (matches short-form ad length; extend to 15s
-  for Instagram/Facebook feed by holding the final CTA frame longer).
+**Slide 1 — Hook**
+On-image text (added in post): *"Beautiful shop. Invisible business."*
+```
+Photoreal still of a charming independent boutique shopfront on a quiet
+Irish market-town street at golden hour, no signage above the door, warm
+raking sunlight, shop window glowing softly from inside, wet cobblestone
+street, one blurred pedestrian walking past without glancing at the shop,
+shallow depth of field, 35mm lens, f/1.8, soft bokeh, warm cinematic colour
+grading, commercial advertising photography, no text, no logos, ultra
+realistic --ar 4:5 --style raw --v 6
+```
 
-## 6. Full Storyboard (8 slides)
+**Slide 2 — Identify the problem**
+On-image text: *"No sign. No search visibility. Same problem."*
+```
+Photoreal close-up still of the blank stone facade directly above a
+boutique shop's front door, faint weathered outline where a sign used to
+hang, chipped paint, warm late-afternoon side light raking across the
+texture, shallow depth of field, 50mm lens, f/2.0, muted warm colour
+grading, commercial architectural photography style, no text, no logos,
+ultra realistic --ar 4:5 --style raw --v 6
+```
 
-1. **Hook** — Full-bleed shot of the empty shopfront, no text yet, just the
-   quiet, slightly melancholic image doing the work. Caption fades in:
-   *"Beautiful shop. Invisible business."*
-2. **Identify the problem** — Zoom to the empty space above the door where
-   signage should be. Text: *"No sign. No search visibility. Same problem."*
-3. **Show consequences** — Cut to a phone screen: a Google search for a
-   nearby competitor category shows three competitors, not this business.
-   Text: *"Customers searched. They found someone else."*
-4. **Explain why it happens** — Split text over a dimly lit "back office"
-   shot of an unclaimed GBP dashboard: *"Most businesses never claim, verify,
-   or update their Google Business Profile."*
-5. **Introduce GBP optimisation** — Suirview Digital dashboard/laptop shot,
-   clean and premium, someone updating photos and hours. Text: *"We turn
-   your profile into your busiest shop window."*
-6. **Show transformation** — The morph transition: empty shopfront becomes
-   a fully optimised GBP listing — reviews, photos, hours, posts all
-   populated. Text: *"Fully optimised. Fully visible."*
-7. **Show business benefits** — Quick warm montage: phone ringing, a
-   booking confirmation notification, a customer walking in the door with
-   purpose this time. Text: *"More calls. More visits. More bookings."*
-8. **Strong CTA** — Return to the shopfront, now with warm light spilling
-   out and a customer walking confidently inside. Suirview Digital logo
-   appears quietly bottom-right. Text: *"Get your free Google Business
-   Profile check today."*
+**Slide 3 — Show consequences**
+On-image text: *"Customers searched. They found someone else."*
+```
+Photoreal over-the-shoulder still of a pedestrian on an Irish market-town
+street holding a smartphone at chest height, screen showing a realistic
+Google Maps local search results list with three competitor boutique shops
+pinned and starred, softly blurred street background, natural daylight,
+shallow depth of field, 50mm macro lens, f/2.2, clean neutral colour
+grading, commercial product photography style, no visible brand logos on
+screen, ultra realistic --ar 4:5 --style raw --v 6
+```
 
-## 7. Self-Critique
+**Slide 4 — Explain why it happens**
+On-image text: *"Most businesses never claim or update their Google
+Business Profile."*
+```
+Photoreal still of a dimly lit small back-office desk inside a boutique
+shop, an open laptop displaying a neglected, unclaimed Google Business
+Profile dashboard with greyed-out fields, a small stack of unopened mail
+beside it, soft cool window light mixing with a warm desk lamp, shallow
+depth of field, 35mm lens, f/2.0, muted desaturated colour grading,
+commercial interior photography style, no readable text on screen, no
+logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 5 — Introduce GBP optimisation**
+On-image text: *"We turn your profile into your busiest shop window."*
+```
+Photoreal still of a professional working at a clean bright desk, laptop
+open showing a fresh, organised Google Business Profile editing screen with
+photo thumbnails being uploaded, soft natural window light, warm minimal
+office styling, shallow depth of field, 35mm lens, f/2.0, clean bright
+colour grading, premium commercial office photography style, no readable
+text on screen, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 6 — Show transformation**
+On-image text: *"Fully optimised. Fully visible."*
+```
+Photoreal still of a smartphone held up in the foreground in front of the
+same boutique shopfront, screen showing the shop now appearing as the top
+Google Maps result with photos, star rating and "Open Now" badge, shopfront
+softly blurred behind the phone in warm golden-hour light, shallow depth of
+field, 50mm macro lens, f/2.0, warm cinematic colour grading, commercial
+product photography style, no readable text on screen beyond generic UI
+elements, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 7 — Show business benefits**
+On-image text: *"More calls. More visits. More bookings."*
+```
+Photoreal still inside the boutique shop, a shopkeeper warmly greeting a
+customer who just walked in holding a phone with a visible "Directions"
+notification, soft warm interior lighting, shelves of products softly
+blurred in the background, shallow depth of field, 35mm lens, f/1.8, warm
+inviting colour grading, commercial lifestyle retail photography style, no
+readable text on screen, no logos, ultra realistic --ar 4:5 --style raw --v 6
+```
+
+**Slide 8 — Strong CTA**
+On-image text: *"Get your free Google Business Profile check today."*
+(Suirview Digital watermark added bottom-right in post — this is the only
+slide carrying the logo.)
+```
+Photoreal still of the same boutique shopfront at dusk, now with warm light
+spilling generously from the window and a small tasteful illuminated sign
+visible above the door, a customer walking confidently through the open
+doorway, warm golden and blue dusk colour grading, shallow depth of field,
+35mm lens, f/1.8, commercial advertising photography style similar to Apple
+or Aesop campaigns, no text, no logos, ultra realistic --ar 4:5 --style raw
+--v 6
+```
+
+## 6. Self-Critique
 
 | Metric | Score |
 |---|---|
@@ -170,38 +225,40 @@ added specifically to fix this: it names the real, common mistake (never
 claiming/verifying the profile) so the owner recognises their own situation
 rather than feeling accused. Lead generation potential was raised from 7 to
 8 by making the CTA a low-friction "free check" rather than a sales pitch,
-and by keeping the Suirview brand mark hidden until the final frame so the
-ad reads as insight first, pitch second.
+and by keeping the Suirview brand mark hidden until the final slide so the
+carousel reads as insight first, pitch second.
 
-## 8. Caption
+## 7. Caption
 
 > Your shopfront is stunning. But if your Google Business Profile is empty,
 > half your customers never even see it before choosing a competitor.
 > We fix that — free profile check, no obligation.
 
-## 9. CTA
+## 8. CTA
 
 **"Get your free Google Business Profile check — see exactly what customers
 see before they walk in."** → link to Suirview Digital GBP Management page.
 
-## 10. Hashtags
+## 9. Hashtags
 
 `#GoogleBusinessProfile #LocalSEO #IrishBusiness #SmallBusinessIreland
 #DigitalShopWindow #GoogleMaps #SuirviewDigital #SupportLocalIreland
 #BusinessGrowth #LocalMarketing`
 
-## 11. Recommended Platform
+## 10. Recommended Platform
 
-Instagram Reels and Facebook Ads (feed + Stories) as primary, with a static
-version of the shopfront-to-listing still cross-posted to LinkedIn to reach
-owner-operators and local business networking groups.
+Instagram carousel post and Facebook carousel ads as primary — the swipe
+mechanic maps naturally onto the slide-by-slide reveal. Cross-post the same
+8 stills as a LinkedIn document/carousel post to reach owner-operators and
+local business networking groups, and repost the strongest single slide
+(Slide 8) as a static feed image.
 
-## 12. Why This Should Generate Leads
+## 11. Why This Should Generate Leads
 
 It converts an abstract service (profile optimisation) into a fear the
 owner already feels every day walking past their own shop — wasted
-potential. Because the resolution happens visually inside the same shot
-(shopfront literally becomes the search result), the value proposition is
-understood in seconds without reading a word of marketing copy, and the CTA
+potential. Because the resolution unfolds across the carousel (shopfront
+becomes the search result by Slide 6), the value proposition is understood
+in seconds of swiping without reading a word of marketing copy, and the CTA
 asks for almost nothing ("free check"), which is the lowest-friction way to
 convert a business owner who is intrigued but hasn't yet decided to spend.
