@@ -761,7 +761,9 @@ main { padding-top: 68px; }
 .offer-spaces { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 28px; border: 1px solid var(--line); border-radius: 16px; background: rgba(10, 11, 15, 0.5); flex-shrink: 0; }
 .offer-num { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 6vw, 4.6rem); line-height: 1; color: var(--gold-light); }
 .offer-lbl { color: var(--slate-dim); margin-top: 6px; line-height: 1.25; }
-@media (max-width: 680px) { .offer-banner { grid-template-columns: 1fr; } .offer-spaces { flex-direction: row; gap: 12px; align-self: start; padding: 12px 18px; } }
+/* Word stamp variant — no date, so the numeral steps down to a seal-sized word */
+.offer-stamp .offer-num { font-size: clamp(1.7rem, 3vw, 2.5rem); text-transform: uppercase; letter-spacing: 0.02em; }
+@media (max-width: 680px) { .offer-banner { grid-template-columns: 1fr; } .offer-spaces { flex-direction: row; gap: 12px; align-self: start; padding: 12px 18px; } .offer-stamp .offer-num { font-size: 1.25rem; } }
 
 /* ============================================================
    CONFIGURATOR — build & price your website
