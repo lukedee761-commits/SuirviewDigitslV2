@@ -33,7 +33,7 @@
      DEFAULT BELOW = +15%. Compare other levels by setting data-lift on <html>:
         document.documentElement.dataset.lift = '25'   // 0 | 10 | 15 | 25
      --------------------------------------------------------------------- */
-  --gold-label: #D1B680;  /* from --gold      #C9A96A  +15% — .block-eyebrow, .hero-kicker, .deck-step, .panel-tag */
+  --gold-label: #D1B680;  /* from --gold      #C9A96A  +15% — .block-eyebrow, .hero-kicker, .deck-step */
   --gold-badge: #B69A69;  /* from --gold-deep #A9884E  +15% — .plan-badge, .step-n */
   --slate: #9CA3B4;       /* from            #8B93A7  +15% — .block-lede, .plan-desc, body copy */
   --slate-dim: #959CAD;   /* from            #828A9E  +15% — small .mono labels */
@@ -411,7 +411,6 @@ main, .foot { position: relative; z-index: 1; }
   border: 1px solid var(--line-soft); border-radius: 20px; padding: clamp(30px, 4vw, 46px);
 }
 .panel-gold { border-color: var(--line); background: linear-gradient(160deg, var(--midnight-2), var(--panel)); }
-.panel-tag { color: var(--gold-label); text-transform: uppercase; margin-bottom: 14px; }
 .panel h3 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin-bottom: 8px; }
 .panel-sub { color: var(--slate); margin-bottom: 22px; }
 .panel ul { list-style: none; display: grid; gap: 12px; }
