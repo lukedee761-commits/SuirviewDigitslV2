@@ -24,9 +24,9 @@
   --cream: #F7F5F1;
 
   /* ---- Heading furniture (text only) -------------------------------------
-     The headings themselves (h1/h2/h3, .block-title, .subhead h3, .acc-title,
-     .offer-banner h3) are --cream #F7F5F1 = 245/255. They are already at the
-     ceiling and are NOT touched.
+     The headings themselves (h1/h2/h3, .block-title, .subhead h3, .acc-title)
+     are --cream #F7F5F1 = 245/255. They are already at the ceiling and are
+     NOT touched.
      What actually read as dark is the gold/grey furniture around them. These
      four tokens carry that furniture and are lifted toward white using
         new = old + p x (255 - old)
@@ -36,7 +36,7 @@
   --gold-label: #D1B680;  /* from --gold      #C9A96A  +15% — .block-eyebrow, .hero-kicker, .deck-step, .panel-tag */
   --gold-badge: #B69A69;  /* from --gold-deep #A9884E  +15% — .plan-badge, .step-n */
   --slate: #9CA3B4;       /* from            #8B93A7  +15% — .block-lede, .plan-desc, body copy */
-  --slate-dim: #959CAD;   /* from            #828A9E  +15% — small .mono labels, .offer-lbl */
+  --slate-dim: #959CAD;   /* from            #828A9E  +15% — small .mono labels */
 
   --line: rgba(201, 169, 106, 0.16);
   --line-soft: rgba(255, 255, 255, 0.07);
@@ -750,20 +750,6 @@ main { padding-top: 68px; }
 /* Universal "every build includes" guarantee strip */
 .build-includes { margin-top: 22px; padding: 20px 24px; border: 1px solid var(--line-soft); border-radius: 16px; background: rgba(15, 27, 61, 0.28); }
 .build-includes > .mono { color: var(--gold-label); text-transform: uppercase; margin-bottom: 12px; }
-
-/* Founding limited-time offer banner */
-.offer-banner { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(20px, 3vw, 44px); margin-bottom: 26px; padding: clamp(24px, 3vw, 38px); border: 1px solid rgba(201, 169, 106, 0.45); border-radius: 20px; background: linear-gradient(135deg, rgba(201, 169, 106, 0.12), rgba(19, 35, 63, 0.6)); }
-.offer-eyebrow { color: var(--gold-light); text-transform: uppercase; margin-bottom: 12px; }
-.offer-banner h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.35rem, 2.6vw, 2.1rem); color: var(--cream); margin-bottom: 10px; letter-spacing: -0.01em; }
-.offer-banner .offer-copy > p { color: var(--slate); max-width: 60ch; margin-bottom: 20px; }
-.offer-banner .offer-copy p strong { color: var(--gold-light); font-weight: 600; }
-.offer-banner .offer-copy > p.offer-why { font-style: italic; color: var(--slate-dim); border-left: 2px solid rgba(201, 169, 106, 0.45); padding-left: 14px; margin-bottom: 14px; }
-.offer-spaces { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 18px 28px; border: 1px solid var(--line); border-radius: 16px; background: rgba(10, 11, 15, 0.5); flex-shrink: 0; }
-.offer-num { font-family: var(--display); font-weight: 800; font-size: clamp(3rem, 6vw, 4.6rem); line-height: 1; color: var(--gold-light); }
-.offer-lbl { color: var(--slate-dim); margin-top: 6px; line-height: 1.25; }
-/* Word stamp variant — no date, so the numeral steps down to a seal-sized word */
-.offer-stamp .offer-num { font-size: clamp(1.7rem, 3vw, 2.5rem); text-transform: uppercase; letter-spacing: 0.02em; }
-@media (max-width: 680px) { .offer-banner { grid-template-columns: 1fr; } .offer-spaces { flex-direction: row; gap: 12px; align-self: start; padding: 12px 18px; } .offer-stamp .offer-num { font-size: 1.25rem; } }
 
 /* ============================================================
    CONFIGURATOR — build & price your website

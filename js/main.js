@@ -370,12 +370,6 @@
       answer: 'Every site is built to be found — on Google and on AI search like ChatGPT, Perplexity and Gemini (we call that GEO). Our monthly plans add fresh content to keep you climbing.',
       actions: [{ label: 'See the plans', act: function () { goTo('#plans'); } }]
     },
-    offer: {
-      chip: 'The founding offer',
-      keys: ['offer', 'founding', 'deal', 'discount', 'spaces', 'special'],
-      answer: 'The founding offer is limited time only: a full build, 12 months of Care and a year of blog content — 52 articles, one a week. It’s €200 to start, then €50/month for the year — or €400 up front and you save 50%. After the year, both carry on at €50/month.',
-      actions: [{ label: 'Claim a space', act: function () { goTo('#contact'); } }]
-    },
     ava: {
       chip: '',
       keys: ['ava', 'receptionist', 'phone', 'answer call', 'answer the phone', 'missed call'],
@@ -389,7 +383,7 @@
       actions: [{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Book a call', act: bookCall }]
     }
   };
-  var DEFAULT_CHIPS = ['build', 'price', 'time', 'seo', 'offer', 'quote'];
+  var DEFAULT_CHIPS = ['build', 'price', 'time', 'seo', 'quote'];
 
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
 
