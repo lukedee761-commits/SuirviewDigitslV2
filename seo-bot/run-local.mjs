@@ -1,7 +1,10 @@
-// Local monthly runner (Option B — your Claude subscription, no API key, no cost).
-// 1) drafts articles via the `claude` CLI  2) runs the quality gate
-// 3) commits the drafts to a review branch and returns you to your current branch.
-// You then review the branch and MERGE it to publish (or delete it to reject).
+// Local weekly runner (your Claude subscription — no API key, no cost).
+// Drafts BATCH articles, ONE COMMIT PER ARTICLE, onto a single review branch.
+// One commit per article is what makes the Mon/Wed/Fri drip possible:
+// publish-next.mjs cherry-picks a single commit at a time onto main.
+//
+// You review the branch, then approve it once (seo-bot/approve.ps1).
+// Nothing reaches main until publish-next.mjs picks it up.
 import { spawnSync } from "node:child_process";
 import { readFileSync, existsSync, unlinkSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -10,56 +13,85 @@ import { fileURLToPath } from "node:url";
 const BOT_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(BOT_DIR, "..");
 const CLIENT = process.env.CLIENT || "suirviewdigital";
+const BATCH = parseInt(process.env.COUNT || "3", 10);
 
 function git(args, opts = {}) {
-  // no shell: args pass literally, so multi-word commit messages stay one argument
   const r = spawnSync("git", args, { cwd: REPO_ROOT, encoding: "utf8", ...opts });
-  if (r.status !== 0 && !opts.allowFail) throw new Error(`git ${args.join(" ")} failed: ${(r.stderr || r.stdout || "").trim()}`);
+  if (r.status !== 0 && !opts.allowFail)
+    throw new Error(`git ${args.join(" ")} failed: ${(r.stderr || r.stdout || "").trim()}`);
   return (r.stdout || "").trim();
 }
-function node(script) {
-  const r = spawnSync(process.execPath, [join(BOT_DIR, script)], { cwd: REPO_ROOT, stdio: "inherit", env: process.env });
+function node(script, env = {}) {
+  const r = spawnSync(process.execPath, [join(BOT_DIR, script)], {
+    cwd: REPO_ROOT, stdio: "inherit", env: { ...process.env, ...env },
+  });
   return r.status || 0;
 }
+
 const scopePaths = ["blog", "sitemap.xml", join("seo-bot", "clients", CLIENT, "calendar.json")];
-
 const startRef = git(["rev-parse", "--abbrev-ref", "HEAD"]);
-console.log(`On branch ${startRef}. Drafting for "${CLIENT}"...\n`);
 
-// 1) generate
-if (node("generate.mjs") !== 0) { console.error("Generation failed."); process.exit(1); }
-
-// any drafts produced?
-const changed = git(["status", "--porcelain", "--", ...scopePaths]);
-if (!changed) { console.log("\nNothing new to draft. Exiting."); process.exit(0); }
-
-// 2) quality gate — on failure, revert everything and bail
-if (node("quality-gate.mjs") !== 0) {
-  console.error("\nQuality gate failed — discarding drafts.");
-  try {
-    const gen = JSON.parse(readFileSync(join(BOT_DIR, ".generated.json"), "utf8"));
-    for (const g of gen) { const f = join(REPO_ROOT, "blog", `${g.slug}.html`); if (existsSync(f)) unlinkSync(f); }
-  } catch {}
-  git(["checkout", "--", ...scopePaths], { allowFail: true });
+if (git(["status", "--porcelain"])) {
+  console.error("Working tree is dirty. Commit or stash first — refusing to run.");
   process.exit(1);
 }
 
-// 3) commit onto a review branch, then return to where we were
 const stamp = new Date().toISOString().replace(/[:T]/g, "-").slice(0, 16);
 const branch = `seo-bot/${CLIENT}-${stamp}`;
+console.log(`On ${startRef}. Drafting ${BATCH} article(s) for "${CLIENT}" onto ${branch}.\n`);
 git(["checkout", "-b", branch]);
-git(["add", "--", ...scopePaths]);
-git(["commit", "-m", `content: monthly SEO drafts for ${CLIENT}`]);
+
+const drafted = [];
+let aborted = null;
+
+for (let i = 1; i <= BATCH; i++) {
+  console.log(`\n─── article ${i} of ${BATCH} ───`);
+
+  // Generate exactly one, so the commit that follows contains exactly one article.
+  if (node("generate.mjs", { COUNT: "1" }) !== 0) { aborted = `generation failed on article ${i}`; break; }
+
+  if (!git(["status", "--porcelain", "--", ...scopePaths])) {
+    console.log("Nothing left in the calendar to draft.");
+    break;
+  }
+
+  // Gate this article alone. On failure, bin it and stop — earlier commits stand.
+  if (node("quality-gate.mjs") !== 0) {
+    try {
+      const gen = JSON.parse(readFileSync(join(BOT_DIR, ".generated.json"), "utf8"));
+      for (const g of gen) {
+        const f = join(REPO_ROOT, "blog", `${g.slug}.html`);
+        if (existsSync(f)) unlinkSync(f);
+      }
+    } catch {}
+    git(["checkout", "--", ...scopePaths], { allowFail: true });
+    aborted = `quality gate rejected article ${i}`;
+    break;
+  }
+
+  let slug = `article-${i}`;
+  try { slug = JSON.parse(readFileSync(join(BOT_DIR, ".generated.json"), "utf8"))[0].slug; } catch {}
+
+  git(["add", "--", ...scopePaths]);
+  git(["commit", "-m", `content: ${slug}`]);
+  drafted.push(slug);
+  console.log(`  committed: ${slug}`);
+}
+
 git(["checkout", startRef]);
 
-const body = existsSync(join(BOT_DIR, ".pr-body.md")) ? readFileSync(join(BOT_DIR, ".pr-body.md"), "utf8") : "";
+if (drafted.length === 0) {
+  git(["branch", "-D", branch], { allowFail: true });
+  console.error(`\nNo articles drafted${aborted ? ` — ${aborted}` : ""}. Branch removed.`);
+  process.exit(1);
+}
+
 console.log("\n────────────────────────────────────────");
-console.log(body.trim());
+console.log(`${drafted.length} draft(s) on ${branch}, one commit each:`);
+drafted.forEach((s, i) => console.log(`  ${i + 1}. ${s}`));
+if (aborted) console.log(`\n⚠ stopped early — ${aborted}`);
 console.log("────────────────────────────────────────");
-console.log(`\n✅ Drafts committed to branch:  ${branch}`);
-console.log(`\nReview & publish:`);
-console.log(`   git checkout ${branch}          # look at the drafts`);
-console.log(`   (open blog/*.html or run your dev server)`);
-console.log(`   git checkout ${startRef} && git merge ${branch} && git push   # PUBLISH`);
-console.log(`\nReject:  git branch -D ${branch}   # topics stay queued for next run`);
-console.log(`Optional preview: git push -u origin ${branch}  → Vercel builds a preview + open a PR\n`);
+console.log(`\nReview:   git checkout ${branch}`);
+console.log(`Approve:  powershell -ExecutionPolicy Bypass -File seo-bot\\approve.ps1 ${branch}`);
+console.log(`          → one article then publishes each Mon/Wed/Fri at 09:00.`);
+console.log(`Reject:   git branch -D ${branch}   (topics return to the queue)\n`);

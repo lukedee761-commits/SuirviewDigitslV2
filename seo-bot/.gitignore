@@ -3,3 +3,4 @@ package-lock.json
 .generated.json
 .pr-body.md
 run.log
+.approved
