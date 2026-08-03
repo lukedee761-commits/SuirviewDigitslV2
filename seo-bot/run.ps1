@@ -1,4 +1,4 @@
-# Weekly SEO drafts — uses your Claude subscription (no API key, no cost).
+# Weekly SEO drafts - uses your Claude subscription (no API key, no cost).
 # Registered in Task Scheduler as "SuirView SEO drafts" (Sundays 09:00).
 # Drafts COUNT articles to a review branch. NOTHING publishes until you merge.
 $ErrorActionPreference = "Continue"

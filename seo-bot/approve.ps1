@@ -8,4 +8,4 @@ if ($LASTEXITCODE -ne 0) { Write-Error "Branch '$Branch' does not exist."; exit 
 $n = (& git -C $repo rev-list --count "main..$Branch")
 Set-Content -Path (Join-Path $repo "seo-bot\.approved") -Value $Branch -Encoding utf8 -NoNewline
 Write-Output "Approved: $Branch"
-Write-Output "$n article(s) queued — one publishes each Mon/Wed/Fri at 09:00."
+Write-Output "$n article(s) queued - one publishes each Mon/Wed/Fri at 09:00."
