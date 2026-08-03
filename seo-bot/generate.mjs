@@ -7,7 +7,7 @@
 //
 //   Env: CLIENT (default suirviewdigital), COUNT (default 3),
 //        CLAUDE_BIN (default "claude"), MODEL (API mode only, default claude-opus-4-8)
-import { readFileSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -74,9 +74,29 @@ function metaDescriptionOf(html) {
 }
 function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
 
+// Articles the new post is allowed to link to. Sourced from files that ACTUALLY
+// exist on disk (not from the calendar), so the model can never be handed a slug
+// that would produce a broken internal link. Titles come from the calendar where
+// known, otherwise from the file's own <h1>.
+function siblingArticles(excludeSlug) {
+  return readdirSync(blogDir)
+    .filter((f) => f.endsWith(".html") && f !== "index.html" && f !== `${excludeSlug}.html`)
+    .map((f) => {
+      const slug = f.replace(/\.html$/, "");
+      const row = calendar.find((c) => c.slug === slug);
+      let title = row?.title;
+      if (!title) {
+        const m = readFileSync(join(blogDir, f), "utf8").match(/<h1[^>]*>([\s\S]*?)<\/h1>/i);
+        title = m ? m[1].replace(/<[^>]*>/g, "").trim() : slug;
+      }
+      return { slug, title, cluster: row?.cluster || null };
+    });
+}
+
 async function writeArticle(item) {
   const canonicalUrl = `${profile.siteUrl}/${profile.blogPath}/${item.slug}.html`;
-  const payload = { profile, item, slug: item.slug, canonicalUrl, dateISO, dateHuman };
+  const siblings = siblingArticles(item.slug);
+  const payload = { profile, item, siblings, slug: item.slug, canonicalUrl, dateISO, dateHuman };
   const userContent = "Write the article for this payload:\n\n" + JSON.stringify(payload, null, 2);
   const html = stripFences(await callModel(systemPrompt, userContent));
   if (!/^<!doctype html/i.test(html)) throw new Error(`model did not return an HTML document for ${item.slug}`);

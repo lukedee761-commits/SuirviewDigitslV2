@@ -27,11 +27,28 @@
     "Central Statistics Office (CSO) Ireland — cso.ie",
     "Local Enterprise Office / Trading Online Voucher — localenterprise.ie",
     "Google Search Central — developers.google.com/search",
+    "Google Business Profile Help — support.google.com/business",
+    "Data Protection Commission (Ireland) — dataprotection.ie",
+    "EUR-Lex, official text of the GDPR (Regulation (EU) 2016/679) — eur-lex.europa.eu",
     "Enterprise Ireland — enterprise-ireland.com"
   ],
   "doNotSay": [
     "No fabricated statistics or invented case-study numbers",
     "Public 'from' prices are fine to mention (Starter from €349, Care from €50/mo) — but never present an exact custom project price as final; exact quotes are confirmed on a quick call",
-    "No guarantees of #1 rankings or specific traffic numbers"
-  ]
+    "No guarantees of #1 rankings or specific traffic numbers",
+    "Never state or imply that incentivising, buying or writing reviews is acceptable — it breaches Google's policies",
+    "Never present llms.txt, or any emerging convention, as a confirmed ranking factor",
+    "Never invent GDPR enforcement figures, fine amounts, or case outcomes"
+  ],
+  "legalContentRules": {
+    "appliesToClusters": ["Data protection & AI"],
+    "rules": [
+      "This is legal INFORMATION, not legal advice. Every article in this cluster must say so plainly and recommend professional advice for the reader's own situation.",
+      "Cite the actual instrument by name and article number — e.g. 'Article 30 of the GDPR (Regulation (EU) 2016/679)' — and link to EUR-Lex or the Data Protection Commission.",
+      "Never paraphrase a legal obligation in a way that makes it sound weaker or narrower than the text. When in doubt, quote the condition.",
+      "The Article 30(5) derogation for organisations with fewer than 250 employees does NOT apply where the processing is likely to result in a risk to the rights and freedoms of data subjects, where it is not occasional, or where it involves special categories of data (Article 9) or data on criminal convictions and offences (Article 10). Never present the 250-employee figure as a blanket exemption.",
+      "Ireland's supervisory authority is the Data Protection Commission (dataprotection.ie). Do not name any other Irish regulator for data protection.",
+      "If you are not confident a legal detail is accurate, leave it out and make the point qualitatively. Never guess at an article number, a deadline, or a penalty."
+    ]
+  }
 }

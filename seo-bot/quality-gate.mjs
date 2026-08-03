@@ -53,6 +53,20 @@ for (const g of generated) {
   if (!/class="stat"/.test(html)) problems.push("no attributed statistic");
   if (!/href="tel:/.test(html)) problems.push("no phone CTA");
   if (!/href="\.\.\/index\.html/.test(html)) problems.push("no internal link to the site");
+  if (!/<link rel="canonical"/.test(html)) problems.push("no canonical tag");
+  if (!/property="og:image"/.test(html)) problems.push("no og:image (blank social preview)");
+
+  // Cross-links: must link to real siblings, and every target must actually exist.
+  // Catches the model inventing a plausible-looking filename, which would ship a
+  // broken internal link — worse than having no link at all.
+  const siblingHrefs = [...html.matchAll(/href="([a-z0-9-]+\.html)"/gi)]
+    .map((m) => m[1])
+    .filter((h) => h !== "index.html" && h !== `${g.slug}.html`);
+  const uniqueSiblings = [...new Set(siblingHrefs)];
+  const brokenLinks = uniqueSiblings.filter((h) => !existsSync(join(blogDir, h)));
+  if (brokenLinks.length) problems.push(`BROKEN internal link(s): ${brokenLinks.join(", ")}`);
+  if (uniqueSiblings.length < 2) problems.push(`only ${uniqueSiblings.length} sibling link(s) — needs at least 2`);
+
   const wc = wordCount(html);
   if (wc < 600 || wc > 2200) problems.push(`word count ${wc} out of range (600–2200)`);
 

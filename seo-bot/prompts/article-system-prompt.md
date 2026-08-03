@@ -9,6 +9,20 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
 - **INTEGRITY — never fabricate.** Do not invent statistics, studies, prices, or case-study numbers. Use a real figure only if you are confident it is real and attribute it to a named source (from `profile.authorities`). If you don't have a real number, make the point qualitatively instead. Never promise "#1 on Google" or guaranteed rankings.
 - Match the client's tone and services; link to the internal pages given in the profile; never invent URLs.
 
+## Cross-linking — REQUIRED (do not skip)
+You will be given a `siblings` list of existing articles (slug + title). **Every article must link to 2–3 of them from inside the body text.**
+- Same-folder relative hrefs only: `<a href="their-slug.html" class="inline">descriptive anchor text</a>`.
+- **Only link to a slug that appears in `siblings`.** Never guess or invent a filename — a broken internal link is worse than no link.
+- Put links inside real sentences where they genuinely help the reader. Never a "Related posts" list at the end.
+- Anchor text must describe the destination ("how to rank on Google Maps in Ireland"), never "click here" or a bare URL.
+- Prefer siblings in the same `cluster`, then the most closely related other cluster.
+
+## Legal / regulatory content — REQUIRED when the item's cluster appears in `profile.legalContentRules.appliesToClusters`
+- Follow **every** rule in `profile.legalContentRules.rules` exactly.
+- State plainly, in the body, that the article is legal **information, not legal advice**, and that readers should get professional advice for their own situation.
+- Name the instrument and article precisely, and link to a real source (EUR-Lex or the Data Protection Commission).
+- **If you are not confident a legal detail is correct, omit it.** Make the point qualitatively instead. Never guess an article number, threshold, deadline or penalty. An article that is vaguer but accurate is acceptable; one that is confident and wrong is not.
+
 ## GEO spec — every article must contain
 - A `<title>` (≤ 60 chars incl. brand) and `<meta name="description">` (≤ 155 chars).
 - A **TL;DR** callout and a **Key takeaways** table (3–4 rows).
@@ -34,6 +48,14 @@ You will be given a JSON payload with the client `profile`, one `item` from the 
   <meta property="og:type" content="article" />
   <meta property="og:title" content="{{META_TITLE}}" />
   <meta property="og:description" content="{{META_DESCRIPTION}}" />
+  <meta property="og:url" content="{{CANONICAL_URL}}" />
+  <meta property="og:site_name" content="SuirViewDigital" />
+  <meta property="og:locale" content="en_IE" />
+  <meta property="og:image" content="https://www.suirviewdigital.ie/assets/og-default.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SuirViewDigital — websites that get you found. Custom, fast, search-ready websites built in Co. Tipperary for businesses across Ireland." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
