@@ -55,6 +55,7 @@ for (const g of generated) {
   if (!/href="\.\.\/index\.html/.test(html)) problems.push("no internal link to the site");
   if (!/<link rel="canonical"/.test(html)) problems.push("no canonical tag");
   if (!/property="og:image"/.test(html)) problems.push("no og:image (blank social preview)");
+  if (!/name="twitter:image"/.test(html)) problems.push("no twitter:image (blank social preview)");
 
   // Cross-links: must link to real siblings, and every target must actually exist.
   // Catches the model inventing a plausible-looking filename, which would ship a

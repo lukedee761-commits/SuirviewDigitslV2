@@ -56,6 +56,10 @@ You will be given a `siblings` list of existing articles (slug + title). **Every
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="SuirViewDigital — websites that get you found. Custom, fast, search-ready websites built in Co. Tipperary for businesses across Ireland." />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{META_TITLE}}" />
+  <meta name="twitter:description" content="{{META_DESCRIPTION}}" />
+  <meta name="twitter:image" content="https://www.suirviewdigital.ie/assets/og-default.png" />
+  <meta name="twitter:image:alt" content="SuirViewDigital — websites that get you found. Custom, fast, search-ready websites built in Co. Tipperary for businesses across Ireland." />
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
