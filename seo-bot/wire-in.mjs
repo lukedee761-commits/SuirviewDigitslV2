@@ -43,9 +43,25 @@ const cluster = row.cluster || "Article";
 const dateISO = new Date().toISOString().slice(0, 10);
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-// --- Journal index card (newest first) ---
 const indexPath = join(blogDir, "index.html");
 let index = readFileSync(indexPath, "utf8");
+
+// --- normalise the asset version to whatever the site is currently on ---
+// The writer can't know the current cache-bust token, and a stale one serves
+// old CSS. blog/index.html is the source of truth.
+const verMatch = index.match(/styles\.css\?v=([0-9a-z]+)/i);
+if (verMatch) {
+  const want = verMatch[1];
+  const fixed = html
+    .replace(/(styles\.css\?v=)[0-9a-z]+/gi, `$1${want}`)
+    .replace(/(blog\.css\?v=)[0-9a-z]+/gi, `$1${want}`);
+  if (fixed !== html) {
+    writeFileSync(articlePath, fixed, "utf8");
+    console.log(`  assets: version bumped to ?v=${want}`);
+  }
+}
+
+// --- Journal index card (newest first) ---
 if (index.includes(`href="${slug}.html"`)) {
   console.log(`  index: already lists ${slug} — left alone`);
 } else {
@@ -61,6 +77,25 @@ if (index.includes(`href="${slug}.html"`)) {
   if (index === before) { console.error("Could not find <div class=\"blog-grid\"> in blog/index.html."); process.exit(1); }
   writeFileSync(indexPath, index, "utf8");
   console.log(`  index: card added`);
+}
+
+// --- Blog JSON-LD blogPost list on the Journal index ---
+// Without this the Blog schema silently drifts out of sync with the articles.
+const articleUrl = `${profile.siteUrl}/${profile.blogPath}/${slug}.html`;
+index = readFileSync(indexPath, "utf8");
+if (index.includes(`"url": "${articleUrl}"`)) {
+  console.log(`  blog schema: already lists ${slug} — left alone`);
+} else {
+  const entry = `      { "@type": "BlogPosting", "headline": ${JSON.stringify(title)}, "url": "${articleUrl}", "datePublished": "${dateISO}" },`;
+  const before = index;
+  // CRLF-tolerant: these files are checked out with Windows line endings.
+  index = index.replace(/("blogPost"\s*:\s*\[[ \t]*\r?\n)/, `$1${entry}\r\n`);
+  if (index === before) {
+    console.log(`  blog schema: WARNING — could not find the "blogPost" array; add ${slug} by hand`);
+  } else {
+    writeFileSync(indexPath, index, "utf8");
+    console.log(`  blog schema: entry added`);
+  }
 }
 
 // --- sitemap entry ---

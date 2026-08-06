@@ -41,7 +41,7 @@
     "Never invent GDPR enforcement figures, fine amounts, or case outcomes"
   ],
   "legalContentRules": {
-    "appliesToClusters": ["Data protection & AI"],
+    "appliesToClusters": ["Data protection & AI", "Irish rules & compliance", "Trades & trust", "Grants & money"],
     "rules": [
       "This is legal INFORMATION, not legal advice. Every article in this cluster must say so plainly and recommend professional advice for the reader's own situation.",
       "Cite the actual instrument by name and article number — e.g. 'Article 30 of the GDPR (Regulation (EU) 2016/679)' — and link to EUR-Lex or the Data Protection Commission.",
