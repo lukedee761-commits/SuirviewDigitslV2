@@ -49,6 +49,28 @@
   // ===== Scroll reveals (resilient handler — no IntersectionObserver) =====
   var reveals = [].slice.call(document.querySelectorAll('.reveal'));
 
+
+  /* ===== "What's included" on the plan cards (phones) =====
+     The bullets are hidden by CSS under 700px so four tiers fit a 2x2. This
+     opens one card at a time; closing the others keeps the grid from growing
+     into a wall of text. */
+  document.querySelectorAll('.plan-more').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var card = btn.closest('.plan');
+      var open = card.classList.contains('is-open');
+      var grid = card.parentElement;
+      grid.querySelectorAll('.plan.is-open').forEach(function (other) {
+        if (other !== card) {
+          other.classList.remove('is-open');
+          var b = other.querySelector('.plan-more');
+          if (b) b.setAttribute('aria-expanded', 'false');
+        }
+      });
+      card.classList.toggle('is-open', !open);
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+  });
+
   // ===== Scroll spy for the rail =====
   var spyLinks = [].slice.call(document.querySelectorAll('.rail-index a'));
   var spySections = [].slice.call(document.querySelectorAll('[data-spy-target]'));

@@ -239,20 +239,28 @@ main, .foot { position: relative; z-index: 1; }
   font-size: clamp(1.35rem, min(4.6vw, 3.9vh), 2.6rem);
   line-height: 1.15;
   padding: clamp(5px, 0.7vh, 8px) 0;
+  /* This is the only navigation on mobile — the corner "Book a call" pill is
+     display:none under 900px — so these have to clear the 44px touch floor.
+     Padding alone left them at 37px. */
+  min-height: 44px;
   color: var(--cream); display: flex; align-items: baseline; gap: 18px;
   transition: color 0.3s var(--ease), transform 0.35s var(--ease);
 }
 .overlay-nav a:hover { color: var(--gold-light); transform: translateX(12px); }
 .overlay-nav .mono { font-style: normal; color: var(--slate-dim); font-size: 0.85rem; }
 .overlay-foot { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 48px; }
-.overlay-foot a { font-family: var(--mono); font-size: 0.85rem; color: var(--slate); }
+/* Phone and email inside the mobile menu — same 44px floor as the nav above. */
+.overlay-foot a { font-family: var(--mono); font-size: 0.85rem; color: var(--slate); display: inline-flex; align-items: center; min-height: 44px; }
 .overlay-foot a:hover { color: var(--gold-light); }
 /* Short windows: below ~620px the padding and the clamp floor are most of the
    height budget, so trimming them buys more than shrinking the text again.
    Top padding still has to clear the fixed close button (18px + ~48px). */
 @media (max-height: 620px) {
   .overlay { padding-top: clamp(70px, 10vh, 84px); padding-bottom: 24px; }
-  .overlay-nav a { font-size: clamp(1.05rem, min(4.6vw, 3.9vh), 2.6rem); padding: 4px 0; }
+  /* Ten items at 44px will not fit a 620px-tall window alongside the close
+     button and the overlay footer, so the floor is relaxed here rather than
+     letting the menu overflow and strand the last items. */
+  .overlay-nav a { font-size: clamp(1.05rem, min(4.6vw, 3.9vh), 2.6rem); padding: 4px 0; min-height: 36px; }
   .overlay-foot { margin-top: 24px; }
 }
 
@@ -435,7 +443,10 @@ main, .foot { position: relative; z-index: 1; }
 .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(36px, 5vw, 70px); align-items: start; }
 .contact-lead { color: var(--slate); font-size: 1.1rem; max-width: 400px; margin-bottom: 28px; }
 .contact-list { list-style: none; display: grid; gap: 14px; margin-top: 34px; }
+/* tel: and mailto: — the two links most likely to be tapped on a phone, and
+   they were 18px tall. */
 .contact-list a, .contact-list span { color: var(--slate); font-size: 0.85rem; }
+.contact-list a { display: inline-flex; align-items: center; min-height: 44px; }
 .contact-list a:hover { color: var(--gold-light); }
 
 .form {
@@ -464,11 +475,13 @@ main, .foot { position: relative; z-index: 1; }
   padding: 34px var(--gutter) 34px calc(var(--rail-w) + var(--gutter));
   border-top: 1px solid var(--line-soft); color: var(--slate-dim);
 }
+/* 44px touch floor on the footer links too — they were 18–22px tall. */
+.foot a { display: inline-flex; align-items: center; min-height: 44px; }
 .foot a:hover { color: var(--gold-light); }
 .foot-social { display: flex; align-items: center; gap: 12px; }
 .foot-social a {
   display: flex; align-items: center; justify-content: center;
-  width: 36px; height: 36px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   border: 1px solid var(--line-soft); color: var(--slate-dim);
   transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background-color 0.3s var(--ease);
 }
@@ -833,7 +846,8 @@ main { padding-top: 68px; }
 .chat-input button svg { width: 18px; height: 18px; fill: none; stroke: #1a1408; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .plan-from { font-family: var(--mono); font-size: .66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--slate-dim); display: block; margin-bottom: 4px; }
 .plan-desc { color: var(--slate); font-size: .9rem; line-height: 1.55; margin: 12px 0 2px; }
-.tier-flag { font-family: var(--mono); font-size: .56rem; letter-spacing: 1.2px; text-transform: uppercase; margin-left: 8px; padding: 3px 8px; border-radius: 999px; background: rgba(201, 169, 106, 0.14); border: 1px solid var(--line); color: var(--gold-light); white-space: nowrap; vertical-align: middle; }
+/* .56rem rendered at 8.96px — below any sensible legibility floor. */
+.tier-flag { font-family: var(--mono); font-size: .7rem; letter-spacing: 1px; text-transform: uppercase; margin-left: 8px; padding: 3px 8px; border-radius: 999px; background: rgba(201, 169, 106, 0.14); border: 1px solid var(--line); color: var(--gold-light); white-space: nowrap; vertical-align: middle; }
 .subhead { max-width: 760px; margin: clamp(52px, 7vh, 84px) 0 22px; }
 .subhead h3 { font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--cream); margin-top: 6px; }
 .subhead p { color: var(--slate); margin-top: 8px; max-width: 620px; }
@@ -843,15 +857,79 @@ main { padding-top: 68px; }
 @media (max-width: 980px) {
   .tier-grid { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow-x: visible; scroll-snap-type: none; padding-bottom: 0; }
 }
+/* Phones: four tiers as a 2x2 so the prices can be compared at a glance.
+   The bullets have to come out of the default view for this to work — six of
+   them are 262px of a 479px card, and halving the column width would wrap them
+   to four lines each and make the card TALLER than the stacked version. They
+   move behind "What's included" instead. */
 @media (max-width: 700px) {
-  .tier-grid { grid-template-columns: minmax(0, 1fr); }
-  /* Badge + price share the top row so each card stays short enough to read at a glance */
-  .tier-grid .plan { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; column-gap: 16px; padding: 22px 20px; }
-  .tier-grid .plan-badge { grid-area: 1 / 1; margin-bottom: 0; align-self: start; }
+  .tier-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .tier-grid .plan { display: flex; flex-direction: column; padding: 16px 14px; }
+  .tier-grid .plan-badge { margin-bottom: 6px; font-size: .6rem; letter-spacing: 1.4px; }
   .tier-grid .plan-badge .tier-flag { margin-left: 0; }
-  .tier-grid .plan-from { grid-area: 1 / 2; text-align: right; margin-bottom: 0; align-self: start; }
-  .tier-grid .plan-price { grid-area: 2 / 2; text-align: right; }
-  .tier-grid .plan-desc { grid-area: 2 / 1; margin: 0; }
-  .tier-grid .plan ul { grid-column: 1 / -1; margin-top: 18px; gap: 10px; }
-  .tier-grid .plan .pill { grid-column: 1 / -1; margin-top: 18px; }
+  .tier-grid .plan-from { margin-bottom: 2px; font-size: .58rem; }
+  .tier-grid .plan-price { font-size: 1.6rem; }
+  /* Clamped so an uneven sentence can't set the height of all four cells */
+  .tier-grid .plan-desc {
+    margin: 6px 0 0; font-size: .84rem; line-height: 1.4;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden;
+  }
+  .tier-grid .plan .pill { margin-top: 12px; width: 100%; text-align: center; padding: 12px 10px; font-size: .74rem; }
+
+  /* Care ladder 3-across. Cells land at ~106px, so everything inside has to be
+     short: the description comes out (it needs a sentence's width to read) and
+     the detail stays behind the same "What's included" tap. */
+  /* `dense` matters: an open card takes a full row, and without it the two
+     closed cards strand themselves one per row around the hole. */
+  .ladder-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; grid-auto-flow: row dense; }
+  .ladder-grid .plan { padding: 14px 9px; text-align: center; }
+  .ladder-grid .plan-badge { margin-bottom: 6px; font-size: .55rem; letter-spacing: .8px; }
+  /* €149/mo will not fit 109px on one line, and .plan-price is nowrap — so the
+     unit drops beneath the figure instead of overflowing the cell. */
+  .ladder-grid .plan-price { font-size: 1.24rem; white-space: normal; }
+  .ladder-grid .plan-price small { display: block; font-size: .6rem; margin-top: 1px; }
+  .ladder-grid .plan-desc { display: none; }
+  /* "What's included" overflows at this width; the shorter label is set in the
+     ::after so the desktop button keeps its full wording. */
+  .ladder-grid .plan-more { font-size: 0; justify-content: center; gap: 4px; margin-top: 8px; padding-top: 2px; }
+  .ladder-grid .plan-more::after {
+    content: "Included"; font-size: 11px; letter-spacing: .05em;
+  }
+  /* "Best fit for most" cannot be set legibly in 91px of usable width. The card
+     keeps the signal as a gold top edge rather than shrinking the words. */
+  .ladder-grid .tier-flag { display: none; }
+  .ladder-grid .plan-featured { border-top: 2px solid var(--gold); }
+  /* The bullets need the full row width, not a 106px column */
+  .ladder-grid .plan.is-open { grid-column: 1 / -1; }
+  .ladder-grid .plan.is-open .plan-desc { display: block; margin: 6px 0 0; font-size: .84rem; }
+  .ladder-grid .plan.is-open .plan-incl { text-align: left; }
+}
+
+/* --- "What's included" disclosure (phones only; the bullets show outright on
+   anything wider, where there is room for them) --- */
+.plan-more { display: none; }
+.plan-chev {
+  width: 9px; height: 9px; flex: 0 0 9px;
+  border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg); transition: transform .3s var(--ease);
+}
+@media (max-width: 700px) {
+  .plan-more {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    width: 100%; min-height: 44px; margin-top: 10px; padding: 0;
+    background: none; border: 0; border-top: 1px solid var(--line);
+    color: var(--gold-light); cursor: pointer;
+    font-family: var(--mono); font-size: .66rem; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .plan-incl {
+    max-height: 0; opacity: 0; visibility: hidden; overflow: hidden;
+    transition: max-height .45s var(--ease), opacity .3s var(--ease), visibility 0s .45s;
+  }
+  .plan.is-open .plan-incl {
+    max-height: 460px; opacity: 1; visibility: visible;
+    transition: max-height .45s var(--ease), opacity .3s var(--ease), visibility 0s;
+  }
+  .plan.is-open .plan-chev { transform: translateY(2px) rotate(225deg); }
+  .plan ul { margin-top: 12px; gap: 9px; }
+  .plan li { font-size: .85rem; line-height: 1.45; }
 }
