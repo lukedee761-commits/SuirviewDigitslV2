@@ -4,33 +4,9 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // ===== Cal.com "Book a call" popup (same account as v1) =====
-  var CAL_LINK = 'luke-stapleton-gffimi';
-  var CAL_NAMESPACE = 'intro-call';
-  (function (C, A, L) {
-    var p = function (a, ar) { a.q.push(ar); };
-    var d = C.document;
-    C.Cal = C.Cal || function () {
-      var cal = C.Cal, ar = arguments;
-      if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement('script')).src = A; cal.loaded = true; }
-      if (ar[0] === L) {
-        var api = function () { p(api, arguments); };
-        var namespace = ar[1];
-        api.q = api.q || [];
-        if (typeof namespace === 'string') { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ['initNamespace', namespace]); }
-        else { p(cal, ar); }
-        return;
-      }
-      p(cal, ar);
-    };
-  })(window, 'https://app.cal.com/embed/embed.js', 'init');
-  Cal('init', CAL_NAMESPACE, { origin: 'https://cal.com' });
-  Cal.ns[CAL_NAMESPACE]('ui', { hideEventTypeDetails: false, layout: 'month_view' });
-  document.querySelectorAll('.book-call').forEach(function (btn) {
-    btn.setAttribute('data-cal-namespace', CAL_NAMESPACE);
-    btn.setAttribute('data-cal-link', CAL_LINK);
-    btn.setAttribute('data-cal-config', '{"layout":"month_view"}');
-  });
+  /* Cal.com booking removed — the site now routes every CTA to the
+     five-question form. Nothing carried .book-call, so the embed was
+     fetching app.cal.com on each load to wire up nothing. */
 
   // ===== Preloader curtain → hero choreography =====
   var preloader = document.querySelector('.preloader');
@@ -365,7 +341,7 @@
     if (document.querySelector(hash)) window.location.hash = hash;
     else window.location.href = 'index.html' + hash;
   }
-  function bookCall() { var b = document.querySelector('.book-call'); if (b) b.click(); }
+  function bookCall() { goTo('#contact'); }
 
   var TOPICS = {
     build: {
@@ -384,7 +360,7 @@
       chip: 'How long does it take?',
       keys: ['long', 'time', 'quick', 'fast', 'when', 'turnaround', 'ready'],
       answer: 'Usually about a week from our first call to going live — sometimes faster. You’ll see a live preview early, so there are no surprises.',
-      actions: [{ label: 'Book a quick call', act: bookCall }]
+      actions: [{ label: 'Send the 5 questions', act: bookCall }]
     },
     seo: {
       chip: 'SEO & AI search?',
@@ -402,7 +378,7 @@
       chip: 'Get a quote',
       keys: ['contact', 'talk', 'human', 'enquire', 'email', 'get in touch', 'speak'],
       answer: 'Perfect — tell us a little about your business and we’ll come back fast with an exact price. You can also book a quick call.',
-      actions: [{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Book a call', act: bookCall }]
+      actions: [{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Answer 5 questions', act: bookCall }]
     }
   };
   var DEFAULT_CHIPS = ['build', 'price', 'time', 'seo', 'quote'];
@@ -487,7 +463,7 @@
       if (key) { addMsg(TOPICS[key].answer, 'bot'); addActions(TOPICS[key].actions); }
       else {
         addMsg('Good question! The quickest way is a proper answer from us — want to get a quote or book a quick call?', 'bot');
-        addActions([{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Book a call', act: bookCall }]);
+        addActions([{ label: 'Get a quote', act: function () { goTo('#contact'); } }, { label: 'Answer 5 questions', act: bookCall }]);
       }
     }, 240);
   });

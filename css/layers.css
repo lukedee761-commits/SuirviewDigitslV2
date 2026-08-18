@@ -133,12 +133,18 @@
   max-height:0;opacity:0;visibility:hidden;overflow:hidden;
   transition:max-height .5s var(--lyr-ease),opacity .3s var(--lyr-ease),visibility 0s .5s;
 }
-/* :focus-within matters here — the Read lyr-more link inside is unreachable while
-   collapsed, so tabbing to the always-visible lyr name is what opens it. */
-.lyr:hover .lyr-detail,
-.lyr:focus-within .lyr-detail{
-  max-height:340px;opacity:1;visibility:visible;
-  transition:max-height .5s var(--lyr-ease),opacity .38s var(--lyr-ease) .06s,visibility 0s;
+/* Pointer-only. :focus-within matters here — the Read more link inside is
+   unreachable while collapsed, so tabbing to the layer name is what opens it.
+   MUST stay behind (hover:hover): on touch the toggle button keeps focus after
+   a tap, so :focus-within held the panel open and the second tap appeared to
+   do nothing — the class came off and aria-expanded flipped, but this rule was
+   still matching. Touch is driven solely by .is-open. */
+@media (hover:hover){
+  .lyr:hover .lyr-detail,
+  .lyr:focus-within .lyr-detail{
+    max-height:340px;opacity:1;visibility:visible;
+    transition:max-height .5s var(--lyr-ease),opacity .38s var(--lyr-ease) .06s,visibility 0s;
+  }
 }
 /* No hover to give: show everything rather than hiding it behind a gesture
    these visitors cannot make. */
@@ -160,12 +166,19 @@
   width:44px;height:44px;flex:0 0 44px;
   background:none;border:0;cursor:pointer;color:var(--lyr-muted);
 }
+/* An SVG path, not a rotated border box. 1.5px of border resolved to 1px at
+   dpr 2 — a hairline diagonal that aliases badly on a phone — and the old
+   translateY hack made the arrow hop 5px as it flipped, because a rotated
+   border-square is optically centred in neither state. A path is centred in
+   its own viewBox, so opening is a clean 180deg with nothing to compensate. */
 .lyr-chev{
-  width:11px;height:11px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;
-  transform:translateY(-3px) rotate(45deg);transition:transform .35s var(--lyr-ease);
+  width:14px;height:14px;flex:0 0 14px;
+  fill:none;stroke:currentColor;stroke-width:2.2;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .35s var(--lyr-ease);
 }
 .lyr.is-open .lyr-toggle{color:var(--lyr-gold)}
-.lyr.is-open .lyr-chev{transform:translateY(2px) rotate(225deg)}
+.lyr.is-open .lyr-chev{transform:rotate(180deg)}
 .sr-only{
   position:absolute;width:1px;height:1px;padding:0;margin:-1px;
   overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;

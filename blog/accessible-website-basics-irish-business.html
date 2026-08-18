@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Accessibility Basics | SuirViewDigital</title>
+  <meta name="description" content="Five practical accessibility basics for a small Irish business website — contrast, keyboard navigation, alt text, form labels and resizable text." />
+  <meta name="theme-color" content="#0A0B0F" />
+  <link rel="canonical" href="https://www.suirviewdigital.ie/blog/accessible-website-basics-irish-business.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Website Accessibility Basics | SuirViewDigital" />
+  <meta property="og:description" content="Five practical accessibility basics for a small Irish business website — contrast, keyboard navigation, alt text, form labels and resizable text." />
+  <meta property="og:url" content="https://www.suirviewdigital.ie/blog/accessible-website-basics-irish-business.html" />
+  <meta property="og:site_name" content="SuirViewDigital" />
+  <meta property="og:locale" content="en_IE" />
+  <meta property="og:image" content="https://www.suirviewdigital.ie/assets/og-default.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="SuirViewDigital — websites that get you found. Custom, fast, search-ready websites built in Co. Tipperary for businesses across Ireland." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Website Accessibility Basics | SuirViewDigital" />
+  <meta name="twitter:description" content="Five practical accessibility basics for a small Irish business website — contrast, keyboard navigation, alt text, form labels and resizable text." />
+  <meta name="twitter:image" content="https://www.suirviewdigital.ie/assets/og-default.png" />
+  <meta name="twitter:image:alt" content="SuirViewDigital — websites that get you found. Custom, fast, search-ready websites built in Co. Tipperary for businesses across Ireland." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css?v=20260731a" />
+  <link rel="stylesheet" href="blog.css?v=20260731a" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Making your website work for everyone (even if you're exempt)",
+    "description": "Five practical accessibility basics for a small Irish business website — contrast, keyboard navigation, alt text, form labels and resizable text.",
+    "author": { "@type": "Person", "name": "Luke Stapleton" },
+    "publisher": { "@type": "Organization", "name": "SuirViewDigital", "url": "https://www.suirviewdigital.ie/" },
+    "datePublished": "2026-08-17",
+    "inLanguage": "en-IE",
+    "mainEntityOfPage": "https://www.suirviewdigital.ie/blog/accessible-website-basics-irish-business.html"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "Do I legally have to make my website accessible?", "acceptedAnswer": { "@type": "Answer", "text": "Most small Irish businesses providing a service are exempt from the European Accessibility Act as a microenterprise. This article is about doing it anyway because it makes for a better site, not because it's a legal requirement for most readers." } },
+      { "@type": "Question", "name": "What's the single easiest accessibility fix to start with?", "acceptedAnswer": { "@type": "Answer", "text": "Colour contrast and alt text on images are usually the quickest wins — both can often be checked and fixed on an existing site in an afternoon, without touching the layout or design." } },
+      { "@type": "Question", "name": "Will making my site accessible slow it down or make it look worse?", "acceptedAnswer": { "@type": "Answer", "text": "No. Good contrast, clear labels and sensible text sizing are visual design decisions, not technical trade-offs — a well-designed accessible site typically looks cleaner, not more cluttered." } }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="contours" aria-hidden="true">
+    <svg class="contour-layer contour-a" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice">
+      <g fill="none" stroke="#13233F" stroke-width="1.1">
+        <path d="M-50,620 C200,560 350,700 620,640 C880,585 1010,690 1450,610"/>
+        <path d="M-50,700 C220,645 380,790 660,724 C920,665 1050,780 1450,700"/>
+        <path d="M-50,180 C260,240 420,90 700,150 C960,205 1120,100 1450,170"/>
+      </g>
+    </svg>
+  </div>
+  <nav class="switch" aria-label="Primary">
+    <a class="switch-item" href="../about.html">About</a>
+    <a class="switch-item" href="../index.html">
+      <span class="sw-full">Website Development</span><span class="sw-abbr">Websites</span>
+    </a>
+    <a class="switch-item" href="../receptionist.html">
+      <span class="sw-full">24/7 Receptionist Agent</span><span class="sw-abbr">24/7 Receptionist</span>
+    </a>
+    <a class="switch-item is-active" href="index.html">Journal</a>
+    <a class="switch-item" href="../check.html"><span class="sw-full">Free Website Check</span><span class="sw-abbr">Check</span></a>
+  </nav>
+
+  <header class="blog-top">
+    <a class="brand" href="../index.html" aria-label="SuirViewDigital — home">
+      <svg viewBox="0 0 96 96" aria-hidden="true">
+        <defs>
+          <linearGradient id="blgm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E4C888"/><stop offset="1" stop-color="#A9884E"/></linearGradient>
+          <linearGradient id="blgb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3B82F6"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
+        </defs>
+        <rect x="2" y="2" width="92" height="92" rx="20" fill="none" stroke="url(#blgm)" stroke-width="2"/>
+        <g transform="translate(9.76,12.15) scale(0.78)"><path d="M46 28 C46 21.5 35 19.5 28.5 23.5 C21 28 22.5 36 31 39.5 C39.5 43 44.5 46.5 43 53.5 C41.5 60.5 30 63.5 23.5 59.5" fill="none" stroke="url(#blgm)" stroke-width="5.6" stroke-linecap="round"/>
+        <path d="M50 26 L61 60 L72 26" fill="none" stroke="url(#blgm)" stroke-width="6.0" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 71 C30 63 46 79 61 60 C69 50 76 44 84 40" fill="none" stroke="url(#blgb)" stroke-width="3.8" stroke-linecap="round" opacity="0.95"/></g>
+      </svg>
+      <b>SuirViewDigital</b>
+    </a>
+    <nav class="blog-nav">
+      <a href="index.html" class="hide-sm">Journal</a>
+      <a href="../index.html#services" class="hide-sm">Services</a>
+      <a href="../index.html#plans" class="hide-sm">Plans</a>
+      <a href="../index.html#contact" class="pill pill-gold" style="padding:9px 18px;font-size:0.82rem;">Get a quote</a>
+    </nav>
+  </header>
+  <main id="main">
+    <article class="post">
+      <p class="crumb"><a href="../index.html" class="inline">Home</a> / <a href="index.html" class="inline">Journal</a> / Irish rules & compliance</p>
+      <span class="eyebrow">Irish rules & compliance</span>
+      <h1>Making your website work for everyone (even if you're exempt)</h1>
+      <p class="post-meta">17 August 2026 · 6 min read · by Luke Stapleton</p>
+
+      <div class="tldr"><strong>TL;DR:</strong> Most small Irish businesses are exempt from the European Accessibility Act as microenterprises — but a handful of practical habits (contrast, keyboard navigation, alt text, form labels, resizable text) make a site genuinely easier to use for everyone, and none of them are difficult or expensive to get right.</div>
+
+      <table class="takeaways">
+        <thead><tr><th>Point</th><th>Detail</th></tr></thead>
+        <tbody>
+          <tr><td>Colour contrast</td><td>Text needs to stand out clearly from its background — light grey on white is the most common offender.</td></tr>
+          <tr><td>Keyboard & labels</td><td>A visitor should be able to tab through links and forms, and every input needs a real, visible label.</td></tr>
+          <tr><td>Alt text & sizing</td><td>Images need a short written description, and text should resize without breaking the layout.</td></tr>
+        </tbody>
+      </table>
+
+      <p><em>This article is general information, not legal advice. As covered in <a href="does-the-accessibility-act-apply-to-my-website.html" class="inline">does the European Accessibility Act apply to your website?</a>, the CCPC's guidance exempts microenterprises — <span class="stat">fewer than 10 people, turnover or balance sheet under €2 million</span> — providing a service, which covers most small Irish businesses. This piece is about doing it anyway, for its own sake.</em></p>
+
+      <h2>Why bother with accessibility if you're legally exempt?</h2>
+      <p>Because it's not really a separate job from building a good website — it's mostly the same job, described from a different angle. Clear contrast, sensible labels, and text that doesn't break when someone increases their browser's font size are the same choices that make a site easier to use for a customer half-reading on their phone in a queue, not just for someone using a screen reader. Treat it as part of ordinary good design rather than a compliance checklist, and it stops feeling like extra work.</p>
+
+      <h2>What is WCAG 2.1 AA, in plain terms?</h2>
+      <p>WCAG (the Web Content Accessibility Guidelines) is the internationally recognised standard for making web content usable by people with disabilities, and "AA" is the level most businesses and public bodies work towards — thorough without being extreme. You don't need to read the full standard to benefit from it. The handful of basics below cover most of what actually matters for a typical small-business site.</p>
+
+      <h2>Does colour contrast actually matter that much?</h2>
+      <p>Yes — it's usually the single biggest issue on small-business sites we review, and one of the easiest to fix. Light grey text on a white background, or pale gold on a dark navy, might look elegant on a designer's screen and be genuinely hard to read in bright sunlight or for anyone with reduced contrast sensitivity, which becomes more common with age. A simple test: if you have to squint or lean in to read your own body text, it needs more contrast, not less.</p>
+
+      <blockquote class="expert"><p>"Contrast is the one I flag most often when I look at a business's existing site. It's almost never intentional — it happens because a design looked fine on one screen, in one light, and nobody checked it anywhere else. It takes minutes to fix and it's one of the highest-impact changes you can make."</p><cite>— Luke Stapleton, SuirViewDigital</cite></blockquote>
+
+      <h2>Can visitors navigate your site without a mouse?</h2>
+      <p>Try it yourself: put the mouse aside and use only the Tab key to move through your homepage. Can you reach every link, button and form field, and can you always tell where you are? Some visitors navigate this way out of necessity, using a keyboard or a switch device rather than a mouse — but a site that fails this test often also has a menu that's fiddly to use on mobile, which is a much bigger everyday audience for most small businesses.</p>
+
+      <h2>What do alt text and form labels actually do?</h2>
+      <p>Alt text is a short written description attached to an image, read aloud by a screen reader when the image itself can't be seen — "exterior of the salon on Parnell Street" rather than nothing at all. A form label does something similar for an input field: it tells a visitor, and any assistive technology, exactly what's expected in that box, rather than leaving it to a placeholder that vanishes the moment someone starts typing. Both are quick to add properly and both quietly help everyone, not just visitors using assistive technology — a screen reader and a search engine are, in a rough sense, reading your page the same unglamorous way, so a page that's clearly described tends to be a page that's clearly understood.</p>
+
+      <h2>Does text need to resize without breaking the layout?</h2>
+      <p>Yes. Some visitors increase their browser's default text size, whether for comfort or necessity, and a well-built site should handle that gracefully — text growing, wrapping, and staying readable, rather than overlapping or spilling off the edge of the page. This is mostly a build-quality question rather than a design one, and it's the kind of thing that's easy to overlook until someone actually tries it. It's also one of the reasons a site is worth revisiting occasionally rather than left untouched for years — our piece on <a href="signs-your-website-needs-a-redesign.html" class="inline">the signs your website needs a redesign</a> covers a few more of the tell-tale signs it's time to look again.</p>
+
+      <h2>Where does the cost of fixing this actually sit?</h2>
+      <p>For an existing site, most of what's above is a few hours of focused work, not a rebuild — contrast and alt text especially. If you're planning a new build or a bigger redesign anyway, it costs nothing extra to bake these habits in from the start rather than retrofit them later. Our guide to <a href="how-much-does-a-website-cost-ireland.html" class="inline">what a website actually costs in Ireland</a> covers where that kind of work typically sits within a project, so there's no surprise about what's included.</p>
+
+      <section class="post-faq">
+        <h2>Frequently asked questions</h2>
+        <h3>Do I legally have to make my website accessible?</h3><p>Most small Irish businesses providing a service are exempt from the European Accessibility Act as a microenterprise. This article is about doing it anyway because it makes for a better site, not because it's a legal requirement for most readers.</p>
+        <h3>What's the single easiest accessibility fix to start with?</h3><p>Colour contrast and alt text on images are usually the quickest wins — both can often be checked and fixed on an existing site in an afternoon, without touching the layout or design.</p>
+        <h3>Will making my site accessible slow it down or make it look worse?</h3><p>No. Good contrast, clear labels and sensible text sizing are visual design decisions, not technical trade-offs — a well-designed accessible site typically looks cleaner, not more cluttered.</p>
+      </section>
+
+      <div class="cta-box">
+        <h2>Want a plain, honest look at your current site?</h2>
+        <p>We'll walk through what's working, what isn't, and what's worth fixing first — accessibility included.</p>
+        <a href="tel:+353851538421" class="pill pill-gold pill-lg">Call 085 153 8421</a>
+        <a href="../index.html#contact" class="pill pill-lg" style="border:1px solid var(--line);color:var(--cream);">Get a quote</a>
+      </div>
+    </article>
+  </main>
+  <footer class="foot" style="padding-left:clamp(20px,5vw,48px);">
+    <span class="mono">© <span id="yr"></span> SuirViewDigital</span>
+    <a class="mono" href="index.html">← Back to Journal</a>
+    <a class="mono" href="../index.html">Home ↑</a>
+  </footer>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -239,7 +239,7 @@ main, .foot { position: relative; z-index: 1; }
   font-size: clamp(1.35rem, min(4.6vw, 3.9vh), 2.6rem);
   line-height: 1.15;
   padding: clamp(5px, 0.7vh, 8px) 0;
-  /* This is the only navigation on mobile — the corner "Book a call" pill is
+  /* This is the only navigation on mobile — the corner "Get a quote" pill is
      display:none under 900px — so these have to clear the 44px touch floor.
      Padding alone left them at 37px. */
   min-height: 44px;
