@@ -88,16 +88,17 @@
 .layers-hero h1{
   font-family:var(--font-display);font-weight:400;
   /* min() picks whichever runs out first: width on phones, height on laptops. */
-  font-size:clamp(2.6rem,min(12.5vw,15vh),8.6rem);
-  line-height:.86;letter-spacing:.005em;text-transform:uppercase;
+  font-size:clamp(2.05rem,min(9.6vw,11.2vh),6.5rem);
+  line-height:.88;letter-spacing:.005em;text-transform:uppercase;
   margin:0 0 clamp(16px,2.8vh,38px);
 }
 .layers-hero h1 span{display:block}
 /* Each line steps in — the offset itself is the idea. In em, not %, so the
    stagger tracks the type: as a share of the full-width block it swamped the
    words once the headline came down to 67px. */
-.layers-hero h1 span:nth-child(2){padding-left:.5em}
-.layers-hero h1 span:nth-child(3){padding-left:1em;color:var(--lyr-gold)}
+.layers-hero h1 span:nth-child(2){padding-left:.34em}
+.layers-hero h1 span:nth-child(3){padding-left:.68em}
+.layers-hero h1 span:nth-child(4){padding-left:1.02em;color:var(--lyr-gold)}
 /* Sized to run the width of the headline above it. At 44ch it left ~510px of
    open space to its right, which read as an unfinished column. */
 .lyr-lede{
@@ -116,10 +117,26 @@
 }
 
 /* ============================================================
-   THE SIX — named, not drawn
+   THE SIX — the second act
+   ------------------------------------------------------------
+   The headline no longer promises a number, so the six carry
+   their own set-up. This is where the layers argument lives now:
+   below the finished site, as the answer to "why not the cheap
+   one?" rather than as the opening line.
    ============================================================ */
+.lyr-six{display:flex;flex-direction:column;gap:clamp(14px,2vh,22px)}
+.lyr-six-lede{
+  margin:0;max-width:52ch;
+  font-size:clamp(.95rem,1.25vw,1.08rem);line-height:1.5;
+  color:var(--lyr-muted);
+}
+.lyr-six-lede b{color:var(--lyr-cream);font-weight:600}
+.lyr-six-lede em{
+  font-family:var(--font-accent);font-style:italic;font-weight:400;
+  color:var(--lyr-gold);
+}
 .lyr-list{
-  list-style:none;margin:clamp(16px,2.6vh,30px) 0 0;padding:0;
+  list-style:none;margin:0;padding:0;
   max-width:min(100%,62ch);
   border-top:1px solid var(--lyr-line);
 }
@@ -182,16 +199,18 @@
      one, so sticking it makes it ride down over its own list and cover the
      text. It has nothing left to hold against — unstick it. */
   .lyr-copy{position:static}
-  .lyr-list{grid-area:list}
-  /* One finished site is far shorter than six stacked plates were, so
-     top-aligning it left a well of dead space beneath. */
-  .lyr-show{grid-area:show;align-self:center}
+  .lyr-six{grid-area:list}
+  /* The show area spans both rows, and with the six now carrying their own
+     set-up that span is taller than the viewport. Centring in it dropped the
+     finished site below the fold, which is the one thing the fold is for.
+     Held at the top instead, beside the headline. */
+  .lyr-show{grid-area:show;align-self:start;position:sticky;top:clamp(96px,14vh,160px)}
 }
 @media (max-width:899.98px){
   .lyr-in{display:flex;flex-direction:column}
   .lyr-copy{order:1}
   .lyr-show{order:2}
-  .lyr-list{order:3}
+  .lyr-six{order:3}
   /* The cue reads "Here they are" and pointed at the six. Stacked, the
      next thing down is the showcase, so the cue would be lying. */
   .lyr-foot{display:none}
@@ -328,10 +347,11 @@
    kicker, which carries "Website Designer / Thurles, Tipperary" and is the only
    place the body says what the title claims. */
 @media (max-width:640px){
-  .layers-hero h1 span:nth-child(2){padding-left:.3em}
-  .layers-hero h1 span:nth-child(3){padding-left:.6em}
+  .layers-hero h1 span:nth-child(2){padding-left:.22em}
+  .layers-hero h1 span:nth-child(3){padding-left:.44em}
+  .layers-hero h1 span:nth-child(4){padding-left:.66em}
   .layers-hero{padding-block:clamp(68px,9vh,92px) clamp(14px,2.2vh,30px)}
-  .layers-hero h1{font-size:clamp(2.3rem,11.2vw,8.6rem);margin-bottom:clamp(10px,1.8vh,20px)}
+  .layers-hero h1{font-size:clamp(1.95rem,9.4vw,6.5rem);margin-bottom:clamp(10px,1.8vh,20px)}
   .lyr-copy{margin-bottom:clamp(10px,1.8vh,20px)}
   .lyr-kicker{font-size:.68rem;margin-bottom:clamp(6px,1vh,12px)}
   .lyr-lede{font-size:.92rem;line-height:1.45}
@@ -343,7 +363,7 @@
    sentence that sets up the six. */
 @media (max-width:640px) and (max-height:750px){
   .layers-hero{padding-bottom:8px}
-  .layers-hero h1{font-size:clamp(2.1rem,10vw,8.6rem)}
+  .layers-hero h1{font-size:clamp(1.8rem,8.6vw,6.5rem)}
   .lyr-kicker{font-size:.62rem}
 }
 
