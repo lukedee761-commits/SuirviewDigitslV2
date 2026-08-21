@@ -205,6 +205,7 @@ main, .foot { position: relative; z-index: 1; }
 .pill-gold:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(201, 169, 106, 0.4); }
 .pill-lg { padding: 16px 34px; font-size: 1rem; }
 .pill-block { width: 100%; }
+.pill-abbr { display: none; }
 
 /* ---------- Overlay menu ---------- */
 .overlay {
@@ -554,6 +555,15 @@ main, .foot { position: relative; z-index: 1; }
 .switch {
   position: fixed; top: 0; left: var(--rail-w); right: 0; z-index: 100;
   display: flex; align-items: stretch; height: 68px;
+  /* The .corner controls are fixed on top of this bar at z-index 110.
+     Reserving their width here is what stops a tab sitting underneath
+     them; --corner-w is set per breakpoint alongside the corner itself.
+     The scroll is a safety valve only: when the tabs fit, nothing
+     scrolls, and when a narrow handset runs out they can still be
+     reached instead of being silently covered. */
+  padding-right: var(--corner-w, 0px);
+  overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none;
+  overscroll-behavior-inline: contain;
   background: rgba(10, 11, 15, 0.82); backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--line);
 }
@@ -568,27 +578,28 @@ main, .foot { position: relative; z-index: 1; }
   border-right: 1px solid var(--line-soft);
   transition: color .3s var(--ease), background-color .3s var(--ease);
 }
+.switch::-webkit-scrollbar { display: none; }
+.switch-item { flex: none; }
 .switch-item:hover { background: rgba(255, 255, 255, 0.035); }
 .switch-item.is-active { color: var(--cream); }
 .switch-item.is-active::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
   background: linear-gradient(90deg, var(--gold-light), var(--gold-deep));
 }
-.sw-abbr { display: none; }
+.sw-abbr, .sw-tiny { display: none; }
 /* the bar is fixed, so the page needs to start below it */
 main { padding-top: 68px; }
-/* The .corner controls are fixed at z-index 110 and overlap this bar from the
-   right, so the tabs must always end left of whatever sits there. With four
-   tabs the full labels only clear the "Book a call" pill from ~1040px up
-   (57px to spare at 1041) — so below that the pill goes rather than the
-   labels, and the tabs run against the narrow menu button instead. That buys
-   full labels all the way down to 900px (87px to spare at 901); the chat
-   launcher carries the booking action wherever the pill is gone. Scoped to
-   .corner so the chat's own .chat-book (same class) is untouched. */
-@media (max-width: 1040px) {
-  .corner .book-call { display: none; }
-}
-@media (max-width: 900px) {
+/* This used to hide the corner pill below 1040px via `.corner .book-call`.
+   The button no longer carries that class, so the rule matched nothing and
+   the pill sat on top of three tabs on every phone. The pill now shrinks and
+   the bar reserves its width instead of the pill disappearing — losing the
+   only always-visible CTA was never the intent, it was just the cheapest way
+   to stop the collision. --corner-w must stay in step with .corner below. */
+:root { --corner-w: 0px; }
+/* Scoped with :has so pages that ship the bar but no corner
+   (every blog page) keep a full-width bar instead of a gap. */
+@media (max-width: 1040px) { :root:has(.corner) { --corner-w: 206px; } }
+@media (max-width: 1080px) {
   .sw-full { display: none; }
   .sw-abbr { display: inline; }
 }
@@ -596,18 +607,41 @@ main { padding-top: 68px; }
   .switch { height: 56px; }
   .switch-item { font-size: .62rem; letter-spacing: 1px; padding: 0 9px; }
   main { padding-top: 56px; }
+  /* Shrunk to sit beside the menu button rather than over the tabs. */
+  :root:has(.corner) { --corner-w: 124px; }
+  /* Reserving padding only clears the corner at the far end of the scroll;
+     mid-scroll a tab still slid underneath it. Ending the bar before the
+     controls means no tab can ever be under them at any scroll position,
+     and .corner::before carries the bar's own backdrop across the gap so
+     the top edge still reads as one continuous bar. */
+  .switch { right: var(--corner-w); padding-right: 0; }
+  .corner { top: 9px; right: 12px; gap: 8px; }
+  .corner::before {
+    content: ""; position: absolute; inset: -9px -12px -9px -16px; z-index: -1;
+    background: rgba(10, 11, 15, 0.82); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .corner .pill { font-size: .66rem; padding: 8px 14px; }
+  .corner .pill-full { display: none; }
+  .corner .pill-abbr { display: inline; }
+  .menu-btn { width: 38px; height: 38px; padding: 0 9px; gap: 5px; }
 }
 /* "24/7 Receptionist" is ~130px on its own, so the four tabs have to claw back
    width from tracking and padding to clear the menu button (which sits at
    viewport - 64px). This tier needs >=335px; JetBrains Mono is the worst case
    here, a Consolas fallback measures narrower, not wider. */
 @media (max-width: 460px) {
-  .switch-item { font-size: .60rem; letter-spacing: .4px; padding: 0 5px; }
+  .switch-item { font-size: .56rem; letter-spacing: 0; padding: 0 4px; }
+  /* "24/7 Receptionist" is ~95px on its own and will not fit beside the
+     pill on a 390px handset. Only the tab that has a shorter form gives up
+     its abbreviation — hiding .sw-abbr outright would blank the others. */
+  .switch-item:has(.sw-tiny) .sw-abbr { display: none; }
+  .switch-item .sw-tiny { display: inline; }
 }
 /* Below 335px even that runs under the button, so 320px-class phones give up
    the tracking entirely. */
 @media (max-width: 359px) {
-  .switch-item { font-size: .56rem; letter-spacing: 0; padding: 0 3px; }
+  .switch-item { font-size: .54rem; padding: 0 3px; }
 }
 
 /* ============================================================

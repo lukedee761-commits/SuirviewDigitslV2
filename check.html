@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=20260814b" />
+  <link rel="stylesheet" href="css/styles.css?v=20260821a" />
 
   <style>
     /* =========================================================
@@ -38,7 +38,13 @@
        Mobile-first: this page exists to be used ON a phone.
        ========================================================= */
 
-    .chk-wrap { max-width: 720px; margin: 0 auto; padding: 0 var(--gutter); }
+    /* This page has no left rail, so the fixed .switch bar must start at the
+       viewport edge rather than 76px in, and no .corner, so it keeps its full
+       width (the --corner-w reserve is scoped to :root:has(.corner)). */
+    :root { --rail-w: 0px; }
+    /* Clear the fixed bar: 68px tall, 56px under 640. */
+    .chk-wrap { max-width: 720px; margin: 0 auto; padding: 68px var(--gutter) 0; }
+    @media (max-width: 640px) { .chk-wrap { padding-top: 56px; } }
 
     /* Not defined in styles.css — needed for the fieldset legends. */
     .sr-only {
@@ -223,6 +229,21 @@
 <body>
 
   <a class="skip-link" href="#chkMain">Skip to content</a>
+
+
+  <nav class="switch" aria-label="Primary">
+    <a class="switch-item" href="about.html">About</a>
+    <a class="switch-item" href="index.html">
+      <span class="sw-full">Website Development</span><span class="sw-abbr">Websites</span>
+    </a>
+    <a class="switch-item" href="receptionist.html">
+      <span class="sw-full">24/7 Receptionist Agent</span><span class="sw-abbr">24/7 Receptionist</span><span class="sw-tiny">Receptionist</span>
+    </a>
+    <a class="switch-item" href="blog/index.html">Journal</a>
+    <a class="switch-item is-active" href="check.html" aria-current="page">
+      <span class="sw-full">Free Website Check</span><span class="sw-abbr">Check</span>
+    </a>
+  </nav>
 
   <div class="chk-wrap">
 
