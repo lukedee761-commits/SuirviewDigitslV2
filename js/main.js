@@ -328,6 +328,10 @@
   if (!chat) return;
   var launch = document.getElementById('chatLaunch');
   var panel = document.getElementById('chatPanel');
+  // #chat now holds a WhatsApp link rather than the guided assistant. The
+  // engine below is left intact so the assistant can be restored by putting
+  // its markup back, but without a launcher there is nothing to wire up.
+  if (!launch || !panel) return;
   var closeBtn = document.getElementById('chatClose');
   var log = document.getElementById('chatLog');
   var chipBar = document.getElementById('chatChips');
