@@ -114,486 +114,244 @@
 40%{transform:scaleY(1);opacity:1}
 100%{transform:scaleY(1);transform-origin:bottom;opacity:0}
 }
+
 /* ============================================================
-   THE STACK — flat lit panels
+   THE SIX — named, not drawn
    ============================================================ */
-/* The six lyr-stack, now the right-hand column of the layers-hero. Narrower than the
-   full-width section they replaced, so everything in them is a size down.
-   Compacted: each shows only its number and name until hovered. */
-/* Sized so all six collapsed lyr-stack land inside one lyr-screen alongside the
-   headline — hence the vh terms, which is what actually constrains them. */
-/* Gap pays for the larger .lyr-disc: the hero is fixed to one screen, so any
-   type increase inside it has to be reclaimed here. */
-.lyr-stack{width:100%;display:grid;gap:clamp(8px,1.3vh,15px)}
-/* --- one lyr opens at a time ---
-   The detail expands DOWNWARD and the lyr's own top never moves, so the
-   thing under the cursor stays put — only the lyr-stack beneath it shift. Expand
-   upward or centre it and the pointer would fall off its own target. */
-.lyr-detail{
-  max-height:0;opacity:0;visibility:hidden;overflow:hidden;
-  transition:max-height .5s var(--lyr-ease),opacity .3s var(--lyr-ease),visibility 0s .5s;
+.lyr-list{
+  list-style:none;margin:clamp(16px,2.6vh,30px) 0 0;padding:0;
+  max-width:min(100%,62ch);
+  border-top:1px solid var(--lyr-line);
 }
-/* Pointer-only. :focus-within matters here — the Read more link inside is
-   unreachable while collapsed, so tabbing to the layer name is what opens it.
-   MUST stay behind (hover:hover): on touch the toggle button keeps focus after
-   a tap, so :focus-within held the panel open and the second tap appeared to
-   do nothing — the class came off and aria-expanded flipped, but this rule was
-   still matching. Touch is driven solely by .is-open. */
-@media (hover:hover){
-  .lyr:hover .lyr-detail,
-  .lyr:focus-within .lyr-detail{
-    max-height:340px;opacity:1;visibility:visible;
-    transition:max-height .5s var(--lyr-ease),opacity .38s var(--lyr-ease) .06s,visibility 0s;
-  }
+.lyr-list li{border-bottom:1px solid var(--lyr-line)}
+.lyr-list a{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:.35em .8em;
+  padding:clamp(8px,1.35vh,13px) 0;
+  text-decoration:none;color:var(--lyr-cream);
+  transition:color .3s var(--lyr-ease);
 }
-/* No hover to give: show everything rather than hiding it behind a gesture
-   these visitors cannot make. */
-/* ---- touch: tap to open, one at a time ----
-   Leaving all six expanded put 227px of detail on every 349px layer and pushed
-   the pricing section 3.4 screens down the page. Collapsed by default here and
-   opened by the toggle button, which only exists on touch. */
-@media (hover:none){
-  .lyr.is-open .lyr-detail{
-    max-height:340px;opacity:1;visibility:visible;
-    transition:max-height .45s var(--lyr-ease),opacity .3s var(--lyr-ease),visibility 0s;
-  }
+.lyr-list em{
+  flex:none;font-style:normal;
+  font-family:var(--font-mono);font-size:.62rem;font-weight:500;
+  letter-spacing:.2em;color:var(--lyr-gold);
+  transition:color .3s var(--lyr-ease);
 }
-/* The toggle is touch-only: on a mouse, hover already does this. It lives
-   inside the <h2> so it shares the name's line box — as a sibling it claimed a
-   44px row of its own, 264px across the six layers. */
-.lyr-toggle{
-  display:none;align-items:center;justify-content:center;
-  width:44px;height:44px;flex:0 0 44px;
-  background:none;border:0;cursor:pointer;color:var(--lyr-muted);
+.lyr-list b{
+  font-family:var(--font-accent);font-weight:400;
+  font-size:clamp(1.02rem,1.5vw,1.24rem);line-height:1.15;
 }
-/* An SVG path, not a rotated border box. 1.5px of border resolved to 1px at
-   dpr 2 — a hairline diagonal that aliases badly on a phone — and the old
-   translateY hack made the arrow hop 5px as it flipped, because a rotated
-   border-square is optically centred in neither state. A path is centred in
-   its own viewBox, so opening is a clean 180deg with nothing to compensate. */
-.lyr-chev{
-  width:14px;height:14px;flex:0 0 14px;
-  fill:none;stroke:currentColor;stroke-width:2.2;
-  stroke-linecap:round;stroke-linejoin:round;
-  transition:transform .35s var(--lyr-ease);
+/* The description takes the rest of the row and drops to its own
+   line when the column gets tight, rather than truncating. */
+.lyr-list span{
+  flex:1 1 16ch;min-width:0;
+  font-size:.84rem;line-height:1.4;color:var(--lyr-muted);
 }
-.lyr.is-open .lyr-toggle{color:var(--lyr-gold)}
-.lyr.is-open .lyr-chev{transform:rotate(180deg)}
-.sr-only{
-  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
-  overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;
-}
-/* AFTER the base rule above, not before: equal specificity means source order
-   decides, and inside the media block first it simply lost to display:none. */
-@media (hover:none){
-  .lyr-toggle{display:inline-flex}
-}
-/* Short laptops: the vh clamps alone don't claw back enough for six lyr-stack plus
-   a masthead, so tighten the per-layer furniture as well. */
+.lyr-list a:hover,.lyr-list a:focus-visible{color:var(--lyr-gold-lit)}
+.lyr-list a:hover em{color:var(--lyr-gold-lit)}
 
-/* --lit runs 0 (far from the reading position) to 1 (dead centre) and drives
-   every lighting lyr-cue continuously, rather than switching on once. Defaults to
-   1 so the section is fully lit if the script never runs. */
-.lyr{position:relative;text-align:center;--lit:1}
-/* --- the plate: a lyr-screen laid back so it reads as a thin lyr ---
-   The box is sized to the plate's ON-SCREEN footprint (16:10 foreshortened
-   by cos 46deg = .695). The panel inside is the full un-foreshortened height
-   and pivots on its bottom edge, so it lands exactly inside this box and the
-   lit front edge sits precisely where the glow starts. */
-.lyr-plate{
-  /* Off vertical, so the plate lies (90 - tilt) off horizontal with its back
-     edge dipping away. HARD CEILING AT 90deg: at exactly 90 the plate is
-     edge-on and has no height, and past it cos goes negative — the sizing
-     maths breaks and the plate flips over to show its face, not its back. */
-  --tilt:86deg;
+/* 44px is a touch floor, so it is scoped to touch — on desktop these
+   rows already clear it and the hero has no vertical slack to give. */
+@media (hover:none),(pointer:coarse){
+  .lyr-list a{min-height:44px;align-items:center}
+}
+
+/* ============================================================
+   THE SHOWCASE COLUMN
+   ============================================================ */
+.lyr-show{width:100%;position:relative}
+
+/* ---------- reading order ----------
+   .lyr-list is a sibling of .lyr-copy and .lyr-show, not a child of the
+   copy, purely so the order can differ by width:
+
+     desktop   headline + list down the left, showcase held beside them
+     mobile    headline, then the PROOF, then the six
+
+   Stacked mobile order with the list inside the copy buried the finished
+   site about two and a half screens down, behind six rows of argument —
+   which is the opposite of leading with the result. */
+@media (min-width:900px){
+  .lyr-in{
+    grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+    grid-template-areas:"copy show" "list show";
+    align-items:start;
+  }
+  .lyr-copy{grid-area:copy}
+  /* layers.css sticks the headline so it holds while you read down the six
+     plates in the OTHER column. The six are now directly beneath it in this
+     one, so sticking it makes it ride down over its own list and cover the
+     text. It has nothing left to hold against — unstick it. */
+  .lyr-copy{position:static}
+  .lyr-list{grid-area:list}
+  /* One finished site is far shorter than six stacked plates were, so
+     top-aligning it left a well of dead space beneath. */
+  .lyr-show{grid-area:show;align-self:center}
+}
+@media (max-width:899.98px){
+  .lyr-in{display:flex;flex-direction:column}
+  .lyr-copy{order:1}
+  .lyr-show{order:2}
+  .lyr-list{order:3}
+  /* The cue reads "Here they are" and pointed at the six. Stacked, the
+     next thing down is the showcase, so the cue would be lying. */
+  .lyr-foot{display:none}
+}
+.show-cap{
+  margin:14px 0 0;
+  font-family:var(--font-mono);font-size:.6rem;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--lyr-muted);
+}
+
+/* ---------- version A: browser frame ---------- */
+.show-frame{
+  margin:0;border:1px solid var(--lyr-line);border-radius:11px;
+  overflow:hidden;background:var(--lyr-panel);
+  box-shadow:0 40px 90px rgba(0,0,0,.62),0 8px 24px rgba(0,0,0,.4);
+}
+.show-bar{
+  position:relative;display:flex;align-items:center;
+  height:38px;padding-inline:14px;
+  background:var(--lyr-panel);border-bottom:1px solid var(--lyr-line);
+}
+.show-dots{display:flex;gap:6px}
+.show-dots i{width:9px;height:9px;border-radius:50%;background:rgba(237,230,214,.18)}
+.show-url{
+  position:absolute;left:50%;transform:translateX(-50%);
+  padding:4px 16px;border-radius:999px;
+  background:var(--lyr-abyss);border:1px solid var(--lyr-line);
+  font-family:var(--font-mono);font-size:.62rem;letter-spacing:.05em;
+  color:var(--lyr-muted);white-space:nowrap;
+}
+.show-frame img{display:block;width:100%;height:auto}
+
+/* ============================================================
+   version B: laptop + phone
+   ------------------------------------------------------------
+   Drawn in CSS rather than baked into the screenshot, so the
+   frames stay crisp at any density and the plate inside can be
+   swapped for a real client site without re-rendering a mockup.
+   ============================================================ */
+.rig{position:relative;width:100%}
+
+.rig-laptop{width:85%}
+.laptop-lid{
   position:relative;
-  aspect-ratio:16/0.698;                         /* fallback: 10 x cos(86deg) */
-  aspect-ratio:16/calc(10 * cos(var(--tilt)));
-  /* Parallax: plates settle as they reach the reading position. Lives here
-     rather than on .lyr-panel, whose transform is spoken for by the tilt. */
-  transform:translateY(calc((1 - var(--lit)) * 26px));
-  transition:transform .7s var(--lyr-ease);
-  /* Far back: at 1500px the near edge magnifies ~25% and bursts the box. */
-  perspective:3200px;
+  padding:10px 10px 11px;
+  border-radius:12px 12px 5px 5px;
+  background:linear-gradient(#2c313a,#191d24);
+  box-shadow:0 34px 74px rgba(0,0,0,.62),0 6px 18px rgba(0,0,0,.45);
 }
-.lyr-panel{
-  /* Flipped past vertical (180deg - tilt), hinged on its own top edge, which is
-     pinned to the BOTTOM of the plate box. The body swings up and over, so the
-     lyr-screen's top edge reads as lying below its bottom edge. |cos| is unchanged
-     by the flip, so the sizing maths above still holds. */
-  position:absolute;left:0;right:0;top:100%;
-  height:1433.4%;                                /* fallback: 100% / cos(86deg) */
-  height:calc(100% / cos(var(--tilt)));
-  transform:rotateX(calc(180deg - var(--tilt)));
-  transform-origin:center top;
-  border:1px solid rgba(237,230,214,.1);
-  border-radius:5px;
-  /* Face down: this is the BACK of the lyr-screen. Fine banding and a soft
-     raking gradient so it reads as a machined surface, not a dead rectangle. */
-  background:
-    repeating-linear-gradient(0deg,rgba(255,255,255,.013) 0 2px,transparent 2px 4px),
-    linear-gradient(168deg,#161d2c 0%,#111725 46%,#0d1220 100%);
-  box-shadow:0 20px 44px -22px rgba(0,0,0,.9);
-  /* The entrance rides on opacity, not transform — transform is spoken for by
-     the tilt, and a second transform declaration would silently replace it. */
-  opacity:.42;
-  transition:border-color .8s var(--lyr-ease),box-shadow .8s var(--lyr-ease),opacity .8s var(--lyr-ease);
+.laptop-cam{
+  position:absolute;top:4px;left:50%;transform:translateX(-50%);
+  width:4px;height:4px;border-radius:50%;background:#0b0e14;
 }
-.lyr.is-lit .lyr-panel{
-  opacity:1;
-  border-color:rgba(255,255,255,.34);
-  box-shadow:0 20px 44px -22px rgba(0,0,0,.9),0 26px 78px -30px rgba(226,238,255,.5);
+.laptop-screen{
+  position:relative;border-radius:3px;overflow:hidden;
+  background:#000;aspect-ratio:16/10;
 }
-/* The chamfer on the near edge. A lyr-screen has thickness, and the bright line
-   where its bezel turns is most of what sells it as an object rather than a
-   rectangle. Sits behind the filament, which is the light itself. */
-.lyr-panel::after{
-  content:"";position:absolute;left:0;right:0;top:0;height:7px;
-  border-radius:5px 5px 0 0;pointer-events:none;z-index:1;
-  background:linear-gradient(180deg,
-    rgba(255,255,255,.62) 0%,
-    rgba(196,212,236,.34) 34%,
-    rgba(38,48,68,.85) 78%,
-    rgba(12,17,28,.95) 100%);
-  /* Constant: the bezel is a property of the object, not of the light. It also
-     sidesteps a pseudo-element quirk where a calc(var()) opacity would not
-     recompute. */
-  opacity:.9;
+.laptop-screen img{display:block;width:100%;height:100%;object-fit:cover}
+/* A single soft diagonal, not a glass streak — the plate underneath
+   is the point and a strong reflection would fight it. */
+.laptop-screen::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(112deg,
+    rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 24%,transparent 50%);
 }
-/* A cool gloss on the glass rather than warm light landing on it — the lyr-screen
-   is the source now, so it lights itself. Flipped plate, so 0deg faces up. */
-.lyr-sheen{
-  position:absolute;inset:0;border-radius:4px;pointer-events:none;z-index:2;
-  background:
-    /* specular that tracks the pointer — a real lyr-screen's reflection moves
-       when you do, and a fixed highlight is a dead giveaway that it's a div */
-    radial-gradient(38% 120% at var(--mx,50%) 105%,
-      rgba(255,255,255,.30) 0%,
-      rgba(255,255,255,.08) 38%,
-      transparent 72%),
-    linear-gradient(0deg,
-      rgba(255,255,255,.20) 0%,
-      rgba(232,241,255,.07) 30%,
-      transparent 58%);
-  opacity:0;transition:opacity 1s var(--lyr-ease);
+/* Wider than the lid and tapered, the way a laptop base reads from
+   slightly above. Negative margins let it overhang both sides. */
+.laptop-deck{
+  position:relative;height:11px;margin-inline:-5.5%;
+  clip-path:polygon(0 0,100% 0,97.5% 100%,2.5% 100%);
+  background:linear-gradient(#21252d,#151920 58%,#0d1016);
+  border-radius:0 0 5px 5px;
 }
-.lyr.is-lit .lyr-sheen{opacity:var(--lit)}
-/* --- the type sitting in that light --- */
-/* Pushed clear of the glow's hot core — the first line was sitting right in it. */
-.lyr-text{position:relative;z-index:1;padding-top:clamp(14px,2.2vh,24px)}
-.lyr-disc{
-  /* .68rem rendered at 10.88px. 12px is the floor worth holding for a line
-     that sits in the glare of the plate's own light. */
-  font-family:var(--font-mono);font-size:.75rem;font-weight:600;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--lyr-muted);margin:0;
-  transition:color .8s var(--lyr-ease),text-shadow .8s var(--lyr-ease);
+.laptop-deck::after{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:13%;height:3px;border-radius:0 0 4px 4px;background:rgba(0,0,0,.55);
 }
-.lyr.is-lit .lyr-disc{
-  color:#ffdc9a;
-  /* This line sits in the hottest part of the white spill, where gold on a
-     bright wash has almost no contrast. A dark halo does the separating that
-     brightening the gold alone cannot. */
-  text-shadow:0 0 3px rgba(5,8,14,.92),0 1px 12px rgba(5,8,14,.85);
+
+.rig-phone{
+  position:absolute;right:0;bottom:0;width:23%;
+  padding:5px;border-radius:26px;
+  background:linear-gradient(150deg,#2c313a,#161a21);
+  box-shadow:0 26px 52px rgba(0,0,0,.72),0 4px 12px rgba(0,0,0,.5);
 }
-.lyr-name{
-  font-family:var(--font-display);font-weight:400;text-transform:uppercase;
-  font-size:clamp(1.05rem,min(1.9vw,3vh),1.6rem);line-height:1;letter-spacing:.02em;
-  margin:6px 0 0;color:#5c6577;
-  transition:color .9s var(--lyr-ease),text-shadow .9s var(--lyr-ease);
+.phone-screen{
+  position:relative;border-radius:21px;overflow:hidden;
+  background:#000;aspect-ratio:390/844;
 }
-/* Brightens continuously with the light rather than snapping on. Done with
-   opacity, not color-mix: a calc() percentage inside color-mix does not
-   recompute in Chrome — it sticks at a flat 50% blend. */
-.lyr-name:has(.lyr-toggle){display:flex;align-items:center;justify-content:center;gap:2px}
-.lyr.is-lit .lyr-name{
-  color:#fbf9f4;
-  text-shadow:0 0 24px rgba(255,255,255,calc(.5 * var(--lit))),
-              0 0 64px rgba(210,226,255,calc(.28 * var(--lit)));
+.phone-screen img{
+  display:block;width:100%;height:100%;
+  object-fit:cover;object-position:top center;
 }
-.lyr-text{opacity:calc(.44 + .56 * var(--lit));transition:opacity .7s var(--lyr-ease)}
-.lyr-desc{
-  margin:12px auto 0;max-width:40ch;color:var(--lyr-muted);font-size:.98rem;
-  transition:color .9s var(--lyr-ease);
+.phone-island{
+  position:absolute;top:5px;left:50%;transform:translateX(-50%);
+  width:34%;height:8px;border-radius:999px;background:#04060a;z-index:2;
 }
-.lyr.is-lit .lyr-desc{color:rgba(237,230,214,.82)}
-/* --- read lyr-more: a link to the lyr's article, not a disclosure --- */
-.lyr-more{
-  margin-top:20px;text-decoration:none;
-  font-family:var(--font-mono);font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--lyr-gold);background:transparent;
-  border:1px solid rgba(212,169,78,.32);border-radius:999px;
-  padding:8px 22px;min-height:44px;                  /* 44px: thumb-sized */
-  display:inline-flex;align-items:center;gap:.7rem;
-  transition:color .3s var(--lyr-ease),border-color .3s var(--lyr-ease),background .3s var(--lyr-ease);
+
+/* ============================================================
+   Responsive
+   ------------------------------------------------------------
+   The old stack was tuned to land all six plates inside one
+   screen. A finished site plus six named layers will not fit a
+   phone in one screen, and pretending otherwise is what shrank
+   the old hero to unreadable. Below 900px the hero is simply
+   allowed to be taller than the fold.
+   ============================================================ */
+@media (max-width:900px){
+  .lyr-show{margin-top:clamp(28px,5vh,48px)}
+  .rig-laptop{width:82%}
+  .rig-phone{width:26%}
 }
-.lyr-more:hover{color:var(--lyr-gold-lit);border-color:var(--lyr-gold-lit);background:rgba(212,169,78,.09)}
-/* arrow, drawn rather than a glyph so it inherits colour and can nudge on hover */
-.lyr-more-x{display:block;width:13px;height:8px;position:relative}
-.lyr-more-x::before{
-  content:"";position:absolute;left:0;top:3.5px;width:13px;height:1px;background:currentColor;
-  transition:transform .3s var(--lyr-ease);
-}
-.lyr-more-x::after{
-  content:"";position:absolute;right:0;top:.5px;width:7px;height:7px;
-  border-top:1px solid currentColor;border-right:1px solid currentColor;
-  transform:rotate(45deg);transition:transform .3s var(--lyr-ease);
-}
-.lyr-more:hover .lyr-more-x::before{transform:translateX(3px)}
-.lyr-more:hover .lyr-more-x::after{transform:rotate(45deg) translate(2px,-2px)}
-.lyr-cost{
-  margin:16px auto 0;max-width:44ch;font-size:.92rem;color:var(--lyr-rust);
-  border-top:1px solid rgba(207,115,80,.28);padding-top:14px;
-}
-.lyr-cost b{
-  display:block;font-family:var(--font-mono);font-size:.6rem;font-weight:500;
-  letter-spacing:.22em;text-transform:uppercase;opacity:.8;margin-bottom:4px;
-}
-/* --- the mock screens --- */
-.lyr-bar{position:absolute;left:0;right:0;top:0;height:11%;background:rgba(255,255,255,.045);border-bottom:1px solid rgba(255,255,255,.06)}
-.lyr-dots{position:absolute;left:3.5%;top:50%;transform:translateY(-50%);display:flex;gap:5px}
-.lyr-dots i{width:5px;height:5px;border-radius:50%;background:rgba(237,230,214,.22)}
-.lyr-blk{position:absolute;border-radius:3px}
-.lyr-screen{position:absolute;inset:0;overflow:hidden;border-radius:4px}
-/* 01 — the look */
-.lyr-m1{background:linear-gradient(160deg,#0e1b2e,#0a0e17 70%)}
-.lyr-m1 .hero-img{left:0;right:0;top:11%;height:52%;background:
-  radial-gradient(120% 90% at 20% 0%,rgba(212,169,78,.28),transparent 60%),
-  linear-gradient(120deg,#16283f,#0d1524)}
-.lyr-m1 .t1{left:6%;top:24%;width:44%;height:9%;background:var(--lyr-cream);opacity:.92}
-.lyr-m1 .t2{left:6%;top:36%;width:30%;height:5%;background:var(--lyr-cream);opacity:.5}
-.lyr-m1 .btn{left:6%;top:46%;width:20%;height:8%;background:var(--lyr-gold);border-radius:999px}
-.lyr-m1 .c{top:70%;height:20%;width:26%;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08)}
-.lyr-m1 .c1{left:6%}
-.lyr-m1 .c2{left:37%}
-.lyr-m1 .c3{left:68%}
-/* 02 — the interface */
-.lyr-m2{background:#0c111c}
-.lyr-m2 .nav{left:6%;top:6%;width:88%;height:6%;border:1px dashed rgba(212,169,78,.5);border-radius:2px}
-.lyr-m2 .tap{border:1px dashed rgba(212,169,78,.55);background:rgba(212,169,78,.07);border-radius:3px}
-.lyr-m2 .tp1{left:6%;top:20%;width:26%;height:16%}
-.lyr-m2 .tp2{left:36%;top:20%;width:26%;height:16%}
-.lyr-m2 .tp3{left:66%;top:20%;width:28%;height:16%}
-.lyr-m2 .ln{background:rgba(237,230,214,.16)}
-.lyr-m2 .l1{left:6%;top:46%;width:56%;height:3.5%}
-.lyr-m2 .l2{left:6%;top:54%;width:44%;height:3.5%}
-.lyr-m2 .l3{left:6%;top:62%;width:50%;height:3.5%}
-.lyr-m2 .cursor{left:56%;top:64%;width:14px;height:14px;border-radius:50%;border:1.5px solid var(--lyr-gold);background:rgba(212,169,78,.2)}
-.lyr-m2 .big{left:6%;top:76%;width:38%;height:13%;border:1px solid rgba(212,169,78,.6);background:rgba(212,169,78,.14);border-radius:999px}
-/* 03 — the words */
-.lyr-m3{background:#0b1017}
-.lyr-m3 .h{left:7%;top:18%;width:62%;height:7%;background:var(--lyr-cream);opacity:.9}
-.lyr-m3 .p{background:rgba(237,230,214,.22)}
-.lyr-m3 .p1{left:7%;top:32%;width:80%;height:3.2%}
-.lyr-m3 .p2{left:7%;top:39%;width:74%;height:3.2%}
-.lyr-m3 .p3{left:7%;top:46%;width:78%;height:3.2%}
-.lyr-m3 .p4{left:7%;top:53%;width:56%;height:3.2%}
-.lyr-m3 .hl{left:7%;top:63%;width:52%;height:6%;background:rgba(212,169,78,.22);border-left:2px solid var(--lyr-gold);border-radius:0 3px 3px 0}
-.lyr-m3 .p5{left:7%;top:76%;width:66%;height:3.2%;background:rgba(237,230,214,.22)}
-/* 04 — the route */
-.lyr-m4{background:#0b1017}
-.lyr-m4 .node{border:1px solid rgba(237,230,214,.2);border-radius:4px;background:rgba(255,255,255,.04)}
-.lyr-m4 .n1{left:6%;top:24%;width:22%;height:26%}
-.lyr-m4 .n2{left:39%;top:24%;width:22%;height:26%}
-.lyr-m4 .n3{left:72%;top:24%;width:22%;height:26%;border-color:var(--lyr-gold);background:rgba(212,169,78,.16)}
-.lyr-m4 .arw{top:36%;height:1px;background:linear-gradient(90deg,transparent,var(--lyr-gold))}
-.lyr-m4 .a1{left:28%;width:11%}
-.lyr-m4 .a2{left:61%;width:11%}
-.lyr-m4 .cta{left:72%;top:33%;width:22%;height:8%;background:var(--lyr-gold);border-radius:999px}
-.lyr-m4 .cap{background:rgba(237,230,214,.18)}
-.lyr-m4 .cp1{left:6%;top:58%;width:22%;height:3%}
-.lyr-m4 .cp2{left:39%;top:58%;width:22%;height:3%}
-.lyr-m4 .cp3{left:72%;top:58%;width:22%;height:3%;background:rgba(212,169,78,.5)}
-.lyr-m4 .ph{left:6%;top:74%;width:40%;height:9%;border:1px solid rgba(212,169,78,.45);border-radius:999px;background:rgba(212,169,78,.09)}
-/* 05 — findability */
-.lyr-m5{background:#0b1017}
-.lyr-m5 .srch{left:6%;top:8%;width:60%;height:8%;border:1px solid rgba(237,230,214,.22);border-radius:999px;background:rgba(255,255,255,.05)}
-.lyr-m5 .ai{left:6%;top:22%;width:88%;height:22%;border:1px solid rgba(212,169,78,.45);border-radius:4px;background:rgba(212,169,78,.1)}
-.lyr-m5 .aiL{background:rgba(212,169,78,.42)}
-.lyr-m5 .ai1{left:9%;top:27%;width:56%;height:2.6%}
-.lyr-m5 .ai2{left:9%;top:33%;width:70%;height:2.6%}
-.lyr-m5 .ai3{left:9%;top:39%;width:40%;height:2.6%}
-.lyr-m5 .r{background:rgba(237,230,214,.2)}
-.lyr-m5 .r1{left:6%;top:52%;width:44%;height:3.4%;background:rgba(237,230,214,.55)}
-.lyr-m5 .r2{left:6%;top:59%;width:70%;height:2.4%}
-.lyr-m5 .r3{left:6%;top:70%;width:38%;height:3.4%;background:rgba(237,230,214,.34)}
-.lyr-m5 .r4{left:6%;top:77%;width:62%;height:2.4%}
-.lyr-m5 .pin{left:84%;top:52%;width:10%;height:26%;border:1px solid rgba(237,230,214,.16);border-radius:3px;background:rgba(255,255,255,.04)}
-/* 06 — the foundation */
-.lyr-m6{background:#0a0d14}
-.lyr-m6 .grid{left:0;right:0;top:0;bottom:0;background-image:linear-gradient(rgba(237,230,214,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(237,230,214,.05) 1px,transparent 1px);background-size:26px 26px}
-.lyr-m6 .g{border-radius:999px;background:rgba(237,230,214,.12);overflow:hidden}
-.lyr-m6 .g1{left:7%;top:22%;width:60%;height:4%}
-.lyr-m6 .g2{left:7%;top:34%;width:60%;height:4%}
-.lyr-m6 .g3{left:7%;top:46%;width:60%;height:4%}
-.lyr-m6 .fill{position:absolute;left:0;top:0;bottom:0;background:var(--lyr-gold);border-radius:999px}
-.lyr-m6 .lock{left:76%;top:20%;width:16%;height:30%;border:1px solid rgba(212,169,78,.45);border-radius:4px;background:rgba(212,169,78,.1)}
-.lyr-m6 .code{background:rgba(237,230,214,.14)}
-.lyr-m6 .c1{left:7%;top:64%;width:30%;height:2.6%}
-.lyr-m6 .c2{left:11%;top:70%;width:44%;height:2.6%}
-.lyr-m6 .c3{left:11%;top:76%;width:36%;height:2.6%}
-.lyr-m6 .c4{left:7%;top:82%;width:22%;height:2.6%}
-/* ---- the lit lyr-screen ------------------------------------------------------
-   The lyr-screen is ON and lying face down, so what shows is a bright page
-   smeared past legibility. Each mock keeps its own layout — that structural
-   variety is the only thing that survives the blur — but the palette is
-   overridden to a single light scheme so all six read as white screens.
-   -------------------------------------------------------------------------- */
-.lyr-screen{
-  background:#f3f6fa;
-  filter:blur(5px) saturate(.55) brightness(1.06);
-}
-/* The foreshortening already destroys vertical detail, so the blur above is
-   really doing horizontal work — hence the generous radius. */
-.lyr-screen .lyr-blk{background:rgba(38,50,72,.26)}
-.lyr-screen .lyr-bar{background:#e4e9f1;border-bottom-color:#d0d7e2}
-.lyr-screen .lyr-dots i{background:#b9c2d0}
-.lyr-screen .hero-img{background:linear-gradient(120deg,#dfe7f2,#eef2f8)}
-.lyr-screen .btn,.lyr-screen .cta,.lyr-screen .fill{background:#d9a44b}
-.lyr-screen .t1,.lyr-screen .h,.lyr-screen .r1{background:rgba(28,38,58,.52)}
-.lyr-screen .hl,.lyr-screen .ai,.lyr-screen .n3,.lyr-screen .lock,.lyr-screen .big{
-  background:rgba(217,164,75,.3);border-color:rgba(217,164,75,.6);
-}
-.lyr-screen .tap,.lyr-screen .nav{border-color:rgba(217,164,75,.55);background:rgba(217,164,75,.12)}
-.lyr-screen .node,.lyr-screen .srch,.lyr-screen .pin,.lyr-screen .c,.lyr-screen .g{
-  background:rgba(38,50,72,.1);border-color:rgba(38,50,72,.18);
-}
-.lyr-screen .grid{
-  background-image:linear-gradient(rgba(38,50,72,.09) 1px,transparent 1px),
-                   linear-gradient(90deg,rgba(38,50,72,.09) 1px,transparent 1px);
-}
-/* The light source. On the panel's local TOP edge, which the flip puts at the
-   bottom of the plate box — right against the type it has to light. */
-.lyr-edge{
-  position:absolute;left:8%;right:8%;top:-1px;height:2px;border-radius:2px;
-  background:linear-gradient(90deg,transparent,#ffffff 20%,#ffffff 80%,transparent);
-  /* The lyr-screen's own light escaping from under its front edge. */
-  box-shadow:0 0 14px 2px rgba(255,255,255,.9),0 0 42px 8px rgba(222,234,255,.55);
-  opacity:0;transition:opacity .9s var(--lyr-ease);
-  z-index:3;
-}
-.lyr.is-lit .lyr-edge{opacity:var(--lit)}
-/* The spill: light thrown down onto the type below. */
-.lyr-glow{
-  position:absolute;left:50%;top:100%;transform:translateX(-50%);
-  /* Height derives from width so the spill scales with the plate. A fixed
-     height would make a smaller plate's glow disproportionately huge. */
-  width:170%;aspect-ratio:3.3;pointer-events:none;z-index:0;
-  /* Two stops, not one: a hot core decaying fast right under the edge, plus a
-     wide soft wash. A single gentle gradient plateaus and reads as grey haze
-     over navy rather than as light. */
-  background:
-    radial-gradient(ellipse 26% 56% at 50% 0%,
-      rgba(255,255,255,.52) 0%,
-      rgba(226,236,252,.20) 42%,
-      transparent 72%),
-    radial-gradient(ellipse 60% 100% at 50% 0%,
-      rgba(216,229,250,.24) 0%,
-      /* a trace of gold at the far falloff keeps it in the brand */
-      rgba(212,169,78,.07) 44%,
-      transparent 78%),
-    /* The pool: a wide, flat ellipse reading as light landing on a surface.
-       Without it the spill fades into void and the plate looks like it is
-       floating in nothing, which is most of why the section felt flat. */
-    radial-gradient(ellipse 78% 30% at 50% 22%,
-      rgba(198,216,244,.16) 0%,
-      rgba(170,192,226,.06) 40%,
-      transparent 72%);
-  opacity:0;transition:opacity 1.1s var(--lyr-ease);
-}
-.lyr.is-lit .lyr-glow{opacity:var(--lit)}
+
 @media (max-width:640px){
-.layers-hero h1 span:nth-child(2){padding-left:.3em}
-.layers-hero h1 span:nth-child(3){padding-left:.6em}
-.lyr-glow{height:170px}
-
-/* ---- ONE SCREEN ON MOBILE -------------------------------------------------
-   The section ran 1262px against an 812px viewport, ~1.9 screens, so the six
-   layers could not be taken in as a set — which is the entire point of them.
-   Everything below is sized in vh rather than px so the section fits the
-   viewport it is actually in, instead of one particular handset.
-
-   Budget at 812px:  90 padding + 232 copy + 426 stack + 30 gaps + 34 foot.
-   The three levers used, in order of how much they cost the design:
-     1. spacing (free)
-     2. plate WIDTH, not tilt (keeps the plate reading as a plate, see below)
-     3. disc and name on one line (the only structural change)
-   Deliberately NOT touched: the 44px touch floor on .lyr-link, and .lyr-disc's
-   12px legibility floor. Those are accessibility, not decoration. */
-
-.layers-hero{
-  min-height:100svh;
-  padding-block:clamp(68px,9vh,92px) clamp(14px,2.2vh,30px);
-}
-/* 12.5vw put the headline at 47px and three lines of it at 121px, the single
-   biggest block above the layers. 11.2vw still fills the column. */
-.layers-hero h1{font-size:clamp(2.3rem,11.2vw,8.6rem)}
-.lyr-copy{margin-bottom:clamp(10px,1.8vh,20px)}
-.lyr-kicker{font-size:.68rem;margin-bottom:clamp(6px,1vh,12px)}
-.layers-hero h1{margin-bottom:clamp(10px,1.8vh,20px)}
-.lyr-lede{font-size:.92rem;line-height:1.45}
-/* "Here they are" with a downward cue line. It exists to send you to the layers.
-   Once the layers are in the same screen it is pointing at something already in
-   view, so it is dead weight and 48px of the budget. Cue only, no CTA. */
-.lyr-foot{display:none}
-
-.lyr-stack{gap:clamp(4px,1vh,12px)}
-
-/* The plate is foreshortened off its WIDTH via aspect-ratio, so narrowing it
-   shortens it proportionally while --tilt stays at 81deg. Dropping the height
-   by raising the tilt instead would take it back toward the hairline that 81deg
-   was chosen to avoid (see the note that used to live here). */
-.lyr-plate{--tilt:81deg;width:56%;margin-inline:auto}
-
-/* Disc and name share a line. This is the one change that alters the shape of
-   a row rather than its spacing, and it is what buys the last ~20px each. */
-.lyr-text{
-  display:flex;flex-wrap:wrap;
-  align-items:baseline;justify-content:center;
-  column-gap:7px;
-  padding-top:clamp(2px,.6vh,8px);
-}
-/* Tracking, not size. 12px is the legibility floor and stays; the .18em of
-   tracking is decoration, and at 27 characters ("06 — Performance & security")
-   it alone was 30px — enough to push rows 05 and 06 onto a second line, which
-   cost 20px each. Tightening the tracking puts every row back on one line. */
-.lyr-disc{margin:0;letter-spacing:.05em}
-.lyr-name{margin:0;font-size:.95rem}
-/* Full-width so it drops under the row it belongs to when expanded. */
-.lyr-detail{flex:0 0 100%}
+  .lyr-list b{font-size:1rem}
+  .lyr-list span{flex-basis:100%;font-size:.8rem}
+  .show-bar{height:32px}
+  .show-url{font-size:.56rem;padding:3px 12px}
+  .rig-laptop{width:100%}
+  /* Static rather than overlapping: at this width an overlapped phone
+     lands on top of the laptop screen instead of beside it. */
+  .rig{display:flex;align-items:flex-end;gap:12px}
+  .rig-laptop{width:76%}
+  .rig-phone{position:static;width:24%;border-radius:18px;padding:4px}
+  .phone-screen{border-radius:14px}
+  .phone-island{height:6px;top:4px}
 }
 
-/* ---- short phones ---------------------------------------------------------
-   A 390x844 handset showing browser chrome leaves ~670svh, and the block above
-   is tuned for the ~812 a chrome-less phone reports. The last ~90px has to come
-   out of content rather than spacing, because the spacing is already at its
-   floors here.
 
-   The lede is the one thing that can go: it is the only element above the fold
-   whose job is done by the six layer names immediately beneath it. The kicker
-   deliberately STAYS at every size - it carries "Website Designer / Thurles,
-   Tipperary", and the note at the top of this file records that the page
-   otherwise ranks for a title the body never says. Losing it to save 40px would
-   trade an SEO decision for a layout one. */
+/* ---- phones ---------------------------------------------------------------
+   The old version of this block existed to squeeze six plates into one screen.
+   There are no plates, and a finished site plus six named layers will never be
+   one screen on a handset — so this is now only type sizing. What is
+   deliberately NOT touched: the 44px touch floor on .lyr-list a, and the
+   kicker, which carries "Website Designer / Thurles, Tipperary" and is the only
+   place the body says what the title claims. */
+@media (max-width:640px){
+  .layers-hero h1 span:nth-child(2){padding-left:.3em}
+  .layers-hero h1 span:nth-child(3){padding-left:.6em}
+  .layers-hero{padding-block:clamp(68px,9vh,92px) clamp(14px,2.2vh,30px)}
+  .layers-hero h1{font-size:clamp(2.3rem,11.2vw,8.6rem);margin-bottom:clamp(10px,1.8vh,20px)}
+  .lyr-copy{margin-bottom:clamp(10px,1.8vh,20px)}
+  .lyr-kicker{font-size:.68rem;margin-bottom:clamp(6px,1vh,12px)}
+  .lyr-lede{font-size:.92rem;line-height:1.45}
+}
+
+/* ---- short phones --------------------------------------------------------
+   The lede is NOT hidden here any more. It used to go so the six plates could
+   fit the fold; nothing below it is fighting for that space now, and it is the
+   sentence that sets up the six. */
 @media (max-width:640px) and (max-height:750px){
-  /* Bottom padding is the last 6px between the section box and 100svh. The row
-     above it already has its own breathing room from the stack gap. */
   .layers-hero{padding-bottom:8px}
-  .lyr-lede{display:none}
   .layers-hero h1{font-size:clamp(2.1rem,10vw,8.6rem)}
   .lyr-kicker{font-size:.62rem}
-  .lyr-plate{width:50%}
-  .lyr-name{font-size:.9rem}
 }
 
-/* ---- short laptops -------------------------------------------------------
-   MUST stay last in this file. It sits at the same specificity as the base
-   rules it overrides, so earlier in the source it simply lost — .lyr-disc kept
-   its full size and the hero ran 45px past the fold at 1366x640.
-   .lyr-disc is deliberately NOT shrunk back here: 12px is the legibility floor,
-   so the room comes out of spacing instead. */
+/* MUST stay last in this file: it sits at the same specificity as the
+   base rules it overrides, so earlier in the source it simply loses.
+   Gives the showcase a ceiling so it cannot push the fold on a 1366x640 screen. */
 @media (max-height:760px) and (min-width:900px){
-  .lyr-stack{gap:4px}
-  .lyr-text{padding-top:8px}
-  .lyr-name{margin-top:3px}
-  .lyr-disc{letter-spacing:.12em}
+  .lyr-list a{padding-block:clamp(5px,.9vh,10px)}
+  .rig-laptop{width:78%}
+  .rig-phone{width:21%}
 }

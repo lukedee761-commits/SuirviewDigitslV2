@@ -1,0 +1,8 @@
+# Vercel serves this repo's root, so anything left here is public on
+# www.suirviewdigital.ie. Keep working files out of the deploy.
+_preview-*
+_shots/
+_showcase/
+serve-preview.py
+*.md
+!README.md
